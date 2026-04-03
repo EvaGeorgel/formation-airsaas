@@ -5,64 +5,60 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
         body { font-family: 'DM Sans', sans-serif; background: #F8FAFC; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .card { background: #fff; border-radius: 16px; padding: 30px; max-width: 650px; width: 100%; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-top: 5px solid #6366F1; }
-        .video-quote { font-style: italic; color: #4338CA; background: #EEF2FF; padding: 15px; border-radius: 10px; margin-bottom: 25px; font-size: 14px; border-left: 4px solid #6366F1; }
-        .task-list { display: flex; flex-direction: column; gap: 10px; }
-        .task-item { display: flex; align-items: center; justify-content: space-between; background: #F1F5F9; padding: 15px; border-radius: 10px; transition: 0.3s; }
-        .task-item.hidden { opacity: 0.3; transform: scale(0.95); pointer-events: none; }
-        .btn-delete { background: #EF4444; color: white; border: none; padding: 5px 10px; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: bold; }
-        .btn-keep { background: #10B981; color: white; border: none; padding: 5px 10px; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: bold; }
-        .final-msg { display: none; margin-top: 25px; padding: 20px; background: #DCFCE7; border-radius: 12px; color: #166534; font-size: 14px; animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .card { background: #fff; border-radius: 16px; padding: 35px; max-width: 650px; width: 100%; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-top: 6px solid #6366F1; }
+        
+        .video-principle { background: #EEF2FF; border-radius: 12px; padding: 20px; margin-bottom: 25px; border-left: 5px solid #6366F1; }
+        .video-principle h3 { margin: 0 0 10px 0; color: #3730A3; font-size: 16px; }
+        
+        .quiz-zone { display: grid; gap: 15px; }
+        .choice-card { border: 2px solid #E2E8F0; border-radius: 12px; padding: 20px; cursor: pointer; transition: 0.3s; background: white; }
+        .choice-card:hover { border-color: #6366F1; transform: translateY(-2px); }
+        .choice-card.selected-ok { border-color: #10B981; background: #F0FDF4; }
+        .choice-card.selected-ko { border-color: #EF4444; background: #FEF2F2; }
+
+        .explanation { display: none; margin-top: 15px; font-size: 13px; line-height: 1.5; font-weight: 500; }
+        .tag-pro { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; margin-bottom: 8px; font-weight: 700; }
     </style>
 </head>
 <body>
     <div class="card">
-        <h2 style="margin-top:0; font-size:20px;">Atelier Vidéo : Nettoyez votre Roadmap</h2>
-        <div class="video-quote">
-            "Le jalon, c'est du signal. La tâche, c'est du bruit. Ne polluez pas la vue de votre Sponsor."
+        <div class="video-principle">
+            <h3>🎥 Méthodologie AirSaaS</h3>
+            <p style="font-size: 14px; color: #4338CA; margin:0;">
+                "Un bon jalon est un résultat <b>incontestable</b>. On ne peut pas être 'presque' à l'étape Signature."
+            </p>
         </div>
-        <p style="font-size: 14px; color: #64748B;"><b>Consigne :</b> Supprimez les "Tâches" et gardez uniquement les "Vrais Jalons".</p>
-        
-        <div class="task-list">
-            <div class="task-item" id="t1">
-                <span>📞 Appeler le prestataire informatique</span>
-                <button class="btn-delete" onclick="remove('t1', true)">Supprimer (Bruit)</button>
+
+        <h2 style="font-size: 18px; margin-bottom: 20px;">Atelier : Signal vs Bruit</h2>
+        <p style="font-size: 14px; color: #64748B; margin-bottom: 25px;">Selon les conseils de la vidéo, identifiez les jalons qui apportent de la <b>valeur</b> à votre Sponsor :</p>
+
+        <div class="quiz-zone">
+            <div class="choice-card" onclick="reveal(this, false, 'e1')">
+                <span class="tag-pro" style="background: #F1F5F9; color: #475569;">Option A</span>
+                <div style="font-weight: 600;">"Réunion hebdomadaire avec le prestataire"</div>
+                <div id="e1" class="explanation" style="color: #991B1B;">
+                    ❌ <b>C'est du BRUIT.</b> C'est votre quotidien de CP. Le Sponsor ne doit pas voir vos réunions dans sa roadmap stratégique.
+                </div>
             </div>
-            <div class="task-item" id="t2">
-                <span>✅ Signature du contrat client réalisée</span>
-                <button class="btn-keep" onclick="keep('t2')">Garder (Signal)</button>
+
+            <div class="choice-card" onclick="reveal(this, true, 'e2')">
+                <span class="tag-pro" style="background: #E0F2FE; color: #0369A1;">Option B</span>
+                <div style="font-weight: 600;">"Cahier des charges validé par les métiers"</div>
+                <div id="e2" class="explanation" style="color: #166534;">
+                    ✅ <b>C'est un SIGNAL.</b> C'est un résultat concret et binaire. Le Sponsor comprend que l'étape de conception est terminée.
+                </div>
             </div>
-            <div class="task-item" id="t3">
-                <span>📧 Envoyer le compte-rendu aux équipes</span>
-                <button class="btn-delete" onclick="remove('t3', true)">Supprimer (Bruit)</button>
-            </div>
-            <div class="task-item" id="t4">
-                <span>🏛️ Validation du budget par le Comex</span>
-                <button class="btn-keep" onclick="keep('t4')">Garder (Signal)</button>
+
+            <div class="choice-card" onclick="reveal(this, false, 'e3')">
+                <span class="tag-pro" style="background: #F1F5F9; color: #475569;">Option C</span>
+                <div style="font-weight: 600;">"Préparation des supports de formation"</div>
+                <div id="e3" class="explanation" style="color: #991B1B;">
+                    ❌ <b>C'est une ACTION.</b> Le jalon correct serait : "Supports de formation livrés". Rappelez-vous : le jalon est un résultat.
+                </div>
             </div>
         </div>
 
-        <div id="final-msg" class="final-msg">
-            <b>🚀 Analyse de l'expert :</b> Bravo ! Vous avez séparé le <i>Faire</i> (vos tâches de CP) du <i>Résultat</i> (les jalons AirSaaS). Votre Roadmap est maintenant un outil de communication puissant pour votre Sponsor.
-        </div>
-    </div>
-
-    <script>
-        let actions = 0;
-        function remove(id, correct) {
-            document.getElementById(id).classList.add('hidden');
-            checkEnd();
-        }
-        function keep(id) {
-            document.getElementById(id).style.border = "2px solid #10B981";
-            document.getElementById(id).style.background = "#DCFCE7";
-            checkEnd();
-        }
-        function checkEnd() {
-            actions++;
-            if(actions >= 4) document.getElementById('final-msg').style.display = 'block';
-        }
-    </script>
-</body>
-</html>
+        <div style="margin-top: 30px; padding: 20px; background: #F8FAFC; border-radius: 12px; font-size: 13px; color: #64748B; line-height: 1.6;">
+            <b>🚀 Retenir pour AirSaaS :</b> <br>
+            • Un jalon est compréhensible par tous sans explication. <br>
+            • Limitez-vous à 5-10 jalons par projet pour garder un "signal" fort [cite: 1.
