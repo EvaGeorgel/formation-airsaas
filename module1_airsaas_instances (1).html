@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 1 – AirSaaS & les instances projet</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:#F7F6F2;color:#1a1a1a;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+  .card{background:#fff;border-radius:20px;padding:40px;max-width:680px;width:100%;box-shadow:0 2px 20px rgba(0,0,0,0.08)}
+
+  /* progress */
+  .progress-bar{display:flex;gap:6px;margin-bottom:32px}
+  .step-dot{height:4px;flex:1;border-radius:2px;background:#EBEBEB;transition:background .4s}
+  .step-dot.done{background:#1D9E75}
+  .step-dot.active{background:#1D9E75;opacity:.5}
+
+  /* screens */
+  .screen{display:none;animation:fadeIn .3s ease}
+  .screen.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  /* badge */
+  .badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:16px}
+  .badge-blue{background:#E6F1FB;color:#185FA5}
+  .badge-green{background:#E1F5EE;color:#0F6E56}
+  .badge-amber{background:#FAEEDA;color:#854F0B}
+
+  h1{font-size:22px;font-weight:600;color:#111;line-height:1.3;margin-bottom:8px}
+  .intro{font-size:15px;color:#555;line-height:1.65;margin-bottom:28px}
+
+  /* instance cards */
+  .instances{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+  .inst{border-radius:14px;padding:16px;cursor:pointer;border:1.5px solid transparent;transition:border-color .2s, transform .15s}
+  .inst:hover{transform:translateY(-2px)}
+  .inst.sel{border-color:currentColor}
+  .inst-coproj{background:#E6F1FB;color:#185FA5}
+  .inst-copil{background:#E1F5EE;color:#0F6E56}
+  .inst-comex{background:#FAEEDA;color:#854F0B}
+  .inst-icon{font-size:22px;margin-bottom:8px}
+  .inst-name{font-size:13px;font-weight:600;margin-bottom:4px}
+  .inst-desc{font-size:11px;opacity:.8;line-height:1.5}
+  .inst-detail{background:#F7F6F2;border-radius:12px;padding:16px;font-size:13px;line-height:1.65;color:#333;margin-bottom:28px;display:none}
+  .inst-detail.show{display:block}
+  .detail-title{font-weight:600;font-size:14px;margin-bottom:6px}
+
+  /* roles */
+  .roles{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+  .role-row{display:flex;gap:12px;align-items:flex-start;padding:14px;background:#F7F6F2;border-radius:12px}
+  .role-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+  .role-icon.sponsor{background:#FAEEDA}
+  .role-icon.cp{background:#E6F1FB}
+  .role-icon.moa{background:#E1F5EE}
+  .role-icon.moe{background:#EEEDFE}
+  .role-name{font-size:13px;font-weight:600;margin-bottom:3px}
+  .role-text{font-size:12px;color:#555;line-height:1.55}
+
+  /* quiz */
+  .quiz-q{font-size:16px;font-weight:600;color:#111;margin-bottom:20px;line-height:1.4}
+  .options{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+  .opt{border:1.5px solid #E5E5E5;border-radius:12px;padding:14px 16px;font-size:14px;cursor:pointer;transition:all .2s;background:#fff;text-align:left;color:#333}
+  .opt:hover{border-color:#B5D4F4;background:#F0F7FD}
+  .opt.correct{border-color:#1D9E75;background:#E1F5EE;color:#085041}
+  .opt.wrong{border-color:#E24B4A;background:#FCEBEB;color:#501313}
+  .opt:disabled{cursor:default}
+  .feedback{display:none;padding:14px 16px;border-radius:12px;font-size:13px;line-height:1.55;margin-bottom:20px}
+  .feedback.show{display:block}
+  .feedback.ok{background:#E1F5EE;color:#085041;border:1px solid #9FE1CB}
+  .feedback.ko{background:#FCEBEB;color:#501313;border:1px solid #F7C1C1}
+
+  /* success */
+  .success-icon{font-size:48px;text-align:center;margin-bottom:16px}
+  .success-title{font-size:22px;font-weight:600;text-align:center;margin-bottom:8px}
+  .success-sub{font-size:15px;color:#555;text-align:center;line-height:1.6;margin-bottom:28px}
+  .recap{background:#F7F6F2;border-radius:14px;padding:20px;margin-bottom:28px}
+  .recap-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #EBEBEB;font-size:13px;color:#333}
+  .recap-item:last-child{border:none}
+  .recap-item::before{content:'✓';color:#1D9E75;font-weight:700}
+
+  /* nav */
+  .nav{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
+  .btn{padding:12px 24px;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:opacity .2s,transform .1s;font-family:'DM Sans',sans-serif}
+  .btn:active{transform:scale(.97)}
+  .btn-primary{background:#1D9E75;color:#fff}
+  .btn-primary:hover{opacity:.9}
+  .btn-secondary{background:#F0F0EE;color:#333}
+  .btn-secondary:hover{background:#E8E8E6}
+  .btn-disabled{background:#E0E0E0;color:#999;cursor:not-allowed}
+  .screen-label{font-size:12px;color:#AAA}
+
+  .highlight{background:#FAEEDA;border-radius:6px;padding:2px 6px;color:#854F0B;font-weight:500}
+</style>
+</head>
+<body>
+<div class="card">
+
+  <div class="progress-bar">
+    <div class="step-dot active" id="dot0"></div>
+    <div class="step-dot" id="dot1"></div>
+    <div class="step-dot" id="dot2"></div>
+    <div class="step-dot" id="dot3"></div>
+  </div>
+
+  <!-- SCREEN 0 : Intro -->
+  <div class="screen active" id="s0">
+    <div class="badge badge-blue">Module 1 · ~4 min</div>
+    <h1>Comprendre AirSaaS et les instances projet</h1>
+    <p class="intro">AirSaaS est l'outil de pilotage de tous les projets chez Cerfrance Mayenne-Sarthe. En tant que chef de projet, vous l'utiliserez au quotidien pour suivre l'avancement, remonter des décisions et coordonner les acteurs.<br><br>Dans ce module, vous apprendrez à identifier les 3 instances de gouvernance et le rôle de chaque acteur clé.</p>
+    <div style="background:#F7F6F2;border-radius:14px;padding:18px;margin-bottom:28px">
+      <div style="font-size:13px;font-weight:600;margin-bottom:10px;color:#111">Dans ce module vous allez :</div>
+      <div style="font-size:13px;color:#444;display:flex;flex-direction:column;gap:7px">
+        <div>→ Identifier les 3 instances de gouvernance projet</div>
+        <div>→ Comprendre les rôles du Sponsor et du Chef de projet</div>
+        <div>→ Distinguer MOA et MOE</div>
+        <div>→ Valider vos acquis avec un quiz</div>
+      </div>
+    </div>
+    <div class="nav">
+      <span class="screen-label">1 / 4</span>
+      <button class="btn btn-primary" onclick="go(1)">Commencer →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 1 : Les 3 instances -->
+  <div class="screen" id="s1">
+    <div class="badge badge-blue">Les instances de gouvernance</div>
+    <h1>3 instances pour piloter vos projets</h1>
+    <p class="intro">Chaque projet chez Cerfrance repose sur 3 niveaux de gouvernance. <span class="highlight">Cliquez sur chaque instance</span> pour en comprendre le rôle.</p>
+    <div class="instances">
+      <div class="inst inst-coproj" onclick="showDetail('coproj',this)">
+        <div class="inst-icon">🔧</div>
+        <div class="inst-name">CoProj</div>
+        <div class="inst-desc">Comité Projet<br>Niveau opérationnel</div>
+      </div>
+      <div class="inst inst-copil" onclick="showDetail('copil',this)">
+        <div class="inst-icon">🧭</div>
+        <div class="inst-name">CoPil</div>
+        <div class="inst-desc">Comité de Pilotage<br>Niveau tactique</div>
+      </div>
+      <div class="inst inst-comex" onclick="showDetail('comex',this)">
+        <div class="inst-icon">🏛</div>
+        <div class="inst-name">Comex</div>
+        <div class="inst-desc">Comité Exécutif<br>Niveau stratégique</div>
+      </div>
+    </div>
+    <div class="inst-detail" id="detail-coproj">
+      <div class="detail-title" style="color:#185FA5">CoProj — Comité Projet (opérationnel)</div>
+      Animé par le Chef de projet, il réunit l'équipe opérationnelle chaque semaine (30 min) ou toutes les 2 semaines (1h). Il permet de <strong>revoir l'avancement des livrables</strong>, définir les plans d'action (qui, quoi, quand) et remonter les points bloquants.
+    </div>
+    <div class="inst-detail" id="detail-copil">
+      <div class="detail-title" style="color:#0F6E56">CoPil — Comité de Pilotage (mensuel)</div>
+      Réunit le Sponsor et le Chef de projet chaque mois, avant le Comex. Il permet de faire un <strong>état de santé du projet</strong> (météo), d'ajuster les jalons si besoin, de lister les décisions à prendre et les points de vigilance.
+    </div>
+    <div class="inst-detail" id="detail-comex">
+      <div class="detail-title" style="color:#854F0B">Comex — Comité Exécutif (mensuel)</div>
+      Instance d'arbitrage stratégique. Il statue sur les <strong>GO / NO GO</strong> des projets, traite les points critiques remontés par le Sponsor, et veille à la coordination globale du portefeuille de projets. Le CA intervient si l'investissement dépasse 500 K€.
+    </div>
+    <div class="nav">
+      <button class="btn btn-secondary" onclick="go(0)">← Retour</button>
+      <span class="screen-label">2 / 4</span>
+      <button class="btn btn-primary" onclick="go(2)">Suivant →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 2 : Rôles -->
+  <div class="screen" id="s2">
+    <div class="badge badge-green">Les acteurs clés</div>
+    <h1>Qui fait quoi dans votre projet ?</h1>
+    <p class="intro">4 acteurs structurent la réalisation de chaque projet. Voici leurs responsabilités essentielles.</p>
+    <div class="roles">
+      <div class="role-row">
+        <div class="role-icon sponsor">🎯</div>
+        <div>
+          <div class="role-name">Sponsor</div>
+          <div class="role-text">Nomme le Chef de projet, engage les ressources, porte la conduite du changement. Il est le premier ambassadeur du projet et prend toutes les décisions nécessaires. Il rend compte mensuellement à la DG.</div>
+        </div>
+      </div>
+      <div class="role-row">
+        <div class="role-icon cp">📋</div>
+        <div>
+          <div class="role-name">Chef de projet</div>
+          <div class="role-text">Garant du déroulement du projet et de sa livraison dans les délais. Il planifie, coordonne, anime le CoProj et le CoPil. Il rend compte au Sponsor et met à jour AirSaaS régulièrement.</div>
+        </div>
+      </div>
+      <div class="role-row">
+        <div class="role-icon moa">✅</div>
+        <div>
+          <div class="role-name">MOA — Maîtrise d'Ouvrage</div>
+          <div class="role-text">Exprime le besoin fonctionnel, réalise la recette fonctionnelle et valide la solution livrée. Elle représente les métiers.</div>
+        </div>
+      </div>
+      <div class="role-row">
+        <div class="role-icon moe">⚙️</div>
+        <div>
+          <div class="role-name">MOE — Maîtrise d'Œuvre</div>
+          <div class="role-text">Responsable de la réalisation technique, de l'étude de faisabilité, de l'intégration et de la recette technique. Elle garantit l'exploitabilité de la solution.</div>
+        </div>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="btn btn-secondary" onclick="go(1)">← Retour</button>
+      <span class="screen-label">3 / 4</span>
+      <button class="btn btn-primary" onclick="go(3)">Quiz →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 3 : Quiz -->
+  <div class="screen" id="s3">
+    <div class="badge badge-amber">Quiz de validation</div>
+    <h1>Testez vos connaissances</h1>
+    <br>
+    <div id="quiz-container">
+      <!-- Q1 -->
+      <div id="q1" class="quiz-block">
+        <div class="quiz-q">1. Qui nomme le Chef de projet ?</div>
+        <div class="options">
+          <button class="opt" onclick="answer('q1',this,false)">La MOA</button>
+          <button class="opt" onclick="answer('q1',this,true)">Le Sponsor</button>
+          <button class="opt" onclick="answer('q1',this,false)">Le Comex</button>
+          <button class="opt" onclick="answer('q1',this,false)">La DG</button>
+        </div>
+        <div class="feedback ok" id="fb1-ok">✓ Correct ! Le Sponsor nomme le Chef de projet, lui délègue les ressources et porte la conduite du changement.</div>
+        <div class="feedback ko" id="fb1-ko">✗ Pas tout à fait. C'est le <strong>Sponsor</strong> qui nomme le Chef de projet et lui met à disposition les ressources nécessaires.</div>
+      </div>
+      <!-- Q2 -->
+      <div id="q2" class="quiz-block" style="display:none">
+        <div class="quiz-q">2. Quel est le rythme du CoPil dans AirSaaS ?</div>
+        <div class="options">
+          <button class="opt" onclick="answer('q2',this,false)">Chaque semaine</button>
+          <button class="opt" onclick="answer('q2',this,false)">Tous les 15 jours</button>
+          <button class="opt" onclick="answer('q2',this,true)">Mensuel, avant le Comex</button>
+          <button class="opt" onclick="answer('q2',this,false)">Trimestriel</button>
+        </div>
+        <div class="feedback ok" id="fb2-ok">✓ Exact ! Le CoPil se tient <strong>chaque mois, avant le Comex</strong>, pour faire le point sur l'état de santé du projet.</div>
+        <div class="feedback ko" id="fb2-ko">✗ Le CoPil est <strong>mensuel</strong>, et se tient avant la réunion Comex pour préparer les arbitrages si nécessaire.</div>
+      </div>
+      <!-- Q3 -->
+      <div id="q3" class="quiz-block" style="display:none">
+        <div class="quiz-q">3. Quelle instance est responsable de l'expression du besoin fonctionnel ?</div>
+        <div class="options">
+          <button class="opt" onclick="answer('q3',this,false)">La MOE</button>
+          <button class="opt" onclick="answer('q3',this,true)">La MOA</button>
+          <button class="opt" onclick="answer('q3',this,false)">Le Chef de projet</button>
+          <button class="opt" onclick="answer('q3',this,false)">Le Sponsor</button>
+        </div>
+        <div class="feedback ok" id="fb3-ok">✓ Bravo ! La <strong>MOA</strong> est responsable du besoin fonctionnel, de la recette et de la validation de la solution.</div>
+        <div class="feedback ko" id="fb3-ko">✗ C'est la <strong>MOA</strong> (Maîtrise d'Ouvrage) qui exprime le besoin fonctionnel et valide la solution. La MOE, elle, s'occupe de la réalisation technique.</div>
+      </div>
+    </div>
+    <div class="nav" id="quiz-nav">
+      <button class="btn btn-secondary" onclick="go(2)">← Retour</button>
+      <span class="screen-label" id="q-label">Question 1 / 3</span>
+      <button class="btn btn-disabled" id="btn-next-q" onclick="nextQ()" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 4 : Résultat -->
+  <div class="screen" id="s4">
+    <div class="success-icon">🎉</div>
+    <div class="success-title">Module 1 terminé !</div>
+    <div class="success-sub">Vous maîtrisez les instances de gouvernance et les rôles clés. C'est la base pour bien utiliser AirSaaS au quotidien.</div>
+    <div class="recap">
+      <div class="recap-item">Les 3 instances : CoProj · CoPil · Comex</div>
+      <div class="recap-item">Le Sponsor nomme et habilite le Chef de projet</div>
+      <div class="recap-item">La MOA exprime le besoin, la MOE réalise</div>
+      <div class="recap-item">CoPil = mensuel, avant Comex</div>
+    </div>
+    <div style="text-align:center">
+      <div style="font-size:13px;color:#888;margin-bottom:12px">Prochain module :</div>
+      <div style="font-size:15px;font-weight:600;color:#111">Module 2 — Le cycle de vie d'un projet dans AirSaaS</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  var cur = 0;
+  var qCur = 1;
+  var scores = {q1:null, q2:null, q3:null};
+
+  function go(n){
+    document.getElementById('s'+cur).classList.remove('active');
+    cur = n;
+    document.getElementById('s'+cur).classList.add('active');
+    updateDots();
+  }
+
+  function updateDots(){
+    for(var i=0;i<4;i++){
+      var d = document.getElementById('dot'+i);
+      d.classList.remove('done','active');
+      if(i < cur) d.classList.add('done');
+      else if(i === cur) d.classList.add('active');
+    }
+  }
+
+  function showDetail(id, el){
+    document.querySelectorAll('.inst-detail').forEach(function(d){d.classList.remove('show')});
+    document.querySelectorAll('.inst').forEach(function(e){e.classList.remove('sel')});
+    document.getElementById('detail-'+id).classList.add('show');
+    el.classList.add('sel');
+  }
+
+  function answer(qid, btn, correct){
+    var opts = btn.parentNode.querySelectorAll('.opt');
+    opts.forEach(function(o){o.disabled=true});
+    var num = qid.replace('q','');
+    if(correct){
+      btn.classList.add('correct');
+      document.getElementById('fb'+num+'-ok').classList.add('show');
+      scores[qid] = true;
+    } else {
+      btn.classList.add('wrong');
+      document.getElementById('fb'+num+'-ko').classList.add('show');
+      scores[qid] = false;
+    }
+    var nb = document.getElementById('btn-next-q');
+    nb.disabled = false;
+    nb.classList.remove('btn-disabled');
+    nb.classList.add('btn-primary');
+    if(qCur === 3){
+      nb.textContent = 'Voir le bilan →';
+    }
+  }
+
+  function nextQ(){
+    if(qCur < 3){
+      document.getElementById('q'+qCur).style.display='none';
+      qCur++;
+      document.getElementById('q'+qCur).style.display='block';
+      document.getElementById('q-label').textContent = 'Question '+qCur+' / 3';
+      var nb = document.getElementById('btn-next-q');
+      nb.disabled=true;
+      nb.classList.add('btn-disabled');
+      nb.classList.remove('btn-primary');
+      nb.textContent = 'Suivant';
+    } else {
+      go(4);
+    }
+  }
+</script>
+</body>
+</html>
