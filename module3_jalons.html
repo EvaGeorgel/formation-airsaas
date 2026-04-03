@@ -16,7 +16,90 @@
 
         /* Jalon Grid */
         .jalon-card { border: 1px solid #E2E8F0; border-radius: 10px; padding: 20px; margin-bottom: 15px; cursor: pointer; transition: 0.2s; }
-        .jalon-card:hover { border-color: #6366F1; background: #F1F5F9; }
+        .jalon-card:hover { border-co<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+        body { font-family: 'DM Sans', sans-serif; background: #F8FAFC; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .card { background: #fff; border-radius: 12px; padding: 30px; max-width: 700px; width: 100%; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #E2E8F0; }
+        
+        .header-airsaas { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; border-bottom: 2px solid #6366F1; padding-bottom: 15px; }
+        .score-box { margin-left: auto; background: #EEF2FF; color: #6366F1; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 14px; }
+        
+        .quiz-item { background: #F1F5F9; border-radius: 10px; padding: 15px; margin-bottom: 12px; transition: 0.3s; cursor: pointer; border: 1px solid transparent; }
+        .quiz-item:hover { border-color: #6366F1; }
+        .quiz-item.correct { background: #DCFCE7; border-color: #22C55E; color: #166534; }
+        .quiz-item.wrong { background: #FEE2E2; border-color: #EF4444; color: #991B1B; }
+        
+        .feedback-pro { display: none; margin-top: 10px; font-size: 13px; font-style: italic; line-height: 1.5; }
+        .instruction { font-size: 15px; color: #475569; margin-bottom: 20px; line-height: 1.6; }
+        .badge-pro { display: inline-block; background: #6366F1; color: white; padding: 2px 8px; border-radius: 4px; font-size: 10px; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header-airsaas">
+            <div style="font-size: 24px;">🎯</div>
+            <div style="font-weight: 700; font-size: 18px;">Masterclass : Bien nommer ses Jalons</div>
+            <div class="score-box" id="score">Score : 0/3</div>
+        </div>
+
+        <p class="instruction">
+            Dans AirSaaS, un jalon sert à <b>communiquer</b>, pas à lister vos devoirs. <br>
+            <b>Cliquez sur les intitulés qui feraient de "Bons Jalons" pour votre Sponsor :</b>
+        </p>
+
+        <div class="quiz-item" onclick="check(this, false, 'f1')">
+            <b>"Appeler le prestataire pour le devis"</b>
+            <div id="f1" class="feedback-pro">❌ C'est une tâche (To-Do). Le Sponsor s'en moque. Le jalon devrait être "Dehors de prix validés".</div>
+        </div>
+
+        <div class="quiz-item" onclick="check(this, true, 'f2')">
+            <b>"Validation du Go/No-Go Phase 2"</b>
+            <div id="f2" class="feedback-pro">✅ EXCELLENT. C'est un jalon stratégique. Il marque une étape majeure et une prise de décision claire.</div>
+        </div>
+
+        <div class="quiz-item" onclick="check(this, true, 'f3')">
+            <b>"Lancement officiel (Kick-off) réalisé"</b>
+            <div id="f3" class="feedback-pro">✅ PARFAIT. C'est un événement visible par tous qui confirme que le projet est sur les rails.</div>
+        </div>
+
+        <div class="quiz-item" onclick="check(this, false, 'f4')">
+            <b>"Rédiger le compte-rendu de la réunion du 12"</b>
+            <div id="f4" class="feedback-pro">❌ C'est une micro-tâche. Ne polluez pas votre Roadmap AirSaaS avec des détails administratifs.</div>
+        </div>
+
+        <div id="final-tip" style="display:none; margin-top:25px; padding:15px; background:#EEF2FF; border-radius:8px; border: 1px solid #6366F1; font-size:14px; color:#1E40AF;">
+            <b>🚀 Le conseil AirSaaS :</b> Gardez entre 5 et 10 jalons maximum par projet. Si vous en avez 50, vous faites de la gestion de tâches, pas du pilotage !
+        </div>
+    </div>
+
+    <script>
+        let score = 0;
+        function check(el, isCorrect, feedbackId) {
+            if(el.classList.contains('done')) return;
+            el.classList.add('done');
+            
+            const feedback = document.getElementById(feedbackId);
+            feedback.style.display = "block";
+            
+            if(isCorrect) {
+                el.classList.add('correct');
+                score++;
+                document.getElementById('score').innerText = "Score : " + score + "/2";
+            } else {
+                el.classList.add('wrong');
+            }
+            
+            if(document.querySelectorAll('.done').length >= 4) {
+                document.getElementById('final-tip').style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>lor: #6366F1; background: #F1F5F9; }
         .jalon-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
         .jalon-title { font-weight: 600; color: #1E293B; font-size: 15px; width: 70%; }
         
