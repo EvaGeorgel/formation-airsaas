@@ -2,74 +2,48 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
-        body { font-family: 'DM Sans', sans-serif; background: #F4F7FA; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .card { background: #fff; border-radius: 16px; padding: 35px; max-width: 800px; width: 100%; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-top: 6px solid #6366F1; }
+        body { font-family: 'DM Sans', sans-serif; background: #F8FAFC; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .card { background: #fff; border-radius: 16px; padding: 30px; max-width: 700px; width: 100%; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #E2E8F0; }
         
-        .video-insight { background: #EEF2FF; border-radius: 12px; padding: 20px; margin-bottom: 30px; border-left: 5px solid #6366F1; }
-        .video-insight h3 { margin: 0 0 10px 0; color: #3730A3; font-size: 16px; }
-        
-        .workshop-grid { display: grid; gap: 15px; }
-        .step-box { background: #fff; border: 2px solid #E2E8F0; border-radius: 12px; padding: 20px; transition: 0.3s; }
-        .step-box:hover { border-color: #6366F1; transform: scale(1.01); }
-        
-        .label-bad { color: #EF4444; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 5px; }
-        .label-good { color: #10B981; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 5px; }
-        
-        .btn-reveal { background: #6366F1; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 12px; margin-top: 10px; font-weight: 600; }
-        .solution { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px dashed #CBD5E1; animation: fadeIn 0.4s; }
-        
-        .tag-group { display: flex; gap: 8px; margin-top: 10px; }
-        .tag { font-size: 10px; background: #F1F5F9; padding: 3px 8px; border-radius: 4px; font-weight: 600; color: #475569; }
+        .header-top { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; border-bottom: 2px solid #6366F1; padding-bottom: 15px; }
+        .badge-count { background: #EEF2FF; color: #6366F1; padding: 4px 12px; border-radius: 20px; font-weight: 700; font-size: 13px; }
+
+        .lesson-box { background: #F1F5F9; border-radius: 12px; padding: 20px; margin-bottom: 25px; border-left: 5px solid #6366F1; }
+        .lesson-box h3 { margin: 0 0 10px 0; font-size: 16px; color: #1E293B; }
+        .lesson-box p { margin: 0; font-size: 14px; color: #475569; line-height: 1.5; }
+
+        .quiz-container { display: flex; flex-direction: column; gap: 12px; }
+        .option { background: #fff; border: 2px solid #E2E8F0; border-radius: 10px; padding: 18px; cursor: pointer; transition: 0.2s; position: relative; }
+        .option:hover { border-color: #6366F1; background: #F8FAFC; }
+        .option.correct { border-color: #22C55E; background: #F0FDF4; }
+        .option.wrong { border-color: #EF4444; background: #FEF2F2; }
+
+        .feedback { display: none; margin-top: 10px; font-size: 13px; font-weight: 500; animation: fadeIn 0.3s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
     <div class="card">
-        <div class="video-insight">
-            <h3>💡 Ce que nous apprend la méthode AirSaaS :</h3>
-            <p style="font-size: 14px; color: #4338CA; line-height: 1.5; margin: 0;">
-                "Un jalon n'est pas ce que VOUS faites, c'est ce que le PROJET produit." <br>
-                <b>Règle d'or :</b> Si votre Sponsor ne comprend pas l'intitulé en 2 secondes, ce n'est pas un jalon, c'est une tâche.
-            </p>
+        <div class="header-top">
+            <span style="font-size: 24px;">🎯</span>
+            <h2 style="margin:0; font-size: 18px;">Atelier : Savoir nommer un Jalon</h2>
+            <div class="badge-count">Méthode AirSaaS</div>
         </div>
 
-        <h2 style="font-size: 18px; margin-bottom: 20px;">Atelier : Transformez vos tâches en Jalons</h2>
+        <div class="lesson-box">
+            <h3>💡 La règle d'or de ta vidéo :</h3>
+            <p>"Un jalon n'est pas une tâche que tu fais seul, c'est un résultat visible par ton Sponsor."</p>
+        </div>
 
-        <div class="workshop-grid">
-            <div class="step-box">
-                <div class="label-bad">❌ Tâche de Chef de Projet (Trop précis)</div>
-                <div style="font-weight: 600; color: #1E293B;">"Envoyer le mail de relance pour la signature du mandat"</div>
-                <button class="btn-reveal" onclick="this.nextElementSibling.style.display='block'; this.style.display='none'">Transformer en Jalon AirSaaS →</button>
-                <div class="solution">
-                    <div class="label-good">✅ Bon Jalon (Livrable)</div>
-                    <div style="font-weight: 600; color: #059669;">"Mandat : Signature Adhérent obtenue"</div>
-                    <div class="tag-group">
-                        <span class="tag">👕 Taille : M</span>
-                        <span class="tag">👥 Gestion Interne</span>
-                    </div>
-                </div>
+        <p style="font-size: 14px; color: #64748B; margin-bottom: 15px;"><b>Testez-vous :</b> Lequel de ces intitulés est un "Vrai Jalon" ?</p>
+
+        <div class="quiz-container">
+            <div class="option" onclick="check(this, false, 'f1')">
+                <div style="font-weight: 600;">"Appeler le prestataire pour le devis"</div>
+                <div id="f1" class="feedback" style="color: #B91C1C;">❌ <b>C'est une tâche.</b> Le Sponsor ne doit pas voir ton "To-Do".</div>
             </div>
 
-            <div class="step-box">
-                <div class="label-bad">❌ Tâche de Chef de Projet (Invisible)</div>
-                <div style="font-weight: 600; color: #1E293B;">"Réunion de travail sur les fichiers Excel de facturation"</div>
-                <button class="btn-reveal" onclick="this.nextElementSibling.style.display='block'; this.style.display='none'">Transformer en Jalon AirSaaS →</button>
-                <div class="solution">
-                    <div class="label-good">✅ Bon Jalon (Livrable)</div>
-                    <div style="font-weight: 600; color: #059669;">"Processus de facturation formalisé et validé"</div>
-                    <div class="tag-group">
-                        <span class="tag">👕 Taille : S</span>
-                        <span class="tag">👥 Digital</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div style="margin-top: 30px; padding: 20px; background: #F8FAFC; border-radius: 12px; font-size: 13px; color: #64748B;">
-            <b>🚀 Résultat attendu :</b> En purgeant vos tâches pour ne garder que les livrables, votre barre de progression (actuellement à 51%) devient un indicateur fiable pour votre Direction.
-        </div>
-    </div>
-</body>
-</html>
+            <div class="option
