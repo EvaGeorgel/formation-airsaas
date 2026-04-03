@@ -2,31 +2,46 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
-        body { font-family: 'DM Sans', sans-serif; background: #F8FAFC; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .card { background: #fff; border-radius: 16px; padding: 35px; max-width: 650px; width: 100%; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-top: 6px solid #6366F1; }
-        
-        .methodo-box { background: #F5F3FF; border-radius: 12px; padding: 20px; margin-bottom: 25px; border-left: 5px solid #6366F1; }
-        .methodo-box h3 { margin: 0 0 10px 0; color: #4338CA; font-size: 16px; }
-        .methodo-box p { margin: 0; font-size: 14px; color: #4338CA; line-height: 1.5; }
-
-        .exercise-title { font-size: 18px; font-weight: 700; color: #1E293B; margin-bottom: 20px; }
-        
-        .item-list { display: grid; gap: 12px; }
-        .item { border: 2px solid #E2E8F0; border-radius: 12px; padding: 18px; cursor: pointer; transition: 0.3s; background: white; position: relative; }
-        .item:hover { border-color: #6366F1; background: #F8FAFC; }
-        .item.selected-ok { border-color: #10B981; background: #F0FDF4; }
-        .item.selected-ko { border-color: #EF4444; background: #FEF2F2; }
-
-        .explanation { display: none; margin-top: 12px; font-size: 13px; line-height: 1.5; font-weight: 500; animation: fadeIn 0.3s; }
-        .tag { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; margin-bottom: 8px; font-weight: 700; background: #E2E8F0; color: #475569; }
-        
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        body { font-family: 'DM Sans', sans-serif; background: #F8FAFC; color: #1E293B; line-height: 1.6; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 16px; shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        h1 { color: #6366F1; border-bottom: 3px solid #6366F1; padding-bottom: 10px; font-size: 24px; }
+        h2 { font-size: 18px; margin-top: 30px; display: flex; align-items: center; gap: 10px; }
+        .box { background: #F1F5F9; border-radius: 12px; padding: 20px; margin: 15px 0; border-left: 5px solid #6366F1; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .meteo-item { padding: 10px; border-radius: 8px; text-align: center; font-weight: bold; color: white; }
+        .v { background: #10B981; } .o { background: #F59E0B; } .r { background: #EF4444; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
+        th { background: #6366F1; color: white; padding: 10px; text-align: left; }
+        td { padding: 10px; border-bottom: 1px solid #E2E8F0; }
+        .highlight { font-weight: bold; color: #4338CA; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="methodo-box">
-            <h3>🎯 La Règle d'Or du
+    <div class="container">
+        <h1>Maîtriser le pilotage AirSaaS</h1>
+        
+        <h2>☀️ 1. La Météo : Votre message au Sponsor</h2>
+        <div class="grid">
+            <div class="meteo-item v">VERT : Je gère</div>
+            <div class="meteo-item o">ORANGE : J'ai besoin d'aide</div>
+        </div>
+        <p class="box"><b>Conseil :</b> Ne cachez pas les problèmes. Le Orange sert à demander un arbitrage au Sponsor avant qu'il ne soit trop tard.</p>
+
+        <h2>📅 2. Le Jalon : Signal vs Bruit</h2>
+        <table>
+            <tr><th>Vrai Jalon (Signal)</th><th>Tâche (Bruit)</th></tr>
+            <tr><td>✅ Cadrage validé</td><td>❌ Faire la réunion</td></tr>
+            <tr><td>✅ Signature obtenue</td><td>❌ Appeler le client</td></tr>
+            <tr><td>✅ Mise en prod réalisée</td><td>❌ Vérifier les serveurs</td></tr>
+        </table>
+        <p class="box">Un jalon est un <b>résultat incontestable</b>. Visez 5 à 10 jalons maximum par projet.</p>
+
+        <h2>👕 3. Le Poids des Jalons (Tailles)</h2>
+        <p>Plus la taille (XS, S, M, L) est grande, plus le jalon impacte l'avancement global (%). Ne mettez pas tout en "M", hiérarchisez vos livrables !</p>
+
+        <h2>📝 4. Le Reporting Flash</h2>
+        <ul>
+            <li><span class="highlight">Synthèse :</span> 3 phrases max (Passé / Futur / Blocages).</li>
+            <li>
