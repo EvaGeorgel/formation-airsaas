@@ -20,10 +20,10 @@
 <body>
     <div class="card">
         <h1>🛡️ Registre des Risques : Anticiper pour Décider</h1>
-        <p style="font-size: 14px; color: #6B7280;">Dans AirSaaS, un risque identifié doit déboucher sur un plan d'action. <b>Cliquez sur un risque</b> pour voir l'analyse expert :</p>
+        <p style="font-size: 14px; color: #6B7280;">Dans AirSaaS, un risque identifié doit provoquer une <b>Décision</b>. Cliquez sur un risque pour voir l'analyse expert :</p>
         <table class="risk-table">
             <thead>
-                <tr><th>Risque</th><th>Criticité</th><th>Équipe</th></tr>
+                <tr><th>Risque Type Cerfrance</th><th>Criticité</th><th>Équipe</th></tr>
             </thead>
             <tbody>
                 <tr class="risk-row" onclick="showExpert('r1')">
@@ -32,7 +32,7 @@
                     <td>Gestion interne</td>
                 </tr>
                 <tr class="risk-row" onclick="showExpert('r2')">
-                    <td>⏳ Retard de livraison API Facturation</td>
+                    <td>⏳ Retard de livraison technique / API</td>
                     <td><span class="crit-high" style="color:#E67700; background:#FFF3BF;">MOYENNE</span></td>
                     <td>Digital</td>
                 </tr>
@@ -45,8 +45,8 @@
     </div>
     <script>
         const data = {
-            r1: { t: "Analyse : Risque MOA", d: "C'est le risque n°1 chez Cerfrance. AirSaaS permet de lier ce risque à la Météo. Si les experts ne sont pas libérés, passez la météo en ORANGE pour forcer une Décision en CoPil. Ne subissez pas le risque, communiquez-le." },
-            r2: { t: "Analyse : Risque Technique", d: "Un risque moyen peut devenir critique s'il impacte un jalon 'L' ou 'XL'. Vérifiez l'impact sur votre Roadmap avant de qualifier la criticité." }
+            r1: { t: "Analyse Expert : Indisponibilité MOA", d: "C'est un risque majeur. Si les experts ne sont pas libérés pour la recette, passez votre météo en ORANGE. Le Sponsor doit prendre la décision de prioriser le projet sur le quotidien." },
+            r2: { t: "Analyse Expert : Glissement Technique", d: "Un retard technique impacte directement vos jalons. Si le jalon est de taille 'L' ou 'XL', le risque devient critique pour vos 51% d'avancement." }
         };
         function showExpert(id) {
             const p = document.getElementById('expert-panel');
