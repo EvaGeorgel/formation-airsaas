@@ -3,647 +3,342 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Module 0 — Bienvenue dans AirSaaS</title>
+<title>Module 1 – AirSaaS & les instances projet</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',sans-serif;background:#F4F6FB;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:24px 16px}
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:#F7F6F2;color:#1a1a1a;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+  .card{background:#fff;border-radius:20px;padding:40px;max-width:680px;width:100%;box-shadow:0 2px 20px rgba(0,0,0,0.08)}
 
-/* PROGRESS */
-.progress-wrap{width:100%;max-width:720px;margin-bottom:20px}
-.progress-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.progress-label{font-size:12px;color:#666;font-weight:500}
-.progress-bar{height:6px;background:#E0E4EF;border-radius:3px;overflow:hidden}
-.progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#3B5BDB,#6B8EFF);transition:width .5s ease}
-.steps-dots{display:flex;gap:6px;margin-top:8px}
-.dot{width:8px;height:8px;border-radius:50%;background:#E0E4EF;transition:background .3s}
-.dot.done{background:#3B5BDB}
-.dot.active{background:#3B5BDB;box-shadow:0 0 0 3px rgba(59,91,219,.2)}
+  /* progress */
+  .progress-bar{display:flex;gap:6px;margin-bottom:32px}
+  .step-dot{height:4px;flex:1;border-radius:2px;background:#EBEBEB;transition:background .4s}
+  .step-dot.done{background:#1D9E75}
+  .step-dot.active{background:#1D9E75;opacity:.5}
 
-/* CARD */
-.card{background:#fff;border-radius:20px;padding:36px 40px;max-width:720px;width:100%;box-shadow:0 4px 24px rgba(0,0,0,.08);position:relative}
+  /* screens */
+  .screen{display:none;animation:fadeIn .3s ease}
+  .screen.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-/* SCREENS */
-.screen{display:none}
-.screen.active{display:block;animation:fadeUp .35s ease}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  /* badge */
+  .badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:16px}
+  .badge-blue{background:#E6F1FB;color:#185FA5}
+  .badge-green{background:#E1F5EE;color:#0F6E56}
+  .badge-amber{background:#FAEEDA;color:#854F0B}
 
-/* BADGES */
-.badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:14px}
-.badge-blue{background:#EEF2FF;color:#3B5BDB}
-.badge-green{background:#EBFBEE;color:#2F9E44}
-.badge-orange{background:#FFF3BF;color:#E67700}
-.badge-purple{background:#F3F0FF;color:#7950F2}
+  h1{font-size:22px;font-weight:600;color:#111;line-height:1.3;margin-bottom:8px}
+  .intro{font-size:15px;color:#555;line-height:1.65;margin-bottom:28px}
 
-/* TYPOGRAPHY */
-h1{font-size:24px;font-weight:700;color:#1A1D2E;line-height:1.3;margin-bottom:10px}
-h2{font-size:18px;font-weight:600;color:#1A1D2E;margin-bottom:10px}
-h3{font-size:15px;font-weight:600;color:#2C3E6B;margin-bottom:8px}
-.lead{font-size:15px;color:#555;line-height:1.7;margin-bottom:20px}
-p{font-size:14px;color:#555;line-height:1.7;margin-bottom:12px}
+  /* instance cards */
+  .instances{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+  .inst{border-radius:14px;padding:16px;cursor:pointer;border:1.5px solid transparent;transition:border-color .2s, transform .15s}
+  .inst:hover{transform:translateY(-2px)}
+  .inst.sel{border-color:currentColor}
+  .inst-coproj{background:#E6F1FB;color:#185FA5}
+  .inst-copil{background:#E1F5EE;color:#0F6E56}
+  .inst-comex{background:#FAEEDA;color:#854F0B}
+  .inst-icon{font-size:22px;margin-bottom:8px}
+  .inst-name{font-size:13px;font-weight:600;margin-bottom:4px}
+  .inst-desc{font-size:11px;opacity:.8;line-height:1.5}
+  .inst-detail{background:#F7F6F2;border-radius:12px;padding:16px;font-size:13px;line-height:1.65;color:#333;margin-bottom:28px;display:none}
+  .inst-detail.show{display:block}
+  .detail-title{font-weight:600;font-size:14px;margin-bottom:6px}
 
-/* SCREENSHOT */
-.screenshot-wrap{border-radius:14px;overflow:hidden;border:1.5px solid #E8ECF6;margin:18px 0;box-shadow:0 4px 16px rgba(59,91,219,.08)}
-.screenshot-bar{background:#3B5BDB;padding:8px 14px;display:flex;align-items:center;gap:6px}
-.screenshot-bar span{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.4)}
-.screenshot-bar .url{font-size:11px;color:rgba(255,255,255,.8);margin-left:8px;font-family:monospace}
-.screenshot-img{width:100%;display:block;background:#F8F9FE}
-.screenshot-caption{background:#F8F9FE;padding:10px 14px;font-size:12px;color:#666;border-top:1px solid #E8ECF6;display:flex;align-items:center;gap:6px}
-.screenshot-caption::before{content:'👆';font-size:14px}
+  /* roles */
+  .roles{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+  .role-row{display:flex;gap:12px;align-items:flex-start;padding:14px;background:#F7F6F2;border-radius:12px}
+  .role-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+  .role-icon.sponsor{background:#FAEEDA}
+  .role-icon.cp{background:#E6F1FB}
+  .role-icon.moa{background:#E1F5EE}
+  .role-icon.moe{background:#EEEDFE}
+  .role-name{font-size:13px;font-weight:600;margin-bottom:3px}
+  .role-text{font-size:12px;color:#555;line-height:1.55}
 
-/* HIGHLIGHT BOX */
-.highlight-box{border-radius:12px;padding:16px 20px;margin:16px 0}
-.highlight-blue{background:#EEF2FF;border-left:4px solid #3B5BDB}
-.highlight-green{background:#EBFBEE;border-left:4px solid #2F9E44}
-.highlight-orange{background:#FFF3BF;border-left:4px solid #E67700}
-.highlight-box .hb-title{font-size:13px;font-weight:600;color:#1A1D2E;margin-bottom:4px}
-.highlight-box p{font-size:13px;margin-bottom:0;color:#444}
+  /* quiz */
+  .quiz-q{font-size:16px;font-weight:600;color:#111;margin-bottom:20px;line-height:1.4}
+  .options{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+  .opt{border:1.5px solid #E5E5E5;border-radius:12px;padding:14px 16px;font-size:14px;cursor:pointer;transition:all .2s;background:#fff;text-align:left;color:#333}
+  .opt:hover{border-color:#B5D4F4;background:#F0F7FD}
+  .opt.correct{border-color:#1D9E75;background:#E1F5EE;color:#085041}
+  .opt.wrong{border-color:#E24B4A;background:#FCEBEB;color:#501313}
+  .opt:disabled{cursor:default}
+  .feedback{display:none;padding:14px 16px;border-radius:12px;font-size:13px;line-height:1.55;margin-bottom:20px}
+  .feedback.show{display:block}
+  .feedback.ok{background:#E1F5EE;color:#085041;border:1px solid #9FE1CB}
+  .feedback.ko{background:#FCEBEB;color:#501313;border:1px solid #F7C1C1}
 
-/* CARDS GRID */
-.grid{display:grid;gap:12px;margin:16px 0}
-.grid-2{grid-template-columns:1fr 1fr}
-.grid-3{grid-template-columns:1fr 1fr 1fr}
-.mini-card{border-radius:12px;padding:16px;border:1.5px solid #E8ECF6;background:#FAFBFF}
-.mini-card .mc-icon{font-size:24px;margin-bottom:8px}
-.mini-card .mc-title{font-size:13px;font-weight:600;color:#2C3E6B;margin-bottom:4px}
-.mini-card .mc-text{font-size:12px;color:#666;line-height:1.5}
-.mini-card.active-card{border-color:#3B5BDB;background:#EEF2FF}
+  /* success */
+  .success-icon{font-size:48px;text-align:center;margin-bottom:16px}
+  .success-title{font-size:22px;font-weight:600;text-align:center;margin-bottom:8px}
+  .success-sub{font-size:15px;color:#555;text-align:center;line-height:1.6;margin-bottom:28px}
+  .recap{background:#F7F6F2;border-radius:14px;padding:20px;margin-bottom:28px}
+  .recap-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #EBEBEB;font-size:13px;color:#333}
+  .recap-item:last-child{border:none}
+  .recap-item::before{content:'✓';color:#1D9E75;font-weight:700}
 
-/* MENU ITEMS */
-.menu-list{display:flex;flex-direction:column;gap:8px;margin:14px 0}
-.menu-item{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;border:1.5px solid #E8ECF6;background:#FAFBFF;cursor:pointer;transition:all .2s}
-.menu-item:hover{border-color:#3B5BDB;background:#EEF2FF}
-.menu-item.selected{border-color:#3B5BDB;background:#EEF2FF}
-.menu-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.menu-icon.blue{background:#EEF2FF}
-.menu-icon.green{background:#EBFBEE}
-.menu-icon.purple{background:#F3F0FF}
-.menu-icon.orange{background:#FFF3BF}
-.menu-item-info .mi-title{font-size:13px;font-weight:600;color:#1A1D2E}
-.menu-item-info .mi-desc{font-size:12px;color:#666;margin-top:2px}
-.menu-detail{background:#F4F6FB;border-radius:12px;padding:14px 16px;margin-top:4px;font-size:13px;color:#333;line-height:1.6;display:none}
-.menu-detail.show{display:block;animation:fadeUp .2s ease}
+  /* nav */
+  .nav{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
+  .btn{padding:12px 24px;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:opacity .2s,transform .1s;font-family:'DM Sans',sans-serif}
+  .btn:active{transform:scale(.97)}
+  .btn-primary{background:#1D9E75;color:#fff}
+  .btn-primary:hover{opacity:.9}
+  .btn-secondary{background:#F0F0EE;color:#333}
+  .btn-secondary:hover{background:#E8E8E6}
+  .btn-disabled{background:#E0E0E0;color:#999;cursor:not-allowed}
+  .screen-label{font-size:12px;color:#AAA}
 
-/* STATUS PILLS */
-.status-row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
-.pill{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600}
-.pill-blue{background:#EEF2FF;color:#3B5BDB}
-.pill-yellow{background:#FFF3BF;color:#E67700}
-.pill-green{background:#EBFBEE;color:#2F9E44}
-.pill-red{background:#FFF5F5;color:#C92A2A}
-.pill-gray{background:#F1F3F9;color:#666}
-
-/* MÉTÉO */
-.meteo-row{display:flex;gap:10px;margin:14px 0}
-.meteo-item{flex:1;border-radius:12px;padding:14px;text-align:center;border:1.5px solid transparent}
-.meteo-item .m-icon{font-size:28px;margin-bottom:6px}
-.meteo-item .m-label{font-size:12px;font-weight:600}
-.meteo-item .m-desc{font-size:11px;margin-top:3px;opacity:.8}
-.m-green{background:#EBFBEE;border-color:#8CE99A;color:#2F9E44}
-.m-orange{background:#FFF3BF;border-color:#FFD43B;color:#E67700}
-.m-red{background:#FFF5F5;border-color:#FFC9C9;color:#C92A2A}
-
-/* QUIZ */
-.quiz-question{font-size:16px;font-weight:600;color:#1A1D2E;margin-bottom:18px;line-height:1.4}
-.quiz-options{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
-.qopt{border:1.5px solid #E0E4EF;border-radius:12px;padding:14px 18px;font-size:14px;cursor:pointer;transition:all .2s;background:#fff;text-align:left;font-family:'Inter',sans-serif;color:#333}
-.qopt:hover{border-color:#3B5BDB;background:#F7F9FF}
-.qopt.correct{border-color:#2F9E44;background:#EBFBEE;color:#1A3A1F}
-.qopt.wrong{border-color:#C92A2A;background:#FFF5F5;color:#5A1010}
-.qopt:disabled{cursor:default}
-.feedback{display:none;padding:14px 18px;border-radius:12px;font-size:13px;line-height:1.6;margin-bottom:16px}
-.feedback.show{display:block}
-.feedback.ok{background:#EBFBEE;color:#1A3A1F;border:1px solid #8CE99A}
-.feedback.ko{background:#FFF5F5;color:#5A1010;border:1px solid #FFC9C9}
-.feedback .fb-title{font-weight:700;margin-bottom:4px}
-
-/* TIMELINE */
-.timeline{display:flex;flex-direction:column;gap:0;margin:16px 0}
-.tl-item{display:flex;gap:16px;padding-bottom:20px;position:relative}
-.tl-item:last-child{padding-bottom:0}
-.tl-left{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
-.tl-circle{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;z-index:1}
-.tl-line{width:2px;flex:1;background:#E0E4EF;margin-top:4px}
-.tl-item:last-child .tl-line{display:none}
-.tl-content{padding-top:4px;padding-bottom:4px}
-.tl-title{font-size:13px;font-weight:600;color:#1A1D2E;margin-bottom:3px}
-.tl-desc{font-size:12px;color:#666;line-height:1.5}
-.tl-tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;margin-top:4px}
-
-/* SUCCESS */
-.success-wrap{text-align:center;padding:20px 0}
-.success-icon{font-size:56px;margin-bottom:16px}
-.success-title{font-size:22px;font-weight:700;color:#1A1D2E;margin-bottom:8px}
-.success-sub{font-size:14px;color:#666;line-height:1.6;margin-bottom:24px}
-.recap-list{background:#F4F6FB;border-radius:14px;padding:18px 20px;margin-bottom:20px;text-align:left}
-.recap-item{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid #E8ECF6;font-size:13px;color:#333}
-.recap-item:last-child{border:none}
-.recap-item::before{content:'✓';color:#2F9E44;font-weight:700;flex-shrink:0;margin-top:1px}
-
-/* NAV */
-.nav{display:flex;justify-content:space-between;align-items:center;margin-top:24px;padding-top:20px;border-top:1px solid #F0F2F8}
-.btn{padding:11px 24px;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .2s;font-family:'Inter',sans-serif}
-.btn:active{transform:scale(.97)}
-.btn-primary{background:#3B5BDB;color:#fff}
-.btn-primary:hover{background:#2F4AC5}
-.btn-secondary{background:#F1F3F9;color:#444}
-.btn-secondary:hover{background:#E5E9F5}
-.btn-disabled{background:#E8ECF6;color:#AAB;cursor:not-allowed}
-.nav-label{font-size:12px;color:#AAA;font-weight:500}
-
-/* FORMATEUR */
-.formateur{display:flex;gap:14px;background:#F4F6FB;border-radius:14px;padding:16px 18px;margin-bottom:20px;align-items:flex-start}
-.formateur-avatar{width:44px;height:44px;border-radius:50%;background:#3B5BDB;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.formateur-text{font-size:13px;color:#444;line-height:1.6}
-.formateur-name{font-size:12px;font-weight:600;color:#3B5BDB;margin-bottom:3px}
-
-@media(max-width:560px){
-  .card{padding:24px 20px}
-  .grid-2,.grid-3{grid-template-columns:1fr}
-  .meteo-row{flex-direction:column}
-}
+  .highlight{background:#FAEEDA;border-radius:6px;padding:2px 6px;color:#854F0B;font-weight:500}
 </style>
 </head>
 <body>
-
-<div class="progress-wrap">
-  <div class="progress-top">
-    <span class="progress-label" id="progress-text">Étape 1 sur 7</span>
-    <span class="progress-label" id="progress-pct">14%</span>
-  </div>
-  <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:14%"></div></div>
-  <div class="steps-dots" id="dots"></div>
-</div>
-
 <div class="card">
 
-<!-- ═══════════════════════════════════════ -->
-<!-- SCREEN 0 : Accueil formateur -->
-<!-- ═══════════════════════════════════════ -->
-<div class="screen active" id="s0">
-  <div class="badge badge-blue">🎓 Formation AirSaaS · Module 0</div>
-  <h1>Bienvenue dans AirSaaS !</h1>
-  <div class="formateur">
-    <div class="formateur-avatar">👨‍🏫</div>
-    <div>
-      <div class="formateur-name">Votre formateur</div>
-      <div class="formateur-text">Bonjour ! Je suis ravi de vous accueillir dans cette formation AirSaaS. En 7 étapes courtes, vous allez comprendre ce qu'est AirSaaS, comment vous y connecter, naviguer dans l'interface, et suivre vos projets au quotidien. Aucune connaissance préalable requise — on part de zéro !</div>
-    </div>
+  <div class="progress-bar">
+    <div class="step-dot active" id="dot0"></div>
+    <div class="step-dot" id="dot1"></div>
+    <div class="step-dot" id="dot2"></div>
+    <div class="step-dot" id="dot3"></div>
   </div>
-  <div class="grid grid-3">
-    <div class="mini-card">
-      <div class="mc-icon">⏱</div>
-      <div class="mc-title">~5 minutes</div>
-      <div class="mc-text">Durée estimée de ce module</div>
-    </div>
-    <div class="mini-card">
-      <div class="mc-icon">🎯</div>
-      <div class="mc-title">Débutant</div>
-      <div class="mc-text">Aucun prérequis nécessaire</div>
-    </div>
-    <div class="mini-card">
-      <div class="mc-icon">✅</div>
-      <div class="mc-title">Quiz inclus</div>
-      <div class="mc-text">Validation des acquis à la fin</div>
-    </div>
-  </div>
-  <div class="highlight-box highlight-blue" style="margin-top:16px">
-    <div class="hb-title">📚 Ce que vous allez apprendre</div>
-    <p>Ce qu'est AirSaaS · Comment vous connecter · Les grandes sections de l'interface · La notion de météo et de jalons · Comment lire un projet</p>
-  </div>
-  <div class="nav">
-    <span class="nav-label">Module 0 · Bienvenue</span>
-    <button class="btn btn-primary" onclick="go(1)">Commencer la formation →</button>
-  </div>
-</div>
 
-<!-- ═══════════════════════════════════════ -->
-<!-- SCREEN 1 : C'est quoi AirSaaS ? -->
-<!-- ═══════════════════════════════════════ -->
-<div class="screen" id="s1">
-  <div class="badge badge-blue">Étape 1 — Qu'est-ce qu'AirSaaS ?</div>
-  <h1>AirSaaS : votre outil de pilotage de projets</h1>
-  <div class="formateur">
-    <div class="formateur-avatar">👨‍🏫</div>
-    <div>
-      <div class="formateur-name">Le formateur</div>
-      <div class="formateur-text">Imaginez un tableau de bord commun où tous les projets de Cerfrance sont visibles, suivis et coordonnés. C'est exactement ce qu'est AirSaaS. Fini les emails perdus, les tableaux Excel éparpillés — tout est centralisé ici.</div>
-    </div>
-  </div>
-  <div class="screenshot-wrap">
-    <div class="screenshot-bar"><span></span><span></span><span></span><span class="url">app.airsaas.io — Page de connexion</span></div>
-    <img class="screenshot-img" src="https://evageorgel.github.io/formation-airsaas/screens/login.png" alt="Page de connexion AirSaaS" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div style="display:none;height:160px;background:#EEF2FF;align-items:center;justify-content:center;flex-direction:column;gap:8px">
-      <div style="font-size:32px">🔐</div>
-      <div style="font-size:13px;color:#3B5BDB;font-weight:600">Page de connexion AirSaaS</div>
-      <div style="font-size:12px;color:#666">Rejoignez les équipes projet qui réussissent</div>
-    </div>
-    <div class="screenshot-caption">La page de connexion AirSaaS — vous vous connectez avec votre adresse mail professionnelle Cerfrance</div>
-  </div>
-  <div class="grid grid-2">
-    <div class="mini-card active-card">
-      <div class="mc-icon">🗂</div>
-      <div class="mc-title">Centralise tous les projets</div>
-      <div class="mc-text">Un seul endroit pour voir l'ensemble des projets Cerfrance, leur état et leur avancement</div>
-    </div>
-    <div class="mini-card active-card">
-      <div class="mc-icon">🔔</div>
-      <div class="mc-title">Partage l'information</div>
-      <div class="mc-text">Chaque mise à jour est visible par tous les acteurs concernés en temps réel</div>
-    </div>
-    <div class="mini-card active-card">
-      <div class="mc-icon">📊</div>
-      <div class="mc-title">Pilote la performance</div>
-      <div class="mc-text">Jalons, météo, décisions — tout est tracé et visible pour prendre les bonnes décisions</div>
-    </div>
-    <div class="mini-card active-card">
-      <div class="mc-icon">🤝</div>
-      <div class="mc-title">Aligne les équipes</div>
-      <div class="mc-text">Sponsors, chefs de projet, MOA, MOE — tous travaillent avec le même outil</div>
-    </div>
-  </div>
-  <div class="nav">
-    <button class="btn btn-secondary" onclick="go(0)">← Retour</button>
-    <span class="nav-label">1 / 6</span>
-    <button class="btn btn-primary" onclick="go(2)">Suivant →</button>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════ -->
-<!-- SCREEN 2 : L'interface - fil d'actualités -->
-<!-- ═══════════════════════════════════════ -->
-<div class="screen" id="s2">
-  <div class="badge badge-blue">Étape 2 — L'interface AirSaaS</div>
-  <h1>Votre tableau de bord au quotidien</h1>
-  <div class="formateur">
-    <div class="formateur-avatar">👨‍🏫</div>
-    <div>
-      <div class="formateur-name">Le formateur</div>
-      <div class="formateur-text">Une fois connecté, vous arrivez sur votre fil d'actualités. C'est votre point de départ chaque matin. Regardons ensemble les différentes zones de l'interface.</div>
-    </div>
-  </div>
-  <div class="screenshot-wrap">
-    <div class="screenshot-bar"><span></span><span></span><span></span><span class="url">app.airsaas.io — Fil d'actualités</span></div>
-    <img class="screenshot-img" src="https://evageorgel.github.io/formation-airsaas/screens/feed.png" alt="Fil d'actualités AirSaaS" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div style="display:none;height:200px;background:#EEF2FF;align-items:center;justify-content:center;flex-direction:column;gap:8px">
-      <div style="font-size:32px">📰</div>
-      <div style="font-size:13px;color:#3B5BDB;font-weight:600">Fil d'actualités AirSaaS</div>
-      <div style="font-size:12px;color:#666">Toutes les mises à jour de vos projets en temps réel</div>
-    </div>
-    <div class="screenshot-caption">Le fil d'actualités — chaque action sur vos projets apparaît ici automatiquement</div>
-  </div>
-  <p style="font-weight:600;color:#1A1D2E;margin-bottom:10px">🖱 Cliquez sur chaque zone pour en savoir plus :</p>
-  <div class="menu-list">
-    <div class="menu-item" onclick="toggleMenu('m1',this)">
-      <div class="menu-icon blue">🔵</div>
-      <div class="menu-item-info">
-        <div class="mi-title">Barre de navigation supérieure</div>
-        <div class="mi-desc">Portfolio · Stratégie · Quarter plan · Priorisation · Roadmaps</div>
+  <!-- SCREEN 0 : Intro -->
+  <div class="screen active" id="s0">
+    <div class="badge badge-blue">Module 1 · ~4 min</div>
+    <h1>Comprendre AirSaaS et les instances projet</h1>
+    <p class="intro">AirSaaS est l'outil de pilotage de tous les projets chez Cerfrance Mayenne-Sarthe. En tant que chef de projet, vous l'utiliserez au quotidien pour suivre l'avancement, remonter des décisions et coordonner les acteurs.<br><br>Dans ce module, vous apprendrez à identifier les 3 instances de gouvernance et le rôle de chaque acteur clé.</p>
+    <div style="background:#F7F6F2;border-radius:14px;padding:18px;margin-bottom:28px">
+      <div style="font-size:13px;font-weight:600;margin-bottom:10px;color:#111">Dans ce module vous allez :</div>
+      <div style="font-size:13px;color:#444;display:flex;flex-direction:column;gap:7px">
+        <div>→ Identifier les 3 instances de gouvernance projet</div>
+        <div>→ Comprendre les rôles du Sponsor et du Chef de projet</div>
+        <div>→ Distinguer MOA et MOE</div>
+        <div>→ Valider vos acquis avec un quiz</div>
       </div>
     </div>
-    <div class="menu-detail" id="m1">La barre du haut vous donne accès aux grandes vues d'AirSaaS. <strong>Portfolio</strong> est votre vue principale : elle liste tous vos projets. <strong>Roadmaps</strong> permet de voir les jalons dans le temps. Ces menus sont accessibles à tous les collaborateurs.</div>
-    <div class="menu-item" onclick="toggleMenu('m2',this)">
-      <div class="menu-icon green">📋</div>
-      <div class="menu-item-info">
-        <div class="mi-title">Panneau gauche — Vos projets</div>
-        <div class="mi-desc">Accès rapide à tous vos projets en cours</div>
+    <div class="nav">
+      <span class="screen-label">1 / 4</span>
+      <button class="btn btn-primary" onclick="go(1)">Commencer →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 1 : Les 3 instances -->
+  <div class="screen" id="s1">
+    <div class="badge badge-blue">Les instances de gouvernance</div>
+    <h1>3 instances pour piloter vos projets</h1>
+    <p class="intro">Chaque projet chez Cerfrance repose sur 3 niveaux de gouvernance. <span class="highlight">Cliquez sur chaque instance</span> pour en comprendre le rôle.</p>
+    <div class="instances">
+      <div class="inst inst-coproj" onclick="showDetail('coproj',this)">
+        <div class="inst-icon">🔧</div>
+        <div class="inst-name">CoProj</div>
+        <div class="inst-desc">Comité Projet<br>Niveau opérationnel</div>
+      </div>
+      <div class="inst inst-copil" onclick="showDetail('copil',this)">
+        <div class="inst-icon">🧭</div>
+        <div class="inst-name">CoPil</div>
+        <div class="inst-desc">Comité de Pilotage<br>Niveau tactique</div>
+      </div>
+      <div class="inst inst-comex" onclick="showDetail('comex',this)">
+        <div class="inst-icon">🏛</div>
+        <div class="inst-name">Comex</div>
+        <div class="inst-desc">Comité Exécutif<br>Niveau stratégique</div>
       </div>
     </div>
-    <div class="menu-detail" id="m2">Sur la gauche, vous trouvez la liste de <strong>tous vos projets</strong> auxquels vous êtes associé. Un clic sur un projet vous amène directement à sa fiche. Vous pouvez aussi voir vos responsabilités et votre fil d'actualités personnalisé.</div>
-    <div class="menu-item" onclick="toggleMenu('m3',this)">
-      <div class="menu-icon purple">📰</div>
-      <div class="menu-item-info">
-        <div class="mi-title">Zone centrale — Fil d'actualités</div>
-        <div class="mi-desc">Météo mises à jour · Jalons modifiés · Comptes rendus publiés</div>
+    <div class="inst-detail" id="detail-coproj">
+      <div class="detail-title" style="color:#185FA5">CoProj — Comité Projet (opérationnel)</div>
+      Animé par le Chef de projet, il réunit l'équipe opérationnelle chaque semaine (30 min) ou toutes les 2 semaines (1h). Il permet de <strong>revoir l'avancement des livrables</strong>, définir les plans d'action (qui, quoi, quand) et remonter les points bloquants.
+    </div>
+    <div class="inst-detail" id="detail-copil">
+      <div class="detail-title" style="color:#0F6E56">CoPil — Comité de Pilotage (mensuel)</div>
+      Réunit le Sponsor et le Chef de projet chaque mois, avant le Comex. Il permet de faire un <strong>état de santé du projet</strong> (météo), d'ajuster les jalons si besoin, de lister les décisions à prendre et les points de vigilance.
+    </div>
+    <div class="inst-detail" id="detail-comex">
+      <div class="detail-title" style="color:#854F0B">Comex — Comité Exécutif (mensuel)</div>
+      Instance d'arbitrage stratégique. Il statue sur les <strong>GO / NO GO</strong> des projets, traite les points critiques remontés par le Sponsor, et veille à la coordination globale du portefeuille de projets. Le CA intervient si l'investissement dépasse 500 K€.
+    </div>
+    <div class="nav">
+      <button class="btn btn-secondary" onclick="go(0)">← Retour</button>
+      <span class="screen-label">2 / 4</span>
+      <button class="btn btn-primary" onclick="go(2)">Suivant →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 2 : Rôles -->
+  <div class="screen" id="s2">
+    <div class="badge badge-green">Les acteurs clés</div>
+    <h1>Qui fait quoi dans votre projet ?</h1>
+    <p class="intro">4 acteurs structurent la réalisation de chaque projet. Voici leurs responsabilités essentielles.</p>
+    <div class="roles">
+      <div class="role-row">
+        <div class="role-icon sponsor">🎯</div>
+        <div>
+          <div class="role-name">Sponsor</div>
+          <div class="role-text">Nomme le Chef de projet, engage les ressources, porte la conduite du changement. Il est le premier ambassadeur du projet et prend toutes les décisions nécessaires. Il rend compte mensuellement à la DG.</div>
+        </div>
+      </div>
+      <div class="role-row">
+        <div class="role-icon cp">📋</div>
+        <div>
+          <div class="role-name">Chef de projet</div>
+          <div class="role-text">Garant du déroulement du projet et de sa livraison dans les délais. Il planifie, coordonne, anime le CoProj et le CoPil. Il rend compte au Sponsor et met à jour AirSaaS régulièrement.</div>
+        </div>
+      </div>
+      <div class="role-row">
+        <div class="role-icon moa">✅</div>
+        <div>
+          <div class="role-name">MOA — Maîtrise d'Ouvrage</div>
+          <div class="role-text">Exprime le besoin fonctionnel, réalise la recette fonctionnelle et valide la solution livrée. Elle représente les métiers.</div>
+        </div>
+      </div>
+      <div class="role-row">
+        <div class="role-icon moe">⚙️</div>
+        <div>
+          <div class="role-name">MOE — Maîtrise d'Œuvre</div>
+          <div class="role-text">Responsable de la réalisation technique, de l'étude de faisabilité, de l'intégration et de la recette technique. Elle garantit l'exploitabilité de la solution.</div>
+        </div>
       </div>
     </div>
-    <div class="menu-detail" id="m3">Le fil central affiche <strong>toutes les actions récentes</strong> sur vos projets : mise à jour de météo, ajout d'un jalon, publication d'un compte rendu. Chaque entrée est cliquable pour accéder directement à l'élément concerné.</div>
-  </div>
-  <div class="nav">
-    <button class="btn btn-secondary" onclick="go(1)">← Retour</button>
-    <span class="nav-label">2 / 6</span>
-    <button class="btn btn-primary" onclick="go(3)">Suivant →</button>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════ -->
-<!-- SCREEN 3 : Le Portfolio des projets -->
-<!-- ═══════════════════════════════════════ -->
-<div class="screen" id="s3">
-  <div class="badge badge-green">Étape 3 — Le Portfolio</div>
-  <h1>Voir tous les projets d'un coup d'œil</h1>
-  <div class="formateur">
-    <div class="formateur-avatar">👨‍🏫</div>
-    <div>
-      <div class="formateur-name">Le formateur</div>
-      <div class="formateur-text">Le Portfolio, c'est la vue la plus importante d'AirSaaS. C'est ici que vous voyez l'état de tous les projets, organisés par statut. Un chef de projet y passe chaque jour.</div>
-    </div>
-  </div>
-  <div class="screenshot-wrap">
-    <div class="screenshot-bar"><span></span><span></span><span></span><span class="url">Portfolio → Mes projets</span></div>
-    <img class="screenshot-img" src="https://evageorgel.github.io/formation-airsaas/screens/portfolio.png" alt="Vue Portfolio AirSaaS" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div style="display:none;height:200px;background:#EEF2FF;align-items:center;justify-content:center;flex-direction:column;gap:8px">
-      <div style="font-size:32px">📊</div>
-      <div style="font-size:13px;color:#3B5BDB;font-weight:600">Vue Portfolio — Tous les projets</div>
-      <div style="font-size:12px;color:#666">Organisés par statut : À l'étude · Prépa lancement · En cours · Terminé</div>
-    </div>
-    <div class="screenshot-caption">La vue Portfolio — chaque colonne correspond à un statut de projet. Les cartes roses indiquent une météo à mettre à jour !</div>
-  </div>
-  <p style="font-weight:600;color:#1A1D2E;margin-bottom:8px">Les statuts des projets dans le Portfolio :</p>
-  <div class="status-row">
-    <span class="pill pill-gray">À l'étude</span>
-    <span class="pill pill-yellow">Préparation lancement</span>
-    <span class="pill pill-blue">En cours</span>
-    <span class="pill pill-gray">Différé</span>
-    <span class="pill pill-green">Terminé</span>
-  </div>
-  <div class="highlight-box highlight-orange" style="margin-top:8px">
-    <div class="hb-title">⚠️ Les alertes en rouge en haut du Portfolio</div>
-    <p>AirSaaS vous alerte automatiquement : <strong>mise à jour en retard</strong>, <strong>jalon sans responsable</strong>, <strong>jalon en retard</strong>... Ces indicateurs vous permettent de voir d'un coup d'œil ce qui nécessite votre attention.</p>
-  </div>
-  <div class="nav">
-    <button class="btn btn-secondary" onclick="go(2)">← Retour</button>
-    <span class="nav-label">3 / 6</span>
-    <button class="btn btn-primary" onclick="go(4)">Suivant →</button>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════ -->
-<!-- SCREEN 4 : Fiche projet -->
-<!-- ═══════════════════════════════════════ -->
-<div class="screen" id="s4">
-  <div class="badge badge-purple">Étape 4 — La fiche projet</div>
-  <h1>Tout savoir sur un projet en un écran</h1>
-  <div class="formateur">
-    <div class="formateur-avatar">👨‍🏫</div>
-    <div>
-      <div class="formateur-name">Le formateur</div>
-      <div class="formateur-text">Quand vous cliquez sur un projet, vous arrivez sur sa fiche. C'est le cœur d'AirSaaS. Laissez-moi vous montrer les 4 zones essentielles à connaître.</div>
-    </div>
-  </div>
-  <div class="screenshot-wrap">
-    <div class="screenshot-bar"><span></span><span></span><span></span><span class="url">Fiche projet — Déployer Facture électronique</span></div>
-    <img class="screenshot-img" src="https://evageorgel.github.io/formation-airsaas/screens/fiche_projet.png" alt="Fiche projet AirSaaS" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div style="display:none;height:200px;background:#EEF2FF;align-items:center;justify-content:center;flex-direction:column;gap:8px">
-      <div style="font-size:32px">📁</div>
-      <div style="font-size:13px;color:#3B5BDB;font-weight:600">Fiche projet complète</div>
-      <div style="font-size:12px;color:#666">Personnes · Santé · Jalons · Description · Documents</div>
-    </div>
-    <div class="screenshot-caption">La fiche projet — 3 colonnes : informations à gauche, fil central, santé et jalons à droite</div>
-  </div>
-  <div class="grid grid-2">
-    <div class="mini-card">
-      <div class="mc-icon">👥</div>
-      <div class="mc-title">Colonne gauche</div>
-      <div class="mc-text">Personnes impliquées (Chef de projet, Sponsors), équipes, caractéristiques, documents</div>
-    </div>
-    <div class="mini-card">
-      <div class="mc-icon">💬</div>
-      <div class="mc-title">Zone centrale</div>
-      <div class="mc-text">Fil d'activité du projet : jalons, décisions, comptes rendus, commentaires</div>
-    </div>
-    <div class="mini-card">
-      <div class="mc-icon">🌡</div>
-      <div class="mc-title">Santé du projet</div>
-      <div class="mc-text">Météo actuelle, rappel de mise à jour, statut et avancement global</div>
-    </div>
-    <div class="mini-card">
-      <div class="mc-icon">📅</div>
-      <div class="mc-title">Jalons</div>
-      <div class="mc-text">Liste des jalons avec leur état : en retard, en cours, terminé, bloqué</div>
-    </div>
-  </div>
-  <div class="highlight-box highlight-green">
-    <div class="hb-title">💡 Le bouton "Mettre à jour" en rouge</div>
-    <p>Quand vous voyez ce bouton en rouge sur la fiche projet, c'est qu'une mise à jour de météo est attendue. En tant que Chef de projet, vous devez cliquer dessus et indiquer l'état de santé du projet toutes les 2 semaines.</p>
-  </div>
-  <div class="nav">
-    <button class="btn btn-secondary" onclick="go(3)">← Retour</button>
-    <span class="nav-label">4 / 6</span>
-    <button class="btn btn-primary" onclick="go(5)">Suivant →</button>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════ -->
-<!-- SCREEN 5 : Météo et jalons -->
-<!-- ═══════════════════════════════════════ -->
-<div class="screen" id="s5">
-  <div class="badge badge-orange">Étape 5 — Météo et Jalons</div>
-  <h1>Les deux indicateurs clés d'un projet</h1>
-  <div class="formateur">
-    <div class="formateur-avatar">👨‍🏫</div>
-    <div>
-      <div class="formateur-name">Le formateur</div>
-      <div class="formateur-text">Dans AirSaaS, deux éléments sont au cœur du pilotage : la <strong>météo</strong> (l'état de santé global) et les <strong>jalons</strong> (les étapes clés du projet). Comprendre ces deux éléments, c'est comprendre 80% d'AirSaaS.</div>
-    </div>
-  </div>
-  <h2>🌡 La météo du projet</h2>
-  <p>La météo est une indication visuelle de l'état général du projet. Elle est mise à jour par le Chef de projet <strong>toutes les 2 semaines</strong>.</p>
-  <div class="meteo-row">
-    <div class="meteo-item m-green">
-      <div class="m-icon">☀️</div>
-      <div class="m-label">Tout va bien</div>
-      <div class="m-desc">Le projet avance comme prévu</div>
-    </div>
-    <div class="meteo-item m-orange">
-      <div class="m-icon">⛅</div>
-      <div class="m-label">Quelques problèmes</div>
-      <div class="m-desc">Des difficultés mais gérables</div>
-    </div>
-    <div class="meteo-item m-red">
-      <div class="m-icon">🌧</div>
-      <div class="m-label">En retard</div>
-      <div class="m-desc">Le projet nécessite une attention urgente</div>
-    </div>
-  </div>
-  <div class="screenshot-wrap">
-    <div class="screenshot-bar"><span></span><span></span><span></span><span class="url">Jalons du projet — Vue détaillée</span></div>
-    <img class="screenshot-img" src="https://evageorgel.github.io/formation-airsaas/screens/jalons.png" alt="Vue jalons AirSaaS" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div style="display:none;height:180px;background:#EEF2FF;align-items:center;justify-content:center;flex-direction:column;gap:8px">
-      <div style="font-size:32px">📅</div>
-      <div style="font-size:13px;color:#3B5BDB;font-weight:600">Liste des jalons du projet</div>
-      <div style="font-size:12px;color:#666">Avec leur état : En retard · En cours · Terminé · Bloqué</div>
-    </div>
-    <div class="screenshot-caption">Les jalons — chaque jalon a une date, une équipe responsable, un état météo et un pourcentage d'avancement</div>
-  </div>
-  <h2 style="margin-top:4px">📅 Les jalons</h2>
-  <p>Un jalon est une étape clé du projet avec une date cible. Dans AirSaaS, chaque jalon indique :</p>
-  <div class="status-row">
-    <span class="pill pill-red">🔴 En retard</span>
-    <span class="pill pill-blue">🔵 En cours</span>
-    <span class="pill pill-green">🟢 Terminé</span>
-    <span class="pill pill-red">🚫 Bloqué</span>
-  </div>
-  <div class="highlight-box highlight-blue" style="margin-top:8px">
-    <div class="hb-title">🔗 Les dépendances entre jalons</div>
-    <p>Un jalon peut être <strong>bloqué par un autre jalon</strong> d'un projet différent. AirSaaS vous montre clairement ces dépendances pour anticiper les blocages.</p>
-  </div>
-  <div class="nav">
-    <button class="btn btn-secondary" onclick="go(4)">← Retour</button>
-    <span class="nav-label">5 / 6</span>
-    <button class="btn btn-primary" onclick="go(6)">Quiz →</button>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════ -->
-<!-- SCREEN 6 : Quiz -->
-<!-- ═══════════════════════════════════════ -->
-<div class="screen" id="s6">
-  <div class="badge badge-orange">Quiz de validation</div>
-  <h1>Testez vos connaissances !</h1>
-  <div class="formateur" style="margin-bottom:20px">
-    <div class="formateur-avatar">👨‍🏫</div>
-    <div>
-      <div class="formateur-name">Le formateur</div>
-      <div class="formateur-text">3 questions pour valider ce que vous venez d'apprendre. Prenez le temps de réfléchir !</div>
+    <div class="nav">
+      <button class="btn btn-secondary" onclick="go(1)">← Retour</button>
+      <span class="screen-label">3 / 4</span>
+      <button class="btn btn-primary" onclick="go(3)">Quiz →</button>
     </div>
   </div>
 
-  <div id="q1block">
-    <div class="quiz-question">1. Quelle est la fréquence de mise à jour de la météo dans AirSaaS ?</div>
-    <div class="quiz-options">
-      <button class="qopt" onclick="answer(1,this,false)">Tous les jours</button>
-      <button class="qopt" onclick="answer(1,this,true)">Toutes les 2 semaines</button>
-      <button class="qopt" onclick="answer(1,this,false)">Une fois par mois</button>
-      <button class="qopt" onclick="answer(1,this,false)">À chaque réunion uniquement</button>
+  <!-- SCREEN 3 : Quiz -->
+  <div class="screen" id="s3">
+    <div class="badge badge-amber">Quiz de validation</div>
+    <h1>Testez vos connaissances</h1>
+    <br>
+    <div id="quiz-container">
+      <!-- Q1 -->
+      <div id="q1" class="quiz-block">
+        <div class="quiz-q">1. Qui nomme le Chef de projet ?</div>
+        <div class="options">
+          <button class="opt" onclick="answer('q1',this,false)">La MOA</button>
+          <button class="opt" onclick="answer('q1',this,true)">Le Sponsor</button>
+          <button class="opt" onclick="answer('q1',this,false)">Le Comex</button>
+          <button class="opt" onclick="answer('q1',this,false)">La DG</button>
+        </div>
+        <div class="feedback ok" id="fb1-ok">✓ Correct ! Le Sponsor nomme le Chef de projet, lui délègue les ressources et porte la conduite du changement.</div>
+        <div class="feedback ko" id="fb1-ko">✗ Pas tout à fait. C'est le <strong>Sponsor</strong> qui nomme le Chef de projet et lui met à disposition les ressources nécessaires.</div>
+      </div>
+      <!-- Q2 -->
+      <div id="q2" class="quiz-block" style="display:none">
+        <div class="quiz-q">2. Quel est le rythme du CoPil dans AirSaaS ?</div>
+        <div class="options">
+          <button class="opt" onclick="answer('q2',this,false)">Chaque semaine</button>
+          <button class="opt" onclick="answer('q2',this,false)">Tous les 15 jours</button>
+          <button class="opt" onclick="answer('q2',this,true)">Mensuel, avant le Comex</button>
+          <button class="opt" onclick="answer('q2',this,false)">Trimestriel</button>
+        </div>
+        <div class="feedback ok" id="fb2-ok">✓ Exact ! Le CoPil se tient <strong>chaque mois, avant le Comex</strong>, pour faire le point sur l'état de santé du projet.</div>
+        <div class="feedback ko" id="fb2-ko">✗ Le CoPil est <strong>mensuel</strong>, et se tient avant la réunion Comex pour préparer les arbitrages si nécessaire.</div>
+      </div>
+      <!-- Q3 -->
+      <div id="q3" class="quiz-block" style="display:none">
+        <div class="quiz-q">3. Quelle instance est responsable de l'expression du besoin fonctionnel ?</div>
+        <div class="options">
+          <button class="opt" onclick="answer('q3',this,false)">La MOE</button>
+          <button class="opt" onclick="answer('q3',this,true)">La MOA</button>
+          <button class="opt" onclick="answer('q3',this,false)">Le Chef de projet</button>
+          <button class="opt" onclick="answer('q3',this,false)">Le Sponsor</button>
+        </div>
+        <div class="feedback ok" id="fb3-ok">✓ Bravo ! La <strong>MOA</strong> est responsable du besoin fonctionnel, de la recette et de la validation de la solution.</div>
+        <div class="feedback ko" id="fb3-ko">✗ C'est la <strong>MOA</strong> (Maîtrise d'Ouvrage) qui exprime le besoin fonctionnel et valide la solution. La MOE, elle, s'occupe de la réalisation technique.</div>
+      </div>
     </div>
-    <div class="feedback ok" id="fb1ok"><div class="fb-title">✓ Exact !</div>La météo doit être mise à jour toutes les 2 semaines par le Chef de projet. C'est un indicateur clé du pilotage visible de tous.</div>
-    <div class="feedback ko" id="fb1ko"><div class="fb-title">✗ Pas tout à fait</div>La bonne réponse est <strong>toutes les 2 semaines</strong>. AirSaaS affiche même une alerte rouge quand la météo n'a pas été mise à jour dans ce délai.</div>
-  </div>
-
-  <div id="q2block" style="display:none">
-    <div class="quiz-question">2. Dans la vue Portfolio, que signifie une carte de projet avec un fond rose/rouge ?</div>
-    <div class="quiz-options">
-      <button class="qopt" onclick="answer(2,this,false)">Le projet est terminé</button>
-      <button class="qopt" onclick="answer(2,this,false)">Le projet est en retard sur ses jalons</button>
-      <button class="qopt" onclick="answer(2,this,true)">La météo du projet n'a pas été mise à jour</button>
-      <button class="qopt" onclick="answer(2,this,false)">Le projet a été abandonné</button>
+    <div class="nav" id="quiz-nav">
+      <button class="btn btn-secondary" onclick="go(2)">← Retour</button>
+      <span class="screen-label" id="q-label">Question 1 / 3</span>
+      <button class="btn btn-disabled" id="btn-next-q" onclick="nextQ()" disabled>Suivant</button>
     </div>
-    <div class="feedback ok" id="fb2ok"><div class="fb-title">✓ Bravo !</div>Une carte rose/rouge dans le Portfolio signale que la météo du projet n'a pas été mise à jour dans les délais. C'est une alerte visuelle pour le Chef de projet.</div>
-    <div class="feedback ko" id="fb2ko"><div class="fb-title">✗ Pas tout à fait</div>Une carte rose dans le Portfolio signifie que la <strong>météo n'a pas été mise à jour</strong>. Ce n'est pas lié au statut des jalons ou à la fin du projet.</div>
   </div>
 
-  <div id="q3block" style="display:none">
-    <div class="quiz-question">3. Où trouvez-vous la liste de tous vos projets dans AirSaaS ?</div>
-    <div class="quiz-options">
-      <button class="qopt" onclick="answer(3,this,false)">Dans "Stratégie"</button>
-      <button class="qopt" onclick="answer(3,this,true)">Dans "Portfolio" → "Mes projets"</button>
-      <button class="qopt" onclick="answer(3,this,false)">Dans "Roadmaps"</button>
-      <button class="qopt" onclick="answer(3,this,false)">Dans votre fil d'actualités</button>
-    </div>
-    <div class="feedback ok" id="fb3ok"><div class="fb-title">✓ Parfait !</div>C'est dans <strong>Portfolio → Mes projets</strong> que vous retrouvez tous vos projets, organisés par statut en colonnes Kanban.</div>
-    <div class="feedback ko" id="fb3ko"><div class="fb-title">✗ Presque !</div>La liste de vos projets se trouve dans <strong>Portfolio → Mes projets</strong>. C'est la vue centrale d'AirSaaS pour le pilotage quotidien.</div>
-  </div>
-
-  <div class="nav" id="quiz-nav">
-    <button class="btn btn-secondary" onclick="go(5)">← Retour</button>
-    <span class="nav-label" id="q-label">Question 1 / 3</span>
-    <button class="btn btn-disabled" id="btn-next-q" onclick="nextQ()" disabled>Continuer</button>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════ -->
-<!-- SCREEN 7 : Bilan final -->
-<!-- ═══════════════════════════════════════ -->
-<div class="screen" id="s7">
-  <div class="success-wrap">
+  <!-- SCREEN 4 : Résultat -->
+  <div class="screen" id="s4">
     <div class="success-icon">🎉</div>
-    <div class="success-title">Module 0 terminé !</div>
-    <div class="success-sub">Félicitations ! Vous avez maintenant une vision claire de ce qu'est AirSaaS et comment vous y retrouver. Vous êtes prêt pour la suite de la formation.</div>
+    <div class="success-title">Module 1 terminé !</div>
+    <div class="success-sub">Vous maîtrisez les instances de gouvernance et les rôles clés. C'est la base pour bien utiliser AirSaaS au quotidien.</div>
+    <div class="recap">
+      <div class="recap-item">Les 3 instances : CoProj · CoPil · Comex</div>
+      <div class="recap-item">Le Sponsor nomme et habilite le Chef de projet</div>
+      <div class="recap-item">La MOA exprime le besoin, la MOE réalise</div>
+      <div class="recap-item">CoPil = mensuel, avant Comex</div>
+    </div>
+    <div style="text-align:center">
+      <div style="font-size:13px;color:#888;margin-bottom:12px">Prochain module :</div>
+      <div style="font-size:15px;font-weight:600;color:#111">Module 2 — Le cycle de vie d'un projet dans AirSaaS</div>
+    </div>
   </div>
-  <div class="recap-list">
-    <div class="recap-item">AirSaaS est l'outil central de pilotage de tous les projets Cerfrance</div>
-    <div class="recap-item">L'interface comprend un fil d'actualités, un Portfolio et des fiches projet</div>
-    <div class="recap-item">Le Portfolio organise les projets par statut en vue Kanban</div>
-    <div class="recap-item">La météo doit être mise à jour toutes les 2 semaines par le Chef de projet</div>
-    <div class="recap-item">Les jalons sont les étapes clés du projet avec date, équipe et état de santé</div>
-  </div>
-  <div class="highlight-box highlight-blue">
-    <div class="hb-title">🚀 Prochain module</div>
-    <p><strong>Module 1 — Les rôles et instances :</strong> Qui fait quoi dans AirSaaS ? Découvrez le rôle du Sponsor, du Chef de projet, de la MOA et de la MOE, et comment ils interagissent.</p>
-  </div>
-  <div class="nav" style="justify-content:center">
-    <button class="btn btn-primary" onclick="go(0)">🔄 Revoir le module</button>
-  </div>
-</div>
 
-</div><!-- /card -->
+</div>
 
 <script>
-var cur = 0;
-var qCur = 1;
-var totalScreens = 8;
+  var cur = 0;
+  var qCur = 1;
+  var scores = {q1:null, q2:null, q3:null};
 
-var progLabels = ["Introduction","AirSaaS ?","L'interface","Le Portfolio","La fiche projet","Météo & Jalons","Quiz","Bilan"];
-
-function buildDots(){
-  var d=document.getElementById('dots');
-  d.innerHTML='';
-  for(var i=0;i<totalScreens;i++){
-    var dot=document.createElement('div');
-    dot.className='dot'+(i<cur?' done':i===cur?' active':'');
-    d.appendChild(dot);
+  function go(n){
+    document.getElementById('s'+cur).classList.remove('active');
+    cur = n;
+    document.getElementById('s'+cur).classList.add('active');
+    updateDots();
   }
-}
 
-function updateProgress(){
-  var pct=Math.round((cur/(totalScreens-1))*100);
-  document.getElementById('progress-fill').style.width=pct+'%';
-  document.getElementById('progress-pct').textContent=pct+'%';
-  document.getElementById('progress-text').textContent='Étape '+(cur+1)+' sur '+totalScreens+' — '+progLabels[cur];
-  buildDots();
-}
-
-function go(n){
-  document.getElementById('s'+cur).classList.remove('active');
-  cur=n;
-  document.getElementById('s'+cur).classList.add('active');
-  updateProgress();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function toggleMenu(id,el){
-  var d=document.getElementById(id);
-  var isOpen=d.classList.contains('show');
-  document.querySelectorAll('.menu-detail').forEach(function(x){x.classList.remove('show')});
-  document.querySelectorAll('.menu-item').forEach(function(x){x.classList.remove('selected')});
-  if(!isOpen){d.classList.add('show');el.classList.add('selected');}
-}
-
-function answer(qn,btn,correct){
-  var opts=btn.parentNode.querySelectorAll('.qopt');
-  opts.forEach(function(o){o.disabled=true;});
-  if(correct){
-    btn.classList.add('correct');
-    document.getElementById('fb'+qn+'ok').classList.add('show');
-  } else {
-    btn.classList.add('wrong');
-    document.getElementById('fb'+qn+'ko').classList.add('show');
+  function updateDots(){
+    for(var i=0;i<4;i++){
+      var d = document.getElementById('dot'+i);
+      d.classList.remove('done','active');
+      if(i < cur) d.classList.add('done');
+      else if(i === cur) d.classList.add('active');
+    }
   }
-  var nb=document.getElementById('btn-next-q');
-  nb.disabled=false;
-  nb.classList.remove('btn-disabled');
-  nb.classList.add('btn-primary');
-  if(qCur===3) nb.textContent='Voir mon bilan →';
-}
 
-function nextQ(){
-  if(qCur<3){
-    document.getElementById('q'+qCur+'block').style.display='none';
-    qCur++;
-    document.getElementById('q'+qCur+'block').style.display='block';
-    document.getElementById('q-label').textContent='Question '+qCur+' / 3';
-    var nb=document.getElementById('btn-next-q');
-    nb.disabled=true;
-    nb.classList.add('btn-disabled');
-    nb.classList.remove('btn-primary');
-    nb.textContent='Continuer';
-  } else {
-    go(7);
+  function showDetail(id, el){
+    document.querySelectorAll('.inst-detail').forEach(function(d){d.classList.remove('show')});
+    document.querySelectorAll('.inst').forEach(function(e){e.classList.remove('sel')});
+    document.getElementById('detail-'+id).classList.add('show');
+    el.classList.add('sel');
   }
-}
 
-buildDots();
+  function answer(qid, btn, correct){
+    var opts = btn.parentNode.querySelectorAll('.opt');
+    opts.forEach(function(o){o.disabled=true});
+    var num = qid.replace('q','');
+    if(correct){
+      btn.classList.add('correct');
+      document.getElementById('fb'+num+'-ok').classList.add('show');
+      scores[qid] = true;
+    } else {
+      btn.classList.add('wrong');
+      document.getElementById('fb'+num+'-ko').classList.add('show');
+      scores[qid] = false;
+    }
+    var nb = document.getElementById('btn-next-q');
+    nb.disabled = false;
+    nb.classList.remove('btn-disabled');
+    nb.classList.add('btn-primary');
+    if(qCur === 3){
+      nb.textContent = 'Voir le bilan →';
+    }
+  }
+
+  function nextQ(){
+    if(qCur < 3){
+      document.getElementById('q'+qCur).style.display='none';
+      qCur++;
+      document.getElementById('q'+qCur).style.display='block';
+      document.getElementById('q-label').textContent = 'Question '+qCur+' / 3';
+      var nb = document.getElementById('btn-next-q');
+      nb.disabled=true;
+      nb.classList.add('btn-disabled');
+      nb.classList.remove('btn-primary');
+      nb.textContent = 'Suivant';
+    } else {
+      go(4);
+    }
+  }
 </script>
 </body>
 </html>
