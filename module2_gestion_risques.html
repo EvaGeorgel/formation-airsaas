@@ -7,52 +7,56 @@
         body { font-family: 'Inter', sans-serif; background: #F7F8FC; padding: 20px; display: flex; justify-content: center; }
         .card { background: #fff; border-radius: 16px; padding: 30px; max-width: 750px; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-top: 5px solid #EF4444; }
         h1 { font-family: 'Syne', sans-serif; font-size: 22px; color: #1C1C2E; margin-bottom: 20px; }
-        .risk-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .risk-table th { text-align: left; font-size: 12px; text-transform: uppercase; color: #6B7280; padding: 10px; border-bottom: 2px solid #E5E7EB; }
-        .risk-row { cursor: pointer; transition: 0.2s; border-bottom: 1px solid #F3F4F6; }
-        .risk-row:hover { background: #FFF5F5; }
-        .risk-row td { padding: 15px 10px; font-size: 14px; }
-        .crit-high { color: #C92A2A; font-weight: 700; background: #FFF5F5; padding: 4px 8px; border-radius: 4px; }
-        .expert-panel { display: none; margin-top: 20px; padding: 20px; background: #FEE2E2; border-radius: 12px; border-left: 5px solid #C92A2A; animation: slideIn 0.3s; }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .risk-item { background: #FFF5F5; border: 1px solid #FEE2E2; border-radius: 12px; padding: 20px; margin-bottom: 15px; cursor: pointer; transition: 0.3s; }
+        .risk-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(239, 68, 68, 0.1); }
+        
+        .risk-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .crit-tag { font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; }
+        .crit-high { background: #EF4444; color: white; }
+        
+        .expert-advice { display: none; margin-top: 15px; padding: 15px; background: white; border-radius: 8px; border-left: 4px solid #EF4444; font-size: 13px; line-height: 1.6; color: #475569; }
+        .methodo-note { background: #EEF2FF; padding: 15px; border-radius: 8px; font-size: 13px; color: #3730A3; margin-top: 25px; border: 1px solid #C7D2FE; }
     </style>
 </head>
 <body>
     <div class="card">
-        <h1>🛡️ Registre des Risques : Anticiper pour Décider</h1>
-        <p style="font-size: 14px; color: #6B7280;">Dans AirSaaS, un risque identifié doit provoquer une <b>Décision</b>. Cliquez sur un risque pour voir l'analyse expert :</p>
-        <table class="risk-table">
-            <thead>
-                <tr><th>Risque Type Cerfrance</th><th>Criticité</th><th>Équipe</th></tr>
-            </thead>
-            <tbody>
-                <tr class="risk-row" onclick="showExpert('r1')">
-                    <td>⚠️ Indisponibilité des experts métier (MOA)</td>
-                    <td><span class="crit-high">TRÈS FORTE</span></td>
-                    <td>Gestion interne</td>
-                </tr>
-                <tr class="risk-row" onclick="showExpert('r2')">
-                    <td>⏳ Retard de livraison technique / API</td>
-                    <td><span class="crit-high" style="color:#E67700; background:#FFF3BF;">MOYENNE</span></td>
-                    <td>Digital</td>
-                </tr>
-            </tbody>
-        </table>
-        <div id="expert-panel" class="expert-panel">
-            <h4 id="e-title" style="margin:0 0 10px 0; color:#991B1B;"></h4>
-            <p id="e-desc" style="margin:0; font-size:13px; line-height:1.6; color:#7F1D1D;"></p>
+        <h1>🛡️ Gestion des Risques : La Méthode AirSaaS</h1>
+        <p style="font-size: 14px; color: #64748B; margin-bottom: 20px;">Un risque dans AirSaaS n'est pas une simple note, c'est une <b>alerte stratégique</b>. Cliquez sur les risques pour voir l'analyse expert :</p>
+
+        <div class="risk-item" onclick="toggle('r1')">
+            <div class="risk-header">
+                <span style="font-weight: 700;">Indisponibilité des experts métier (MOA)</span>
+                <span class="crit-tag crit-high">Critique</span>
+            </div>
+            <div id="r1" class="expert-advice">
+                <b>💡 Analyse Expert :</b> C'est le risque principal de ton projet CER-P148. <br>
+                <b>Action :</b> Si ce risque se confirme, passe ta météo en <b>Orange</b>. Cela force le Sponsor à prendre une décision d'arbitrage en CoPil.
+            </div>
+        </div>
+
+        <div class="risk-item" onclick="toggle('r2')">
+            <div class="risk-header">
+                <span style="font-weight: 700;">Retard de l'éditeur sur la Facture Élec</span>
+                <span class="crit-tag crit-high">Critique</span>
+            </div>
+            <div id="r2" class="expert-advice">
+                <b>💡 Analyse Expert :</b> Ce risque impacte directement tes jalons de taille <b>L</b> ou <b>XL</b>. <br>
+                <b>Action :</b> Ne subis pas le planning de l'éditeur. Utilise le registre pour documenter l'impact sur l'avancement (tes 51%) et protège ta trajectoire.
+            </div>
+        </div>
+
+        <div class="methodo-note">
+            <b>🚀 Rappel Expert :</b> Le rôle du CP est d'identifier le risque, le rôle du Sponsor est de décider comment le traiter (Accepter, Réduire, Transférer).
         </div>
     </div>
+
     <script>
-        const data = {
-            r1: { t: "Analyse Expert : Indisponibilité MOA", d: "C'est un risque majeur. Si les experts ne sont pas libérés pour la recette, passez votre météo en ORANGE. Le Sponsor doit prendre la décision de prioriser le projet sur le quotidien." },
-            r2: { t: "Analyse Expert : Glissement Technique", d: "Un retard technique impacte directement vos jalons. Si le jalon est de taille 'L' ou 'XL', le risque devient critique pour vos 51% d'avancement." }
-        };
-        function showExpert(id) {
-            const p = document.getElementById('expert-panel');
-            document.getElementById('e-title').innerText = data[id].t;
-            document.getElementById('e-desc').innerText = data[id].d;
-            p.style.display = 'block';
+        function toggle(id) {
+            const el = document.getElementById(id);
+            const isVisible = el.style.display === 'block';
+            document.querySelectorAll('.expert-advice').forEach(e => e.style.display = 'none');
+            el.style.display = isVisible ? 'none' : 'block';
         }
     </script>
 </body>
