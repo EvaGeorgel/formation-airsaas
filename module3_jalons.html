@@ -4,99 +4,109 @@
     <meta charset="UTF-8">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
-        body { font-family: 'DM Sans', sans-serif; background: #F0F2F5; padding: 20px; display: flex; justify-content: center; }
-        .card { background: #fff; border-radius: 12px; padding: 25px; max-width: 750px; width: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        body { font-family: 'DM Sans', sans-serif; background: #F8FAFC; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .card { background: #fff; border-radius: 12px; padding: 30px; max-width: 800px; width: 100%; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #E2E8F0; }
         
-        /* Header style AirSaaS */
-        .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
-        .title { font-size: 18px; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 10px; }
-        .progress-container { width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; margin: 10px 0; overflow: hidden; }
-        .progress-fill { height: 100%; background: #6366f1; width: 51%; }
+        /* Header AirSaaS Style */
+        .header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
+        .icon-box { background: #6366F1; color: white; padding: 10px; border-radius: 8px; font-weight: bold; }
+        .progress-box { flex-grow: 1; }
+        .bar-bg { background: #E2E8F0; height: 10px; border-radius: 5px; margin-top: 8px; }
+        .bar-fill { background: #6366F1; height: 100%; border-radius: 5px; width: 51%; transition: 1s; }
 
-        /* Jalon Card */
-        .jalon-item { border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-bottom: 12px; transition: 0.2s; position: relative; }
-        .jalon-item:hover { border-color: #6366f1; box-shadow: 0 2px 8px rgba(99,102,241,0.1); }
-        .jalon-name { font-size: 14px; font-weight: 600; color: #334155; margin-bottom: 10px; }
+        /* Jalon Grid */
+        .jalon-card { border: 1px solid #E2E8F0; border-radius: 10px; padding: 20px; margin-bottom: 15px; cursor: pointer; transition: 0.2s; }
+        .jalon-card:hover { border-color: #6366F1; background: #F1F5F9; }
+        .jalon-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
+        .jalon-title { font-weight: 600; color: #1E293B; font-size: 15px; width: 70%; }
         
-        /* Meta icons (reproduisant tes captures) */
-        .meta { display: flex; gap: 12px; align-items: center; font-size: 12px; color: #64748b; flex-wrap: wrap; }
-        .tag { background: #f1f5f9; padding: 2px 8px; border-radius: 4px; display: flex; align-items: center; gap: 4px; }
-        .health { padding: 4px 10px; border-radius: 20px; font-weight: 600; font-size: 11px; }
-        .h-ok { background: #dcfce7; color: #166534; }
-        .h-warn { background: #fef3c7; color: #92400e; }
-        .h-blocked { background: #fee2e2; color: #991b1b; }
+        /* Badges & Health */
+        .badges { display: flex; gap: 8px; flex-wrap: wrap; }
+        .badge { font-size: 11px; padding: 4px 10px; border-radius: 6px; font-weight: 600; background: #F1F5F9; color: #475569; }
+        .health { font-size: 11px; padding: 4px 12px; border-radius: 20px; font-weight: bold; }
+        .h-bloque { background: #FEE2E2; color: #991B1B; }
+        .h-alerte { background: #FEF3C7; color: #92400E; }
+        .h-ok { background: #DCFCE7; color: #166534; }
 
-        /* Tooltip interactif */
-        .info-overlay { display: none; margin-top: 15px; padding: 12px; background: #eff6ff; border-radius: 6px; border-left: 4px solid #3b82f6; font-size: 13px; color: #1e40af; animation: fadeIn 0.3s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .btn-plus { color: #6366f1; font-weight: 700; cursor: pointer; font-size: 12px; text-decoration: underline; }
+        /* Feedback Expert */
+        .expert-note { display: none; margin-top: 15px; padding: 15px; background: #F0F9FF; border-radius: 8px; border-left: 4px solid #0EA5E9; font-size: 13px; color: #0369A1; }
     </style>
 </head>
 <body>
     <div class="card">
         <div class="header">
-            <div class="title">📅 Jalons (avancement : 51%)</div>
-        </div>
-        <div class="progress-container"><div class="progress-fill"></div></div>
-        
-        <p style="font-size: 13px; color: #64748b; margin-bottom: 20px;">
-            <b>Guide Interactif :</b> Cliquez sur les jalons pour comprendre les règles de saisie AirSaaS.
-        </p>
-
-        <div class="jalon-item">
-            <div class="jalon-name">Effinum / Conciliation / Pomo : Tester et formaliser le processus.</div>
-            <div class="meta">
-                <span>👤 CP</span>
-                <span>📅 15/01/2026</span>
-                <span class="tag">👥 Digital</span>
-                <span class="tag">👕 S</span>
-                <span class="health h-blocked">👎 Bloqué</span>
-                <span class="btn-plus" onclick="toggle('i1')">Pourquoi ?</span>
-            </div>
-            <div id="i1" class="info-overlay">
-                <b>Règle AirSaaS :</b> Si un jalon est "Bloqué", vous DEVEZ créer un <b>Risque</b> associé ou une <b>Décision</b> pour alerter le Sponsor. Ne laissez jamais un jalon bloqué sans commentaire.
+            <div class="icon-box">📅</div>
+            <div class="progress-box">
+                <div style="display:flex; justify-content:space-between; font-size: 14px; font-weight:700;">
+                    <span>Jalons du projet</span>
+                    <span>51%</span>
+                </div>
+                <div class="bar-bg"><div class="bar-fill"></div></div>
             </div>
         </div>
 
-        <div class="jalon-item">
-            <div class="jalon-name">Mandat : Obtenir la signature de la PA par nos adhérents.</div>
-            <div class="meta">
-                <span>👤 CP</span>
-                <span>📅 28/02/2026</span>
-                <span class="tag">👥 Gestion interne</span>
-                <span class="tag">👕 M</span>
-                <span class="health h-warn">🤔 Quelques problèmes</span>
-                <span class="btn-plus" onclick="toggle('i2')">Action ?</span>
+        <p style="font-size: 14px; color: #64748B; margin-bottom: 25px;"><b>Mode Expert :</b> Analysez la santé de ces jalons issus de votre projet AirSaaS.</p>
+
+        <div class="jalon-card" onclick="showFeedback('f1')">
+            <div class="jalon-header">
+                <div class="jalon-title">Effinum / Conciliation / Pomo : Tester et formaliser le processus.</div>
+                <span class="health h-bloque">👎 Bloqué</span>
             </div>
-            <div id="i2" class="info-overlay">
-                <b>Analyse :</b> Ici, l'avancement est à 75%. Le statut "Quelques problèmes" indique que la date de fin est menacée. Vérifiez si la taille du jalon (M) est toujours réaliste face à la charge de travail restante.
+            <div class="badges">
+                <span class="badge">👤 Eva G.</span>
+                <span class="badge">📅 15 Janv. 2026</span>
+                <span class="badge">👥 Digital</span>
+                <span class="badge">👕 Taille : S</span>
+            </div>
+            <div id="f1" class="expert-note">
+                <b>💡 Diagnostic Expert :</b> Un jalon bloqué à 0% d'avancement est une alerte critique. <br>
+                <b>Action AirSaaS :</b> Ne vous contentez pas du statut. Ouvrez le jalon et ajoutez un <b>commentaire</b> pour expliquer le point de blocage technique. Le Sponsor verra cette explication dans son rapport hebdomadaire.
             </div>
         </div>
 
-        <div class="jalon-item">
-            <div class="jalon-name">Matelas de données PA : Alimenter l'annuaire...</div>
-            <div class="meta">
-                <span>👤 CP</span>
-                <span>📅 Q1 2026</span>
-                <span class="tag">👥 Gestion interne</span>
-                <span class="tag">👕 XS</span>
-                <span class="health h-ok">⚙️ Tout va bien</span>
-                <span class="btn-plus" onclick="toggle('i3')">Conseil</span>
+        <div class="jalon-card" onclick="showFeedback('f2')">
+            <div class="jalon-header">
+                <div class="jalon-title">Mandat : Obtenir la signature de la PA par nos adhérents.</div>
+                <span class="health h-alerte">🤔 Quelques problèmes</span>
             </div>
-            <div id="i3" class="info-overlay">
-                <b>Bonne pratique :</b> Un jalon XS (Extra Small) est une tâche rapide. S'il est à 50% depuis trop longtemps, passez-le en "Terminé" pour ne pas polluer votre Roadmap.
+            <div class="badges">
+                <span class="badge">👤 CP</span>
+                <span class="badge">📅 28 Fév. 2026</span>
+                <span class="badge">👥 Gestion Interne</span>
+                <span class="badge">👕 Taille : M</span>
+                <span class="badge">📊 Avancement : 75%</span>
+            </div>
+            <div id="f2" class="expert-note">
+                <b>💡 Diagnostic Expert :</b> Ce jalon est presque fini (75%) mais sa santé est dégradée. <br>
+                <b>Analyse :</b> Le "poids" du jalon est <b>M (Medium)</b>. Si les derniers 25% sont les plus difficiles, ce jalon risque de retarder tout le projet. Vérifiez si vous devez déplacer la date ou réduire le périmètre.
             </div>
         </div>
 
+        <div class="jalon-card" onclick="showFeedback('f3')">
+            <div class="jalon-header">
+                <div class="jalon-title">Définir un plan de communication externe annuel.</div>
+                <span class="health h-ok">✅ Tout va bien</span>
+            </div>
+            <div class="badges">
+                <span class="badge">👤 Com.</span>
+                <span class="badge">📅 Q1 2026</span>
+                <span class="badge">👥 Communication</span>
+                <span class="badge">👕 Taille : S</span>
+                <span class="badge">📊 Avancement : 50%</span>
+            </div>
+            <div id="f3" class="expert-note">
+                <b>💡 Diagnostic Expert :</b> Tout semble au vert. <br>
+                <b>Conseil AirSaaS :</b> Puisque c'est un jalon <b>S (Small)</b>, assurez-vous de le clore rapidement. Un projet avec trop de "petits" jalons ouverts à 50% donne une fausse impression de stagnation dans la Roadmap globale.
+            </div>
+        </div>
     </div>
 
     <script>
-        function toggle(id) {
-            const el = document.getElementById(id);
-            const isVisible = el.style.display === 'block';
-            document.querySelectorAll('.info-overlay').forEach(d => d.style.display = 'none');
-            el.style.display = isVisible ? 'none' : 'block';
+        function showFeedback(id) {
+            const note = document.getElementById(id);
+            const isVisible = note.style.display === 'block';
+            document.querySelectorAll('.expert-note').forEach(n => n.style.display = 'none');
+            note.style.display = isVisible ? 'none' : 'block';
         }
     </script>
 </body>
