@@ -3,64 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
-        body { font-family: 'DM Sans', sans-serif; background: #F7F6F2; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .card { background: #fff; border-radius: 20px; padding: 30px; max-width: 650px; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-        h1 { font-size: 22px; color: #111; margin-bottom: 10px; }
-        .intro { font-size: 14px; color: #666; margin-bottom: 25px; }
-        .matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
-        .risk-item { background: #F9FAFB; border: 2px solid #E5E7EB; border-radius: 12px; padding: 15px; cursor: pointer; transition: 0.3s; }
-        .risk-item:hover { border-color: #1D9E75; transform: translateY(-2px); }
-        .risk-title { font-weight: 700; font-size: 14px; color: #374151; display: flex; align-items: center; gap: 8px; }
-        .risk-desc { font-size: 12px; color: #6B7280; margin-top: 5px; }
-        .analysis { display: none; background: #ECFDF5; border: 1px solid #10B981; padding: 15px; border-radius: 10px; margin-top: 20px; animation: fadeIn 0.4s; }
-        .crit-tag { font-size: 10px; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; font-weight: bold; }
-        .high { background: #FEE2E2; color: #991B1B; }
-        .med { background: #FEF3C7; color: #92400E; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;600&display=swap');
+        body { font-family: 'Inter', sans-serif; background: #F7F8FC; padding: 20px; display: flex; justify-content: center; }
+        .card { background: #fff; border-radius: 16px; padding: 30px; max-width: 750px; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-top: 5px solid #EF4444; }
+        h1 { font-family: 'Syne', sans-serif; font-size: 22px; color: #1C1C2E; margin-bottom: 20px; }
+        .risk-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .risk-table th { text-align: left; font-size: 12px; text-transform: uppercase; color: #6B7280; padding: 10px; border-bottom: 2px solid #E5E7EB; }
+        .risk-row { cursor: pointer; transition: 0.2s; border-bottom: 1px solid #F3F4F6; }
+        .risk-row:hover { background: #FFF5F5; }
+        .risk-row td { padding: 15px 10px; font-size: 14px; }
+        .crit-high { color: #C92A2A; font-weight: 700; background: #FFF5F5; padding: 4px 8px; border-radius: 4px; }
+        .expert-panel { display: none; margin-top: 20px; padding: 20px; background: #FEE2E2; border-radius: 12px; border-left: 5px solid #C92A2A; animation: slideIn 0.3s; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
     <div class="card">
-        <h1>Maîtriser le Registre des Risques</h1>
-        <p class="intro">Dans AirSaaS, chaque risque doit être évalué pour générer la matrice de criticité. <b>Cliquez sur un risque</b> pour voir comment le traiter :</p>
-        
-        <div class="matrix">
-            <div class="risk-item" onclick="showRisk('indispo')">
-                <div class="risk-title">⚠️ Indisponibilité MOA</div>
-                <div class="risk-desc">Les experts métiers n'ont pas assez de temps pour la recette.</div>
-                <span class="crit-tag high">Critique</span>
-            </div>
-            <div class="risk-item" onclick="showRisk('delai')">
-                <div class="risk-title">⏳ Glissement Planning</div>
-                <div class="risk-desc">Retard de livraison du prestataire technique.</div>
-                <span class="crit-tag med">Moyen</span>
-            </div>
-        </div>
-
-        <div id="analysis-box" class="analysis">
-            <strong id="a-title"></strong>
-            <p id="a-text" style="font-size: 13px; color: #065F46; line-height: 1.5; margin-top: 8px;"></p>
-            <div style="margin-top: 10px; font-size: 12px; font-weight: bold; color: #047857;">👉 Action AirSaaS : Créer une alerte et informer le Sponsor immédiatement.</div>
+        <h1>🛡️ Registre des Risques : Anticiper pour Décider</h1>
+        <p style="font-size: 14px; color: #6B7280;">Dans AirSaaS, un risque identifié doit déboucher sur un plan d'action. <b>Cliquez sur un risque</b> pour voir l'analyse expert :</p>
+        <table class="risk-table">
+            <thead>
+                <tr><th>Risque</th><th>Criticité</th><th>Équipe</th></tr>
+            </thead>
+            <tbody>
+                <tr class="risk-row" onclick="showExpert('r1')">
+                    <td>⚠️ Indisponibilité des experts métier (MOA)</td>
+                    <td><span class="crit-high">TRÈS FORTE</span></td>
+                    <td>Gestion interne</td>
+                </tr>
+                <tr class="risk-row" onclick="showExpert('r2')">
+                    <td>⏳ Retard de livraison API Facturation</td>
+                    <td><span class="crit-high" style="color:#E67700; background:#FFF3BF;">MOYENNE</span></td>
+                    <td>Digital</td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="expert-panel" class="expert-panel">
+            <h4 id="e-title" style="margin:0 0 10px 0; color:#991B1B;"></h4>
+            <p id="e-desc" style="margin:0; font-size:13px; line-height:1.6; color:#7F1D1D;"></p>
         </div>
     </div>
-
     <script>
-        const risks = {
-            'indispo': {
-                t: "Analyse : Indisponibilité MOA",
-                d: "C'est un risque majeur chez Cerfrance. Probabilité forte (4/5) x Impact critique (5/5). Dans AirSaaS, vous devez lier ce risque à une décision à prendre par le Sponsor pour libérer du temps aux collaborateurs."
-            },
-            'delai': {
-                t: "Analyse : Glissement Planning",
-                d: "Impact modéré sur le budget mais fort sur la date de fin. Saisissez la nouvelle date estimée dans les jalons AirSaaS et passez la météo en Orange pour transparence."
-            }
+        const data = {
+            r1: { t: "Analyse : Risque MOA", d: "C'est le risque n°1 chez Cerfrance. AirSaaS permet de lier ce risque à la Météo. Si les experts ne sont pas libérés, passez la météo en ORANGE pour forcer une Décision en CoPil. Ne subissez pas le risque, communiquez-le." },
+            r2: { t: "Analyse : Risque Technique", d: "Un risque moyen peut devenir critique s'il impacte un jalon 'L' ou 'XL'. Vérifiez l'impact sur votre Roadmap avant de qualifier la criticité." }
         };
-        function showRisk(id) {
-            const box = document.getElementById('analysis-box');
-            document.getElementById('a-title').innerText = risks[id].t;
-            document.getElementById('a-text').innerText = risks[id].d;
-            box.style.display = 'block';
+        function showExpert(id) {
+            const p = document.getElementById('expert-panel');
+            document.getElementById('e-title').innerText = data[id].t;
+            document.getElementById('e-desc').innerText = data[id].d;
+            p.style.display = 'block';
         }
     </script>
 </body>
