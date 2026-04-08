@@ -2,79 +2,168 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { font-family: sans-serif; background: #F4F5F9; padding: 20px; color: #111827; }
-        .container { max-width: 800px; margin: 0 auto; }
-        .card { background: white; border-radius: 16px; padding: 25px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .quiz-case { background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
-        .case-title { font-weight: bold; color: #2D47C9; margin-bottom: 10px; display: block; }
-        .situation { font-size: 14px; margin-bottom: 15px; line-height: 1.5; color: #374151 !important; visibility: visible !important; }
-        .quiz-options { display: flex; flex-wrap: wrap; gap: 10px; }
-        .quiz-btn { background: white; border: 1px solid #D1D5DB; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-size: 13px; flex: 1 1 45%; text-align: left; }
-        .quiz-btn:hover { border-color: #2D47C9; background: #EEF1FB; }
-        .feedback { display: none; margin-top: 15px; padding: 12px; border-radius: 8px; font-size: 13px; font-weight: 500; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap');
+
+        :root {
+            --brand: #2D47C9;
+            --brand-light: #EEF1FB;
+            --text: #111827;
+            --text-muted: #6B7280;
+            --bg: #F4F5F9;
+            --surface: #ffffff;
+            --border: #E5E7EB;
+            --soleil: #059669;
+            --soleil-bg: #ECFDF5;
+            --nuage: #D97706;
+            --nuage-bg: #FFFBEB;
+            --pluie: #EA580C;
+            --pluie-bg: #FFF7ED;
+            --orage: #DC2626;
+            --orage-bg: #FEF2F2;
+        }
+
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); padding: 32px 20px; line-height: 1.6; }
+        .container { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+        .card { background: var(--surface); border-radius: 16px; padding: 32px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
+        h1, h2, .section-label { font-family: 'Space Grotesk', sans-serif; }
+        .page-header { background: var(--brand); border-radius: 20px; padding: 36px; color: white; }
+        .section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--brand); margin-bottom: 8px; }
+
+        /* METEO CARDS */
+        .meteo-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+        .meteo-card { display: flex; align-items: center; gap: 18px; padding: 16px; border-radius: 12px; border: 1.5px solid var(--border); }
+        .meteo-card.soleil { border-color: #6EE7B7; background: var(--soleil-bg); }
+        .meteo-card.nuage { border-color: #FCD34D; background: var(--nuage-bg); }
+        .meteo-card.pluie { border-color: #FDBA74; background: var(--pluie-bg); }
+        .meteo-card.orage { border-color: #FCA5A5; background: var(--orage-bg); }
+        .meteo-icon { font-size: 30px; }
+
+        /* DISTINCTION SECTION */
+        .distinction-block { background: #F9F7FF; border: 1.5px solid #DDD6FE; border-radius: 16px; padding: 24px; margin: 10px 0; }
+        .dist-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+        .dist-col { background: white; border-radius: 12px; padding: 16px; border: 1.5px solid var(--border); border-top: 5px solid; }
+        .dist-col.nuage { border-top-color: var(--nuage); }
+        .dist-col.pluie { border-top-color: var(--pluie); }
+        .dist-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; margin-bottom: 8px; }
+        .dist-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+
+        /* QUIZ */
+        .quiz-case { background: #F9FAFB; border: 1.5px solid var(--border); border-radius: 14px; padding: 24px; margin-bottom: 20px; }
+        .case-num { font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; color: var(--brand); margin-bottom: 8px; }
+        .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .quiz-btn { background: white; border: 1.5px solid var(--border); border-radius: 10px; padding: 12px; font-size: 13px; cursor: pointer; text-align: left; }
+        .quiz-btn:hover:not(:disabled) { border-color: var(--brand); background: var(--brand-light); }
+        .quiz-feedback { display: none; margin-top: 15px; padding: 15px; border-radius: 10px; font-size: 13px; }
     </style>
 </head>
 <body>
 <div class="container">
-
-    <div class="card">
-        <h2 style="color:#2D47C9;">🎯 Exercice : Choisissez la bonne météo</h2>
-        
-        <div class="quiz-case" id="q1">
-            <span class="case-title">CAS 1</span>
-            <div class="situation">
-                Votre projet avance comme prévu. Tous les jalons du mois ont été livrés, le budget est tenu. Aucun blocage identifié.
-            </div>
-            <div class="quiz-options">
-                <button class="quiz-btn" onclick="check('q1', true, this)">☀️ Tout va bien</button>
-                <button class="quiz-btn" onclick="check('q1', false, this)">🌤️ Quelques problèmes</button>
-                <button class="quiz-btn" onclick="check('q1', false, this)">🌧️ C'est compliqué</button>
-                <button class="quiz-btn" onclick="check('q1', false, this)">⛈️ Bloqué</button>
-            </div>
-            <div id="q1-f" class="feedback"></div>
-        </div>
-
-        <div class="quiz-case" id="q2">
-            <span class="case-title">CAS 2</span>
-            <div class="situation">
-                Un livrable a pris 3 jours de retard. Vous avez réorganisé le planning et la date de livraison finale reste atteignable.
-            </div>
-            <div class="quiz-options">
-                <button class="quiz-btn" onclick="check('q2', false, this)">☀️ Tout va bien</button>
-                <button class="quiz-btn" onclick="check('q2', false, this)">🌤️ Quelques problèmes</button>
-                <button class="quiz-btn" onclick="check('q2', true, this)">🌧️ C'est compliqué</button>
-                <button class="quiz-btn" onclick="check('q2', false, this)">⛈️ Bloqué</button>
-            </div>
-            <div id="q2-f" class="feedback"></div>
-        </div>
-
-        <div class="quiz-case" id="q3">
-            <span class="case-title">CAS 3</span>
-            <div class="situation">
-                Un prestataire a 6 semaines de retard. Cette dépendance décale la date de mise en production de 2 mois.
-            </div>
-            <div class="quiz-options">
-                <button class="quiz-btn" onclick="check('q3', false, this)">☀️ Tout va bien</button>
-                <button class="quiz-btn" onclick="check('q3', false, this)">🌤️ Quelques problèmes</button>
-                <button class="quiz-btn" onclick="check('q3', false, this)">🌧️ C'est compliqué</button>
-                <button class="quiz-btn" onclick="check('q3', true, this)">⛈️ Bloqué</button>
-            </div>
-            <div id="q3-f" class="feedback"></div>
+    <div class="page-header">
+        <h1>☀️ Comment faire une météo projet claire ?</h1>
+        <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 10px; font-size: 14px; margin-top: 15px;">
+            <b>C'est quoi la météo projet ?</b><br>
+            C'est un modèle visuel simple qui utilise la métaphore du temps pour communiquer sur l'état de santé d'un projet. C'est le <b>premier indicateur</b> de la santé d'un projet.
         </div>
     </div>
 
+    <div class="card">
+        <div class="section-label">Référentiel</div>
+        <div class="meteo-grid">
+            <div class="meteo-card soleil">
+                <div class="meteo-icon">☀️</div>
+                <div class="meteo-content"><h4>Tout va bien</h4><p>Tous les jalons projets sont sur la bonne voie, aucune action nécessaire.</p></div>
+            </div>
+            <div class="meteo-card nuage">
+                <div class="meteo-icon">🌤️</div>
+                <div class="meteo-content"><h4>Quelques problèmes</h4><p>Des grains de sable apparaissent. On reste vigilant, mais la trajectoire est maintenue.</p></div>
+            </div>
+        </div>
+
+        <div class="distinction-block">
+            <div class="dist-title">⚖️ Arbitrer entre "Quelques problèmes" et "C'est compliqué"</div>
+            <div class="dist-compare">
+                <div class="dist-col nuage">
+                    <div style="font-weight:700; color:var(--nuage); margin-bottom:8px;">🌤️ Quelques problèmes</div>
+                    <div class="dist-row"><div class="dist-dot" style="background:var(--nuage)"></div><span>Des irritants au quotidien (réunion annulée, etc.)</span></div>
+                    <div class="dist-row"><div class="dist-dot" style="background:var(--nuage)"></div><span><b>Le planning n'a pas bougé</b></span></div>
+                </div>
+                <div class="dist-col pluie">
+                    <div style="font-weight:700; color:var(--pluie); margin-bottom:8px;">🌧️ C'est compliqué</div>
+                    <div class="dist-row"><div class="dist-dot" style="background:var(--pluie)"></div><span>Un jalon est officiellement en retard</span></div>
+                    <div class="dist-row"><div class="dist-dot" style="background:var(--pluie)"></div><span><b>La date de fin tient encore</b></span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="meteo-grid">
+            <div class="meteo-card pluie">
+                <div class="meteo-icon">🌧️</div>
+                <div class="meteo-content"><h4>C'est compliqué</h4><p>Jalon en retard. Le plan a été revu mais la date finale tient. Le comité doit être informé.</p></div>
+            </div>
+            <div class="meteo-card orage">
+                <div class="meteo-icon">⛈️</div>
+                <div class="meteo-content"><h4>Bloqué</h4><p>Jalon en retard ET livraison finale impactée. Remontée immédiate au sponsor requise.</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="section-label">Exercice</div>
+        <h2>🎯 Quelle météo choisissez-vous ?</h2>
+
+        <div class="quiz-case" id="q1">
+            <div class="case-num">Cas 1</div>
+            <p class="situation"><b>Votre projet avance comme prévu.</b> Tous les jalons du mois ont été livrés, le budget est tenu. Aucun blocage identifié.</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer('q1', this, true)">☀️ Tout va bien</button>
+                <button class="quiz-btn" onclick="answer('q1', this, false)">🌤️ Quelques problèmes</button>
+                <button class="quiz-btn" onclick="answer('q1', this, false)">🌧️ C'est compliqué</button>
+                <button class="quiz-btn" onclick="answer('q1', this, false)">⛈️ Bloqué</button>
+            </div>
+            <div class="quiz-feedback" id="q1-fb"></div>
+        </div>
+
+        <div class="quiz-case" id="q2">
+            <div class="case-num">Cas 2</div>
+            <p class="situation"><b>Un livrable a pris 3 jours de retard.</b> Vous avez réorganisé le planning et la date de livraison finale reste atteignable. Le sponsor est au courant.</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer('q2', this, false)">☀️ Tout va bien</button>
+                <button class="quiz-btn" onclick="answer('q2', this, false)">🌤️ Quelques problèmes</button>
+                <button class="quiz-btn" onclick="answer('q2', this, true)">🌧️ C'est compliqué</button>
+                <button class="quiz-btn" onclick="answer('q2', this, false)">⛈️ Bloqué</button>
+            </div>
+            <div class="quiz-feedback" id="q2-fb"></div>
+        </div>
+
+        <div class="quiz-case" id="q3">
+            <div class="case-num">Cas 3</div>
+            <p class="situation"><b>Un prestataire dérive de 6 semaines.</b> Cette dépendance décale la date de mise en production de 2 mois. Le COPIL n'est pas encore au courant.</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer('q3', this, false)">☀️ Tout va bien</button>
+                <button class="quiz-btn" onclick="answer('q3', this, false)">🌤️ Quelques problèmes</button>
+                <button class="quiz-btn" onclick="answer('q3', this, false)">🌧️ C'est compliqué</button>
+                <button class="quiz-btn" onclick="answer('q3', this, true)">⛈️ Bloqué</button>
+            </div>
+            <div class="quiz-feedback" id="q3-fb"></div>
+        </div>
+    </div>
 </div>
 
 <script>
-function check(id, isOk, btn) {
-    const f = document.getElementById(id + '-f');
-    f.style.display = 'block';
-    f.style.background = isOk ? '#DEF7EC' : '#FDE8E8';
-    f.style.color = isOk ? '#03543F' : '#9B1C1C';
-    f.innerHTML = isOk ? "✅ Correct !" : "❌ Mauvaise réponse, réessayez.";
-    btn.parentNode.querySelectorAll('button').forEach(b => b.style.opacity = '0.5');
-    btn.style.opacity = '1';
+function answer(id, btn, isOk) {
+    const fb = document.getElementById(id + '-fb');
+    fb.style.display = 'block';
+    fb.style.background = isOk ? '#ECFDF5' : '#FEF2F2';
+    fb.style.color = isOk ? '#065F46' : '#991B1B';
+    const text = {
+        'q1': isOk ? "✅ <b>Bravo !</b> Tout est nominal, c'est le moment de valoriser l'équipe." : "❌ <b>Faux.</b> Si le plan est respecté, restez au vert : ☀️ Tout va bien.",
+        'q2': isOk ? "✅ <b>Correct !</b> Jalon glissé mais Go-Live préservé = 🌧️ C'est compliqué." : "❌ <b>Erreur.</b> Un retard de jalon nécessite une alerte orange : 🌧️ C'est compliqué.",
+        'q3': isOk ? "✅ <b>Bravo !</b> La date de fin glisse, c'est impérativement Bloqué." : "❌ <b>Attention.</b> Si le Go-Live glisse, le statut est obligatoirement ⛈️ Bloqué."
+    };
+    fb.innerHTML = text[id];
+    btn.parentNode.querySelectorAll('button').forEach(b => b.disabled = true);
     btn.style.borderColor = isOk ? '#059669' : '#DC2626';
 }
 </script>
