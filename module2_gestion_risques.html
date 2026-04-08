@@ -3,60 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;600&display=swap');
-        body { font-family: 'Inter', sans-serif; background: #F7F8FC; padding: 20px; display: flex; justify-content: center; }
-        .card { background: #fff; border-radius: 16px; padding: 30px; max-width: 750px; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-top: 5px solid #EF4444; }
-        h1 { font-family: 'Syne', sans-serif; font-size: 22px; color: #1C1C2E; margin-bottom: 20px; }
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap');
         
-        .risk-item { background: #FFF5F5; border: 1px solid #FEE2E2; border-radius: 12px; padding: 20px; margin-bottom: 15px; cursor: pointer; transition: 0.3s; }
-        .risk-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(239, 68, 68, 0.1); }
+        :root {
+            --danger: #C92A2A;
+            --brand: #3B5BDB;
+            --bg: #F7F8FC;
+            --white: #ffffff;
+        }
+
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: #1C1C2E; padding: 20px; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; background: var(--white); border-radius: 16px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
         
-        .risk-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .crit-tag { font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; }
-        .crit-high { background: #EF4444; color: white; }
+        h1 { font-family: 'Syne', sans-serif; font-size: 28px; color: var(--brand); margin-bottom: 10px; }
+        .intro { font-size: 15px; color: #6B7280; margin-bottom: 30px; }
         
-        .expert-advice { display: none; margin-top: 15px; padding: 15px; background: white; border-radius: 8px; border-left: 4px solid #EF4444; font-size: 13px; line-height: 1.6; color: #475569; }
-        .methodo-note { background: #EEF2FF; padding: 15px; border-radius: 8px; font-size: 13px; color: #3730A3; margin-top: 25px; border: 1px solid #C7D2FE; }
+        /* 4 ÉTAPES CYCLE */
+        .cycle-container { display: flex; justify-content: space-between; gap: 15px; margin-bottom: 40px; }
+        .cycle-step { flex: 1; background: #EEF2FF; padding: 15px; border-radius: 12px; text-align: center; border: 1px solid #DBEAFE; }
+        .step-num { display: block; font-weight: 800; color: var(--brand); font-size: 20px; margin-bottom: 5px; }
+        .step-text { font-size: 13px; font-weight: 600; }
+
+        /* GRID DES RISQUES */
+        .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .risk-card { border: 1px solid #E5E7EB; border-radius: 12px; padding: 20px; cursor: pointer; transition: 0.3s; position: relative; }
+        .risk-card:hover { border-color: var(--brand); box-shadow: 0 4px 12px rgba(59,91,219,0.1); transform: translateY(-2px); }
+        .risk-card h3 { font-size: 15px; margin-bottom: 8px; color: var(--brand); display: flex; align-items: center; gap: 10px; }
+        
+        /* DETAILS PANEL */
+        .details { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px dashed #E5E7EB; font-size: 13px; animation: fadeIn 0.3s; }
+        .impact-box { background: #FFF5F5; color: var(--danger); padding: 8px; border-radius: 6px; margin-top: 10px; font-weight: 600; }
+        .action-box { background: #EBFBEE; color: #2F9E44; padding: 8px; border-radius: 6px; margin-top: 5px; font-weight: 600; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>🛡️ Gestion des Risques : La Méthode AirSaaS</h1>
-        <p style="font-size: 14px; color: #64748B; margin-bottom: 20px;">Un risque dans AirSaaS n'est pas une simple note, c'est une <b>alerte stratégique</b>. Cliquez sur les risques pour voir l'analyse expert :</p>
+    <div class="container">
+        <h1>🔍 Le Management des Risques Projet</h1>
+        <p class="intro">
+            Un risque est un <b>événement futur possible</b> que nous pouvons quantifier. 
+            La norme <b>NFX50-117</b> distingue l'imprévu du risque réel. Dans AirSaaS, qualifier le risque permet de décider de la trajectoire.
+        </p>
 
-        <div class="risk-item" onclick="toggle('r1')">
-            <div class="risk-header">
-                <span style="font-weight: 700;">Indisponibilité des experts métier (MOA)</span>
-                <span class="crit-tag crit-high">Critique</span>
+        <div class="cycle-container">
+            <div class="cycle-step"><span class="step-num">1</span><span class="step-text">Identifier les risques</span></div>
+            <div class="cycle-step"><span class="step-num">2</span><span class="step-text">Déterminer probabilité & conséquences</span></div>
+            <div class="cycle-step"><span class="step-num">3</span><span class="step-text">Trouver des solutions</span></div>
+            <div class="cycle-step"><span class="step-num">4</span><span class="step-text">Monitorer & Reporter</span></div>
+        </div>
+
+        <h2 style="font-family: 'Syne'; font-size: 18px; margin-bottom: 20px;">Explorez les types de risques SI classiques :</h2>
+
+        <div class="risk-grid">
+            <div class="risk-card" onclick="toggle(this)">
+                <h3>⚙️ Fonctionnel</h3>
+                <div class="details">
+                    Description : Le poids du spécifique est trop important.
+                    <div class="impact-box">💥 Impact : Dérive du périmètre et coûts.</div>
+                    <div class="action-box">🛠️ Action : Simplifier ou standardiser.</div>
+                </div>
             </div>
-            <div id="r1" class="expert-advice">
-                <b>💡 Analyse Expert :</b> C'est le risque principal de ton projet CER-P148. <br>
-                <b>Action :</b> Si ce risque se confirme, passe ta météo en <b>Orange</b>. Cela force le Sponsor à prendre une décision d'arbitrage en CoPil.
+
+            <div class="risk-card" onclick="toggle(this)">
+                <h3>💻 Technique</h3>
+                <div class="details">
+                    Description : Présence d'un verrou technologique majeur.
+                    <div class="impact-box">💥 Impact : Blocage de la production.</div>
+                    <div class="action-box">🛠️ Action : Réaliser un POC (Proof of Concept).</div>
+                </div>
+            </div>
+
+            <div class="risk-card" onclick="toggle(this)">
+                <h3>🏢 Organisationnel</h3>
+                <div class="details">
+                    Description : Non-tenue des engagements (planning, charges).
+                    <div class="impact-box">💥 Impact : Retard global du projet.</div>
+                    <div class="action-box">🛠️ Action : Recalibrer les ressources.</div>
+                </div>
+            </div>
+
+            <div class="risk-card" onclick="toggle(this)">
+                <h3>👤 Client Interne / MOA</h3>
+                <div class="details">
+                    Description : Faible implication des métiers dans le projet.
+                    <div class="impact-box">💥 Impact : Solution inadaptée aux besoins.</div>
+                    <div class="action-box">🛠️ Action : Ateliers de co-conception forcés.</div>
+                </div>
+            </div>
+
+            <div class="risk-card" onclick="toggle(this)">
+                <h3>🤝 Humain</h3>
+                <div class="details">
+                    Description : Besoin de profils hyper qualifiés / Guerre des talents.
+                    <div class="impact-box">💥 Impact : Fuite des compétences clés.</div>
+                    <div class="action-box">🛠️ Action : Plan de backup et formation.</div>
+                </div>
+            </div>
+
+            <div class="risk-card" onclick="toggle(this)">
+                <h3>🛡️ Cyber / Sécurité</h3>
+                <div class="details">
+                    Description : Vulnérabilités critiques non traitées.
+                    <div class="impact-box">💥 Impact : Perte de données / Arrêt SI.</div>
+                    <div class="action-box">🛠️ Action : Audit de sécurité préventif.</div>
+                </div>
+            </div>
+            
+            <div class="risk-card" onclick="toggle(this)">
+                <h3>⚖️ Légal / RGPD</h3>
+                <div class="details">
+                    Description : Changement de l'environnement juridique.
+                    <div class="impact-box">💥 Impact : Amendes ou arrêt du service.</div>
+                    <div class="action-box">🛠️ Action : Veille juridique constante.</div>
+                </div>
+            </div>
+
+             <div class="risk-card" onclick="toggle(this)">
+                <h3>🧠 Psychosociaux (RPS)</h3>
+                <div class="details">
+                    Description : Stress, harcèlement ou surcharge de travail.
+                    <div class="impact-box">💥 Impact : Burn-out et turn-over.</div>
+                    <div class="action-box">🛠️ Action : Transférer l'alerte aux RH.</div>
+                </div>
             </div>
         </div>
 
-        <div class="risk-item" onclick="toggle('r2')">
-            <div class="risk-header">
-                <span style="font-weight: 700;">Retard de l'éditeur sur la Facture Élec</span>
-                <span class="crit-tag crit-high">Critique</span>
-            </div>
-            <div id="r2" class="expert-advice">
-                <b>💡 Analyse Expert :</b> Ce risque impacte directement tes jalons de taille <b>L</b> ou <b>XL</b>. <br>
-                <b>Action :</b> Ne subis pas le planning de l'éditeur. Utilise le registre pour documenter l'impact sur l'avancement (tes 51%) et protège ta trajectoire.
-            </div>
-        </div>
-
-        <div class="methodo-note">
-            <b>🚀 Rappel Expert :</b> Le rôle du CP est d'identifier le risque, le rôle du Sponsor est de décider comment le traiter (Accepter, Réduire, Transférer).
+        <div style="margin-top: 40px; padding: 20px; background: #F8FAFC; border-radius: 12px; font-size: 13px; color: #64748B; border: 1px solid #E2E8F0;">
+            <b>Rappel Méthodologique :</b> Un risque identifié dans AirSaaS doit toujours être associé à une <b>Criticité</b> (Bas, Moyen, Élevé) lors de la création du projet pour alerter le Sponsor.
         </div>
     </div>
 
     <script>
-        function toggle(id) {
-            const el = document.getElementById(id);
-            const isVisible = el.style.display === 'block';
-            document.querySelectorAll('.expert-advice').forEach(e => e.style.display = 'none');
-            el.style.display = isVisible ? 'none' : 'block';
+        function toggle(card) {
+            const details = card.querySelector('.details');
+            const isVisible = details.style.display === 'block';
+            details.style.display = isVisible ? 'none' : 'block';
         }
     </script>
 </body>
