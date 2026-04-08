@@ -2,52 +2,106 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap');
-        :root { --brand: #3B5BDB; --text: #1C1C2E; --bg: #F7F8FC; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); padding: 20px; line-height: 1.6; }
-        .container { max-width: 850px; margin: 0 auto; background: #fff; border-radius: 16px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-        h1 { font-family: 'Syne', sans-serif; font-size: 26px; color: var(--brand); margin-bottom: 25px; }
-        h2 { font-family: 'Syne', sans-serif; font-size: 18px; margin-top: 30px; color: var(--brand); border-bottom: 2px solid #EEE; padding-bottom: 5px; }
-        h3 { font-size: 16px; margin-top: 20px; color: var(--text); }
-        p, li { font-size: 14px; margin-bottom: 10px; }
-        .highlight-box { background: #EEF2FF; padding: 20px; border-radius: 12px; margin: 20px 0; border-left: 5px solid var(--brand); }
-        .transition-next { margin-top: 50px; padding: 25px; background: #1C1C2E; color: white; border-radius: 12px; text-align: center; font-weight: 500; }
+        
+        :root {
+            --brand: #3B5BDB;
+            --brand-light: #EEF2FF;
+            --bg: #F7F8FC;
+            --text: #1C1C2E;
+            --success: #2F9E44;
+            --danger: #C92A2A;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+        }
+
+        h1 { font-family: 'Syne', sans-serif; font-size: 32px; color: var(--brand); margin-bottom: 30px; border-bottom: 4px solid var(--brand-light); padding-bottom: 15px; }
+        h2 { font-family: 'Syne', sans-serif; font-size: 22px; margin-top: 45px; color: var(--brand); }
+        h3 { font-family: 'Syne', sans-serif; font-size: 18px; margin-top: 25px; color: var(--text); }
+        
+        .hero-box { background: var(--brand-light); border-radius: 16px; padding: 30px; margin: 30px 0; border-left: 6px solid var(--brand); }
+        
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0; }
+        .card-info { background: #F8FAFC; border: 1px solid #E5E7EB; padding: 25px; border-radius: 14px; transition: 0.3s; }
+        .card-info:hover { border-color: var(--brand); transform: translateY(-5px); }
+        .card-info h4 { margin: 0 0 12px 0; color: var(--brand); font-size: 16px; }
+
+        .methodo-block { display: flex; gap: 30px; margin-top: 40px; background: #fff; border: 2px solid var(--brand-light); border-radius: 16px; overflow: hidden; }
+        .methodo-side { flex: 1; padding: 30px; }
+        .side-title { font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; display: block; }
+
+        .tip-box { margin-top: 40px; padding: 25px; background: #FFF3BF; border-radius: 16px; font-size: 15px; border-left: 6px solid #E67700; color: #92400E; }
+        
+        .next-step { margin-top: 60px; padding: 40px; background: var(--text); color: white; border-radius: 16px; text-align: center; }
+        .next-step h4 { font-family: 'Syne'; font-size: 24px; margin-bottom: 10px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>📍 Maîtriser les Jalons Projet</h1>
 
-        <h2>Qu'est-ce qu'un jalon projet ?</h2>
-        <p>Le jalon (en anglais “milestone”) marque la fin d'une étape et un point d'arrêt dans le processus de gestion de projet. Le jalon est souvent associé à un évènement important comme la signature d'un gros contrat, la mise sur le marché d'un produit, ou le lancement d'une campagne publicitaire. C'est en tout cas la fin d'une étape et le début d'une autre dans le cycle de vie d'un projet.</p>
-        <p>D'ailleurs le jalon marque un passage définitif à la prochaine étape : une fois validé, il n'y a normalement pas de retour en arrière dans le planning du projet.</p>
-        <p>Autre chose : les jalons n'ont pas vraiment de durée ou alors cette dernière est nulle, il s'agit plutôt d'un marqueur qui identifie la fin d'une étape et le début d'une autre. En résumé, les jalons sont semblables à des bornes, des panneaux sur une route vous indiquant l'état d'avancement de votre gestion de projets.</p>
+<div class="container">
+    <h1>📍 Piloter par les Jalons sur AirSaaS</h1>
 
-        <h2>Pourquoi faire des jalons projets ?</h2>
-        <p>Les jalons projets ont trois objectifs principaux :</p>
-        <ul>
-            <li><b>Revenir sur l'exécution :</b> tirer les leçons des erreurs commises et adapter la planification.</li>
-            <li><b>Contrôler les livrables :</b> vérifier la conformité avec ce qui avait été déterminé.</li>
-            <li><b>Valider le lancement :</b> autoriser la phase suivante avec des réajustements.</li>
-        </ul>
-        <p>Les jalons permettent aussi d'éviter <b>l'effet tunnel</b>, cause principale de l'échec des projets, en créant des points qui servent de repères à échéances fixes.</p>
+    <div class="hero-box">
+        <h3>Qu'est-ce qu'un jalon projet ?</h3>
+        <p>Le jalon (en anglais “milestone”) marque la fin d'une étape et un point d'arrêt dans le processus de gestion de projet. Il marque un passage définitif : une fois validé, il n'y a normalement pas de retour en arrière. Contrairement aux tâches, les jalons n'ont pas de durée propre : ce sont des marqueurs, des bornes sur votre route indiquant l'état d'avancement.</p>
+    </div>
 
-        <h2>Comment faire les jalons de son projet ?</h2>
-        <h3>Trouver le bon nombre de jalons</h3>
-        <p>Ni trop, ni pas assez ! Si vous en avez trop, vous confondez tâche et jalon. Cela démotive les équipes car elles ne se sentent pas concernées par le micro. À l'inverse, sans assez de jalons, vous augmentez le risque d'arriver à la fin de l'échéancier en étant à côté de la plaque.</p>
-
-        <h3>Penser à assortir une échéance pour chaque jalon</h3>
-        <p>Les jalons ne durent pas dans le temps. La date choisie doit correspondre à la date de lancement ou de réalisation effective (ex: date de rendu au client).</p>
-
-        <div class="highlight-box">
-            <b>Piloter par les jalons VS piloter à la tâche</b><br>
-            Une alternative au contrôle des tâches et aux diagrammes de Gantt (souvent trop complexes ou frustrants) est le pilotage par les jalons. C'est le cœur de la méthodologie AirSaaS pour maîtriser les risques de dérapage.
+    <h2>🎯 Pourquoi faire des jalons projets ?</h2>
+    <p>Les jalons ont trois objectifs principaux pour sécuriser votre trajectoire :</p>
+    <div class="grid-3">
+        <div class="card-info">
+            <h4>🔄 Bilan & Adaptation</h4>
+            <p>Tirer les leçons de la phase passée pour adapter la planification de la phase suivante.</p>
         </div>
-
-        <div class="transition-next">
-            🚀 <b>Prochaine étape :</b> Maintenant que vous maîtrisez les jalons, nous allons voir dans le prochain module comment mettre à jour la météo projet et la météo jalons pour communiquer efficacement.
+        <div class="card-info">
+            <h4>✅ Contrôle Qualité</h4>
+            <p>Vérifier que les livrables sont en conformité avec ce qui avait été déterminé.</p>
+        </div>
+        <div class="card-info">
+            <h4>📢 Anti-Effet Tunnel</h4>
+            <p>Créer des points de repère fixes pour l'équipe et les parties prenantes externes.</p>
         </div>
     </div>
-</body>
-</html>
+
+    <h2>👕 Expertise AirSaaS : Le T-Shirt Sizing</h2>
+    <p>Dans AirSaaS, chaque jalon possède une taille (XS, S, M, L, XL). C’est ce "poids" qui détermine comment votre barre de progression évolue.</p>
+    <div class="methodo-block">
+        <div class="methodo-side" style="background: #F8FAFC;">
+            <span class="side-title" style="color: var(--brand);">PETITES TAILLES (XS / S)</span>
+            <p>Idéal pour des validations simples ou des documents intermédiaires. Impact modéré sur vos 51% d'avancement.</p>
+        </div>
+        <div class="methodo-side" style="background: var(--brand-light);">
+            <span class="side-title" style="color: var(--brand);">GRANDES TAILLES (M / L / XL)</span>
+            <p>Marqueurs stratégiques (ex: Signature, Go-Live). Ce sont eux qui font bondir votre pourcentage de progression globale.</p>
+        </div>
+    </div>
+
+    <h2>⚖️ Pilotage par les jalons VS Pilotage à la tâche</h2>
+    <p>La majorité des organisations échouent à maintenir un diagramme de Gantt (tâches) car il est trop complexe pour des cultures projets hétérogènes.</p>
+    <div class="methodo-block" style="border-color: #E2E8F0;">
+        <div class="methodo-side">
+            <span class="side-title" style="color: var(--danger);">❌ Pilotage à la tâche</span>
+            <p>Trop micro, démotivant pour les responsables métiers non formés, et souvent basé sur une communication non authentique.</p>
+        </div>
+        <div class="methodo-side" style="background: #F0FDF4;">
+            <span class="side-title" style="color: var(--success);">✅ Pilotage par les jalons</span>
+            <p>Alternative agile qui permet à la direction de maîtriser les dérapages sans s'épuiser dans le détail des missions.</p>
+        </div>
+    </div>
