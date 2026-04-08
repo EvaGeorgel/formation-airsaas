@@ -4,25 +4,26 @@
     <meta charset="UTF-8">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap');
-        :root { --brand: #3B5BDB; --text: #1C1C2E; --bg: #F7F8FC; --sun: #FAB005; --cloud: #4dabf7; --rain: #FD7E14; --storm: #E03131; }
+        :root { --brand: #3B5BDB; --text: #1C1C2E; --bg: #F7F8FC; --tout-va-bien: #00E676; --quelques-prob: #FFD600; --complique: #FF9100; --bloque: #FF1744; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); padding: 20px; line-height: 1.6; }
         .container { max-width: 850px; margin: 0 auto; background: #fff; border-radius: 16px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
         
         h1 { font-family: 'Syne', sans-serif; font-size: 28px; color: var(--brand); margin-bottom: 25px; border-bottom: 3px solid #EEF2FF; padding-bottom: 10px;}
         h2 { font-family: 'Syne', sans-serif; font-size: 20px; margin-top: 35px; color: var(--brand); }
-        h3 { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; color: var(--brand); margin-bottom: 8px; }
-
+        
         .hero-concept { background: #EEF2FF; border-radius: 12px; padding: 25px; margin-bottom: 30px; border-left: 5px solid var(--brand); }
         
-        .meteo-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin: 25px 0; }
-        .meteo-card { display: flex; align-items: center; gap: 20px; padding: 20px; border-radius: 12px; border: 1px solid #E5E7EB; background: #fff; }
-        .meteo-icon { font-size: 40px; min-width: 60px; text-align: center; }
+        .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .why-card { background: #F8FAFC; border: 1px solid #E2E8F0; padding: 15px; border-radius: 10px; font-size: 13px; }
+        .why-card b { color: var(--brand); display: block; margin-bottom: 5px; }
 
-        .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-        .why-card { background: #F8FAFC; border: 1px solid #E2E8F0; padding: 20px; border-radius: 12px; font-size: 14px; }
-        .why-card b { color: var(--brand); }
+        .meteo-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 25px 0; }
+        .meteo-card { display: flex; align-items: center; gap: 20px; padding: 15px; border-radius: 12px; border: 1px solid #E5E7EB; background: #fff; }
+        .meteo-icon { font-size: 32px; min-width: 50px; text-align: center; }
+        .meteo-content h4 { margin: 0; font-size: 16px; font-weight: 700; }
+        .meteo-content p { margin: 3px 0 0; font-size: 13px; color: #475569; }
 
-        .note-expert { background: #FFF9DB; border: 1px dashed #FAB005; padding: 20px; border-radius: 12px; margin-top: 30px; font-size: 14px; color: #856404; }
+        .note-expert { background: #F8FAFC; border: 1px dashed var(--brand); padding: 20px; border-radius: 12px; margin-top: 30px; font-size: 14px; text-align: center; }
     </style>
 </head>
 <body>
@@ -31,57 +32,55 @@
 
         <div class="hero-concept">
             <h3>C'est quoi la météo projet ?</h3>
-            <p>La météo projet est un modèle visuel simple qui utilise la métaphore du temps qu'il fait pour communiquer sur l'état de santé d'un projet. C'est le <b>premier indicateur de la santé d'un projet</b>.</p>
-            <p>Concrètement, chaque projet affiche une icône qui dit en un coup d'œil si tout va bien ou si quelque chose cloche.</p>
+            <p>La météo projet est un modèle visuel simple qui utilise la métaphore du temps pour communiquer sur l'état de santé d'un projet. C'est le <b>premier indicateur de la santé d'un projet</b>.</p>
         </div>
 
         <h2>Pourquoi l'utiliser sur vos projets ?</h2>
         <div class="why-grid">
-            <div class="why-card">
-                <b>1. Gagner du temps</b><br>
-                Plus besoin de lire 10 diapositives. Les vues filtrées permettent de visualiser en quelques clics les météos et les retards.
-            </div>
-            <div class="why-card">
-                <b>2. Faciliter le COPIL</b><br>
-                Le flash report intègre tout (jalons, risques, budgets) pour faciliter la prise de décision immédiate.
-            </div>
-            <div class="why-card">
-                <b>3. Aligner les acteurs</b><br>
-                La météo parle à tout le monde (sponsors, décideurs), même à ceux qui ne sont pas dans le détail opérationnel.
-            </div>
-            <div class="why-card">
-                <b>4. Détecter les signaux faibles</b><br>
-                Une cartographie des activités pour déterminer avec précision où concentrer les ressources.
-            </div>
+            <div class="why-card"><b>1. Gagner du temps</b>Plus besoin de lire 10 diapositives. Les vues filtrées permettent de voir les points d'attention en quelques clics.</div>
+            <div class="why-card"><b>2. Faciliter le COPIL</b>Le flash report intègre tout (jalons, risques, budgets) pour faciliter la prise de décision.</div>
+            <div class="why-card"><b>3. Aligner les parties prenantes</b>La météo parle à tout le monde, y compris à ceux qui ne sont pas dans le détail opérationnel.</div>
+            <div class="why-card"><b>4. Détecter les signaux faibles</b>Une cartographie pour déterminer avec précision où concentrer les ressources.</div>
         </div>
 
         <h2>À quoi correspond chaque niveau ?</h2>
         <div class="meteo-grid">
-            <div class="meteo-card" style="border-left: 6px solid #FAB005;">
-                <div class="meteo-icon">☀️</div>
-                <div>
-                    <h4 style="margin:0; color:#FAB005;">Tout va bien</h4>
-                    <p style="margin:5px 0 0; font-size:14px;">Tous les jalons projets sont sur la bonne voie, aucune action nécessaire.</p>
+            <div class="meteo-card" style="border-left: 6px solid var(--tout-va-bien);">
+                <div class="meteo-icon">⚙️</div>
+                <div class="meteo-content">
+                    <h4 style="color:var(--tout-va-bien);">Tout va bien</h4>
+                    <p>Tous les jalons projets sont sur la bonne voie, aucune action nécessaire. Bravo !</p>
                 </div>
             </div>
-            <div class="meteo-card" style="border-left: 6px solid #4dabf7;">
-                <div class="meteo-icon">🌥️</div>
-                <div>
-                    <h4 style="margin:0; color:#4dabf7;">Nuage/pluie : c'est compliqué</h4>
-                    <p style="margin:5px 0 0; font-size:14px;">Un ou plusieurs jalons majeurs sont en retard, mais la livraison finale n'est pas impactée. Notification du sponsor à prévoir.</p>
+
+            <div class="meteo-card" style="border-left: 6px solid var(--quelques-prob);">
+                <div class="meteo-icon">🌤️</div>
+                <div class="meteo-content">
+                    <h4 style="color:var(--quelques-prob);">Quelques problèmes</h4>
+                    <p>Des grains de sable apparaissent. On reste vigilant, mais la trajectoire est maintenue.</p>
                 </div>
             </div>
-            <div class="meteo-card" style="border-left: 6px solid #E03131;">
+
+            <div class="meteo-card" style="border-left: 6px solid var(--complique);">
+                <div class="meteo-icon">🌧️</div>
+                <div class="meteo-content">
+                    <h4 style="color:var(--complique);">C'est compliqué</h4>
+                    <p>Un ou plusieurs jalons majeurs sont en retard, mais la livraison finale n'est pas impactée. Le comité de projet devrait être notifié.</p>
+                </div>
+            </div>
+
+            <div class="meteo-card" style="border-left: 6px solid var(--bloque);">
                 <div class="meteo-icon">⚡</div>
-                <div>
-                    <h4 style="margin:0; color:#E03131;">Orage : bloqué</h4>
-                    <p style="margin:5px 0 0; font-size:14px;">Un ou plusieurs jalons majeurs sont en retard et la livraison finale est impactée. Remontée immédiate nécessaire.</p>
+                <div class="meteo-content">
+                    <h4 style="color:var(--bloque);">Bloqué</h4>
+                    <p>Un ou plusieurs jalons majeurs sont en retard et la livraison finale est impactée. Le sujet doit être remonté immédiatement au sponsor.</p>
                 </div>
             </div>
         </div>
 
         <div class="note-expert">
-            <b>💡 Conseil AirSaaS :</b> Utilisez 4 niveaux plutôt que 3 pour éviter le biais du milieu et forcer une transparence réelle sur l'état du projet.
+            <b>💡 Pourquoi 4 niveaux plutôt que 3 ?</b><br>
+            Pour éviter le biais naturel qui pousse à choisir systématiquement le statut du milieu. Cela force la décision et garantit une transparence écrite réelle.
         </div>
     </div>
 </body>
