@@ -3,26 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
-        body { font-family: 'DM Sans', sans-serif; background: #F7F6F2; padding: 20px; display: flex; justify-content: center; }
-        .card { background: #fff; border-radius: 20px; padding: 30px; max-width: 500px; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.08); text-align: center; }
-        .icon-finish { font-size: 50px; margin-bottom: 20px; }
-        .check-list { text-align: left; background: #F9FAFB; padding: 20px; border-radius: 12px; margin: 20px 0; }
-        .check-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 14px; }
-        input[type="checkbox"] { accent-color: #1D9E75; width: 18px; height: 18px; }
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap');
+        :root { --brand: #3B5BDB; --text: #1C1C2E; --bg: #F7F8FC; --sun: #FAB005; --rain: #FD7E14; --storm: #E03131; --cloud: #4dabf7; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); padding: 20px; line-height: 1.6; }
+        .container { max-width: 850px; margin: 0 auto; background: #fff; border-radius: 16px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        h1 { font-family: 'Syne', sans-serif; font-size: 28px; color: var(--brand); margin-bottom: 25px; border-bottom: 3px solid #EEF2FF; padding-bottom: 10px;}
+        h2 { font-family: 'Syne', sans-serif; font-size: 20px; margin-top: 35px; color: var(--brand); }
+        
+        .hero-concept { background: #EEF2FF; border-radius: 12px; padding: 25px; margin-bottom: 30px; border-left: 5px solid var(--brand); }
+        
+        .meteo-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin: 20px 0; }
+        .meteo-card { display: flex; align-items: center; gap: 20px; padding: 20px; border-radius: 12px; border: 1px solid #E5E7EB; background: #fff; }
+        .meteo-icon { font-size: 40px; min-width: 60px; text-align: center; }
+        .meteo-content h4 { margin: 0; font-size: 16px; }
+        .meteo-content p { margin: 5px 0 0; font-size: 13px; color: #64748B; }
+
+        .benefit-box { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; }
+        .benefit-item { background: #F8FAFC; padding: 15px; border-radius: 10px; text-align: center; font-size: 13px; font-weight: 600; border: 1px solid #E2E8F0; }
+
+        .warning-box { background: #FFF5F5; border: 1px solid #FFE3E3; padding: 25px; border-radius: 12px; margin-top: 35px; }
+        .warning-box h3 { color: #C92A2A; margin-top: 0; font-size: 18px; font-family: 'Syne'; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="icon-finish">🏁</div>
-        <h1>Clôturer sur AirSaaS</h1>
-        <div class="check-list">
-            <div class="check-item"><input type="checkbox"> Passer le statut à "Terminé"</div>
-            <div class="check-item"><input type="checkbox"> Saisir le bilan final (KPIs)</div>
-            <div class="check-item"><input type="checkbox"> Archiver les documents clés</div>
-            <div class="check-item"><input type="checkbox"> Libérer les ressources CoProj</div>
+    <div class="container">
+        <h1>☀️ Faire une météo projet claire</h1>
+
+        <div class="hero-concept">
+            <p>La météo projet est un modèle visuel simple qui utilise la métaphore du temps pour communiquer sur l'état de santé d'un projet. C'est le <b>premier indicateur</b> que l'on regarde !</p>
         </div>
-        <p style="font-size: 12px; color: #999;">Un projet bien clôturé permet d'alimenter les statistiques du Comex !</p>
+
+        <h2>🌤️ Les 4 états de la météo AirSaaS</h2>
+        <p style="font-size: 14px; margin-bottom: 20px;">Pourquoi 4 ? Pour éviter le syndrome du "milieu" et apporter de la nuance.</p>
+
+        <div class="meteo-grid">
+            <div class="meteo-card" style="border-left: 6px solid var(--sun);">
+                <div class="meteo-icon">☀️</div>
+                <div class="meteo-content">
+                    <h4 style="color:var(--sun);">Tout va bien</h4>
+                    <p>Le projet progresse comme prévu. Tous les jalons sont sur la bonne voie. Aucune action nécessaire.</p>
+                </div>
+            </div>
+
+            <div class="meteo-card" style="border-left: 6px solid var(--cloud);">
+                <div class="meteo-icon">🌤️</div>
+                <div class="meteo-content">
+                    <h4 style="color:var(--cloud);">Quelques problèmes</h4>
+                    <p>Des grains de sable apparaissent. On reste vigilant mais on garde la main.</p>
+                </div>
+            </div>
+
+            <div class="meteo-card" style="border-left: 6px solid var(--rain);">
+                <div class="meteo-icon">🌧️</div>
+                <div class="meteo-content">
+                    <h4 style="color:var(--rain);">C'est compliqué</h4>
+                    <p>Un ou plusieurs jalons majeurs sont en retard. Le Sponsor doit être notifié lors du prochain point de synchro.</p>
+                </div>
+            </div>
+
+            <div class="meteo-card" style="border-left: 6px solid var(--storm);">
+                <div class="meteo-icon">⚡</div>
+                <div class="meteo-content">
+                    <h4 style="color:var(--storm);">Bloqué</h4>
+                    <p>La livraison finale est impactée. Le sujet doit être remonté immédiatement au Sponsor et au CoPil.</p>
+                </div>
+            </div>
+        </div>
+
+        <h2>💎 Les 3 bénéfices du reporting visuel</h2>
+        <div class="benefit-box">
+            <div class="benefit-item">📊 Synthétiser l'état d'avancement</div>
+            <div class="benefit-item">📈 Mettre en évidence l'évolution</div>
+            <div class="benefit-item">🗣️ "Provoquer" la parole</div>
+        </div>
+
+        <h2>🔬 Analyse des signaux faibles</h2>
+        <p style="font-size: 14px;">La météo est une cartographie. Apprenez à distinguer :</p>
+        <ul style="font-size: 13px;">
+            <li><b>Signaux faibles :</b> Quelques averses ? C'est la règle des 5C ("C'est Con mais C'est Comme ça").</li>
+            <li><b>Symptômes :</b> Pluie fréquente ? Attention au moral et aux causes réelles.</li>
+            <li><b>Syndromes :</b> La foudre tombe souvent ? La mauvaise santé est chronique, il faut agir sur la structure.</li>
+        </ul>
+
+        <div class="warning-box">
+            <h3>⚠️ Le piège des 3 couleurs</h3>
+            <p style="font-size: 14px;">Quand il n'y a que 3 statuts, on a tendance à mettre celui du milieu par défaut. Cela n'apporte plus la clarté attendue. Le passage à 4 couleurs dans AirSaaS force la décision et la transparence écrite.</p>
+        </div>
+
+        <p style="text-align: center; margin-top: 40px; font-style: italic; font-size: 14px; color: var(--brand); font-weight: 600;">
+            "Mesurer, c'est piloter !"
+        </p>
     </div>
 </body>
 </html>
