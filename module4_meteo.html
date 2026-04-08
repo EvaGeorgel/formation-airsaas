@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Clash+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Space+Grotesk:wght@600;700;800&display=swap');
 
         :root {
             --brand: #2D47C9;
@@ -16,64 +17,108 @@
             --border: #E5E7EB;
             --soleil: #059669;
             --soleil-bg: #ECFDF5;
+            --soleil-border: #6EE7B7;
             --nuage: #D97706;
             --nuage-bg: #FFFBEB;
+            --nuage-border: #FCD34D;
             --pluie: #EA580C;
             --pluie-bg: #FFF7ED;
+            --pluie-border: #FDBA74;
             --orage: #DC2626;
             --orage-bg: #FEF2F2;
+            --orage-border: #FCA5A5;
         }
 
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); padding: 32px 20px; line-height: 1.6; }
-        .container { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
-        .card { background: var(--surface); border-radius: 16px; padding: 32px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
-        h1, h2, .section-label { font-family: 'Space Grotesk', sans-serif; }
-        .page-header { background: var(--brand); border-radius: 20px; padding: 36px; color: white; }
-        .section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--brand); margin-bottom: 8px; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* METEO CARDS */
-        .meteo-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
-        .meteo-card { display: flex; align-items: center; gap: 18px; padding: 16px; border-radius: 12px; border: 1.5px solid var(--border); }
-        .meteo-card.soleil { border-color: #6EE7B7; background: var(--soleil-bg); }
-        .meteo-card.nuage { border-color: #FCD34D; background: var(--nuage-bg); }
-        .meteo-card.pluie { border-color: #FDBA74; background: var(--pluie-bg); }
-        .meteo-card.orage { border-color: #FCA5A5; background: var(--orage-bg); }
-        .meteo-icon { font-size: 30px; }
+        body {
+            font-family: 'DM Sans', 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            padding: 32px 20px;
+            line-height: 1.65;
+        }
 
-        /* DISTINCTION SECTION */
-        .distinction-block { background: #F9F7FF; border: 1.5px solid #DDD6FE; border-radius: 16px; padding: 24px; margin: 10px 0; }
-        .dist-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
-        .dist-col { background: white; border-radius: 12px; padding: 16px; border: 1.5px solid var(--border); border-top: 5px solid; }
-        .dist-col.nuage { border-top-color: var(--nuage); }
-        .dist-col.pluie { border-top-color: var(--pluie); }
-        .dist-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; margin-bottom: 8px; }
-        .dist-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+        .container { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
 
-        /* QUIZ */
-        .quiz-case { background: #F9FAFB; border: 1.5px solid var(--border); border-radius: 14px; padding: 24px; margin-bottom: 20px; }
-        .case-num { font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; color: var(--brand); margin-bottom: 8px; }
-        .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-        .quiz-btn { background: white; border: 1.5px solid var(--border); border-radius: 10px; padding: 12px; font-size: 13px; cursor: pointer; text-align: left; }
-        .quiz-btn:hover:not(:disabled) { border-color: var(--brand); background: var(--brand-light); }
-        .quiz-feedback { display: none; margin-top: 15px; padding: 15px; border-radius: 10px; font-size: 13px; }
+        .page-header { background: var(--brand); border-radius: 20px; padding: 36px 40px; color: white; position: relative; overflow: hidden; }
+        .page-header h1 { font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700; margin-bottom: 12px; position: relative; }
+        .hero-concept { background: rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 22px; font-size: 14px; position: relative; backdrop-filter: blur(4px); }
+
+        .card { background: var(--surface); border-radius: 16px; padding: 32px; box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04); }
+        .section-label { font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--brand); margin-bottom: 8px; opacity: 0.8; }
+        .card h2 { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 20px; }
+
+        .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .why-card { background: var(--brand-light); border-radius: 12px; padding: 16px 18px; font-size: 13.5px; border: 1px solid rgba(45,71,201,0.1); }
+        .why-card b { color: var(--brand); display: block; margin-bottom: 5px; font-size: 13px; }
+
+        .meteo-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+        .meteo-card { display: flex; align-items: center; gap: 18px; padding: 16px 20px; border-radius: 14px; border: 1.5px solid var(--border); }
+        .meteo-card.soleil { border-color: var(--soleil-border); background: var(--soleil-bg); }
+        .meteo-card.nuage { border-color: var(--nuage-border); background: var(--nuage-bg); }
+        .meteo-card.pluie { border-color: var(--pluie-border); background: var(--pluie-bg); }
+        .meteo-card.orage { border-color: var(--orage-border); background: var(--orage-bg); }
+        .meteo-icon { font-size: 30px; min-width: 46px; text-align: center; }
+        .meteo-content h4 { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+        .meteo-content p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+        .distinction-block { background: #F9F7FF; border: 1.5px solid #DDD6FE; border-radius: 16px; padding: 24px; margin: 6px 0 20px; }
+        .dist-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+        .dist-col { background: white; border-radius: 12px; padding: 16px; border: 1.5px solid var(--border); }
+        .dist-col-title { font-size: 13px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+        .dist-row { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: #374151; margin-bottom: 8px; line-height: 1.45; }
+        .dist-dot { width: 7px; height: 7px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+
+        .note-expert { background: #F0F4FF; border: 1.5px dashed var(--brand); border-radius: 14px; padding: 18px 22px; font-size: 13.5px; text-align: center; color: var(--text-muted); }
+
+        .errors-list { display: flex; flex-direction: column; gap: 10px; }
+        .error-item { display: flex; gap: 16px; align-items: flex-start; background: #FFF8F8; border: 1.5px solid #FED7D7; border-radius: 14px; padding: 16px 20px; }
+        .error-body { font-size: 13.5px; }
+        .error-tip { display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; background: var(--brand-light); color: var(--brand); font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 20px; }
+
+        .gov-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .gov-card { background: #F0FDF8; border: 1.5px solid #A7F3D0; border-radius: 14px; padding: 18px 20px; }
+        .gov-badge { display: inline-block; background: var(--brand); color: #fff; font-size: 11px; font-weight: 700; border-radius: 20px; padding: 3px 12px; margin-bottom: 10px; }
+
+        .quiz-wrapper { display: flex; flex-direction: column; gap: 14px; }
+        .quiz-case { background: #F9FAFB; border: 1.5px solid var(--border); border-radius: 14px; padding: 22px; }
+        .situation { font-size: 14px; color: #374151; margin-bottom: 16px; line-height: 1.6; }
+        .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .quiz-btn { border: 1.5px solid var(--border); background: white; border-radius: 10px; padding: 11px 14px; font-size: 13px; cursor: pointer; text-align: left; transition: all 0.18s; font-weight: 500; }
+        .quiz-btn.correct { border-color: #059669; background: #ECFDF5; color: #065F46; font-weight: 700; }
+        .quiz-btn.wrong { border-color: #DC2626; background: #FEF2F2; color: #991B1B; }
+        .quiz-feedback { font-size: 13px; margin-top: 12px; padding: 12px 16px; border-radius: 10px; display: none; line-height: 1.55; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.ok { background: #ECFDF5; color: #065F46; border: 1px solid #A7F3D0; }
+        .quiz-feedback.ko { background: #FEF2F2; color: #991B1B; border: 1px solid #FCA5A5; }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="page-header">
         <h1>☀️ Comment faire une météo projet claire ?</h1>
-        <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 10px; font-size: 14px; margin-top: 15px;">
-            <b>C'est quoi la météo projet ?</b><br>
-            C'est un modèle visuel simple qui utilise la métaphore du temps pour communiquer sur l'état de santé d'un projet. C'est le <b>premier indicateur</b> de la santé d'un projet.
+        <div class="hero-concept"><b>C'est quoi la météo projet ?</b><br>La météo projet est un modèle visuel simple qui utilise la métaphore du temps pour communiquer sur l'état de santé d'un projet. C'est le <b>premier indicateur de la santé d'un projet</b>.</div>
+    </div>
+
+    <div class="card">
+        <div class="section-label">Contexte</div>
+        <h2>Pourquoi l'utiliser sur vos projets ?</h2>
+        <div class="why-grid">
+            <div class="why-card"><b>1. Gagner du temps</b>Plus besoin de lire 10 diapositives. Les vues filtrées permettent de voir les points d'attention en quelques clics.</div>
+            <div class="why-card"><b>2. Faciliter le COPIL</b>Le flash report intègre tout (jalons, risques, budgets) pour faciliter la prise de décision.</div>
+            <div class="why-card"><b>3. Aligner les parties prenantes</b>La météo parle à tout le monde, y compris à ceux qui ne sont pas dans le détail opérationnel.</div>
+            <div class="why-card"><b>4. Détecter les signaux faibles</b>Une cartographie pour déterminer avec précision où concentrer les ressources.</div>
         </div>
     </div>
 
     <div class="card">
         <div class="section-label">Référentiel</div>
+        <h2>À quoi correspond chaque niveau ?</h2>
         <div class="meteo-grid">
             <div class="meteo-card soleil">
                 <div class="meteo-icon">☀️</div>
-                <div class="meteo-content"><h4>Tout va bien</h4><p>Tous les jalons projets sont sur la bonne voie, aucune action nécessaire.</p></div>
+                <div class="meteo-content"><h4>Tout va bien</h4><p>Tous les jalons projets sont sur la bonne voie, aucune action nécessaire. Bravo !</p></div>
             </div>
             <div class="meteo-card nuage">
                 <div class="meteo-icon">🌤️</div>
@@ -82,17 +127,17 @@
         </div>
 
         <div class="distinction-block">
-            <div class="dist-title">⚖️ Arbitrer entre "Quelques problèmes" et "C'est compliqué"</div>
+            <div class="dist-title">🤔 Quelle différence entre ces deux niveaux ?</div>
             <div class="dist-compare">
                 <div class="dist-col nuage">
-                    <div style="font-weight:700; color:var(--nuage); margin-bottom:8px;">🌤️ Quelques problèmes</div>
-                    <div class="dist-row"><div class="dist-dot" style="background:var(--nuage)"></div><span>Des irritants au quotidien (réunion annulée, etc.)</span></div>
-                    <div class="dist-row"><div class="dist-dot" style="background:var(--nuage)"></div><span><b>Le planning n'a pas bougé</b></span></div>
+                    <div class="dist-col-title" style="color:var(--nuage);">🌤️ Quelques problèmes</div>
+                    <div class="dist-row"><div class="dist-dot" style="background:var(--nuage);"></div><span>Des irritants au quotidien</span></div>
+                    <div class="dist-row"><div class="dist-dot" style="background:var(--nuage);"></div><b>Le planning n'a pas bougé</b></div>
                 </div>
                 <div class="dist-col pluie">
-                    <div style="font-weight:700; color:var(--pluie); margin-bottom:8px;">🌧️ C'est compliqué</div>
-                    <div class="dist-row"><div class="dist-dot" style="background:var(--pluie)"></div><span>Un jalon est officiellement en retard</span></div>
-                    <div class="dist-row"><div class="dist-dot" style="background:var(--pluie)"></div><span><b>La date de fin tient encore</b></span></div>
+                    <div class="dist-col-title" style="color:var(--pluie);">🌧️ C'est compliqué</div>
+                    <div class="dist-row"><div class="dist-dot" style="background:var(--pluie);"></div><span>Un jalon est officiellement en retard</span></div>
+                    <div class="dist-row"><div class="dist-dot" style="background:var(--pluie);"></div><b>La date de fin tient encore</b></div>
                 </div>
             </div>
         </div>
@@ -100,71 +145,74 @@
         <div class="meteo-grid">
             <div class="meteo-card pluie">
                 <div class="meteo-icon">🌧️</div>
-                <div class="meteo-content"><h4>C'est compliqué</h4><p>Jalon en retard. Le plan a été revu mais la date finale tient. Le comité doit être informé.</p></div>
+                <div class="meteo-content"><h4>C'est compliqué</h4><p>Un ou plusieurs jalons majeurs sont en retard, mais la livraison finale n'est pas impactée. Le comité de projet devrait être notifié.</p></div>
             </div>
             <div class="meteo-card orage">
                 <div class="meteo-icon">⛈️</div>
-                <div class="meteo-content"><h4>Bloqué</h4><p>Jalon en retard ET livraison finale impactée. Remontée immédiate au sponsor requise.</p></div>
+                <div class="meteo-content"><h4>Bloqué</h4><p>Un ou plusieurs jalons majeurs sont en retard et la livraison finale est impactée. Le sujet doit être remonté immédiatement au sponsor.</p></div>
             </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="section-label">Pièges à éviter</div>
+        <h2>⚠️ Les erreurs courantes à éviter</h2>
+        <div class="errors-list">
+            <div class="error-item">
+                <div class="error-body"><b>Toujours rester au milieu</b><br><span>Mettre "Quelques problèmes" pour éviter les questions difficiles décrédibilise la météo.</span><br><span class="error-tip">✅ Osez "Bloqué" quand c'est le cas.</span></div>
+            </div>
+            <div class="error-item">
+                <div class="error-body"><b>Mise à jour tardive</b><br><span>Mettre à jour seulement avant le COPIL perd la valeur de signal d'alerte.</span><br><span class="error-tip">✅ Mettez à jour au fil de l'eau.</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="section-label">Gouvernance</div>
+        <h2>🗂️ Qui met à jour la météo ?</h2>
+        <div class="gov-grid">
+            <div class="gov-card"><div class="gov-badge">Qui ?</div><div class="gov-text"><b>Le chef de projet</b> est responsable de la mise à jour sur AirSaaS.</div></div>
+            <div class="gov-card"><div class="gov-badge">Fréquence</div><div class="gov-text"><b>Au minimum une fois par semaine.</b></div></div>
         </div>
     </div>
 
     <div class="card">
         <div class="section-label">Exercice</div>
         <h2>🎯 Quelle météo choisissez-vous ?</h2>
-
-        <div class="quiz-case" id="q1">
-            <div class="case-num">Cas 1</div>
-            <p class="situation"><b>Votre projet avance comme prévu.</b> Tous les jalons du mois ont été livrés, le budget est tenu. Aucun blocage identifié.</p>
-            <div class="quiz-options">
-                <button class="quiz-btn" onclick="answer('q1', this, true)">☀️ Tout va bien</button>
-                <button class="quiz-btn" onclick="answer('q1', this, false)">🌤️ Quelques problèmes</button>
-                <button class="quiz-btn" onclick="answer('q1', this, false)">🌧️ C'est compliqué</button>
-                <button class="quiz-btn" onclick="answer('q1', this, false)">⛈️ Bloqué</button>
+        <div class="quiz-wrapper">
+            <div class="quiz-case" id="q1">
+                <div class="situation"><b>Cas 1 —</b> Projet avance comme prévu. Jalons livrés, budget tenu, équipe mobilisée.</div>
+                <div class="quiz-options">
+                    <button class="quiz-btn" onclick="answer('q1', this, true)">☀️ Tout va bien</button>
+                    <button class="quiz-btn" onclick="answer('q1', this, false)">🌤️ Quelques problèmes</button>
+                </div>
+                <div class="quiz-feedback ok" id="q1-fb-ok">✅ Bonne réponse ! Tout est en ordre.</div>
+                <div class="quiz-feedback ko" id="q1-fb-ko">❌ Pas tout à fait. C'est un soleil.</div>
             </div>
-            <div class="quiz-feedback" id="q1-fb"></div>
-        </div>
-
-        <div class="quiz-case" id="q2">
-            <div class="case-num">Cas 2</div>
-            <p class="situation"><b>Un livrable a pris 3 jours de retard.</b> Vous avez réorganisé le planning et la date de livraison finale reste atteignable. Le sponsor est au courant.</p>
-            <div class="quiz-options">
-                <button class="quiz-btn" onclick="answer('q2', this, false)">☀️ Tout va bien</button>
-                <button class="quiz-btn" onclick="answer('q2', this, false)">🌤️ Quelques problèmes</button>
-                <button class="quiz-btn" onclick="answer('q2', this, true)">🌧️ C'est compliqué</button>
-                <button class="quiz-btn" onclick="answer('q2', this, false)">⛈️ Bloqué</button>
+            <div class="quiz-case" id="q3">
+                <div class="situation"><b>Cas 2 —</b> Prestataire en retard de 6 semaines. Livraison finale décalée de 2 mois.</div>
+                <div class="quiz-options">
+                    <button class="quiz-btn" onclick="answer('q3', this, false)">🌧️ C'est compliqué</button>
+                    <button class="quiz-btn" onclick="answer('q3', this, true)">⛈️ Bloqué</button>
+                </div>
+                <div class="quiz-feedback ok" id="q3-fb-ok">✅ Bonne réponse ! Livraison finale impactée = Bloqué.</div>
+                <div class="quiz-feedback ko" id="q3-fb-ko">❌ C'est bloqué car la date finale glisse.</div>
             </div>
-            <div class="quiz-feedback" id="q2-fb"></div>
-        </div>
-
-        <div class="quiz-case" id="q3">
-            <div class="case-num">Cas 3</div>
-            <p class="situation"><b>Un prestataire dérive de 6 semaines.</b> Cette dépendance décale la date de mise en production de 2 mois. Le COPIL n'est pas encore au courant.</p>
-            <div class="quiz-options">
-                <button class="quiz-btn" onclick="answer('q3', this, false)">☀️ Tout va bien</button>
-                <button class="quiz-btn" onclick="answer('q3', this, false)">🌤️ Quelques problèmes</button>
-                <button class="quiz-btn" onclick="answer('q3', this, false)">🌧️ C'est compliqué</button>
-                <button class="quiz-btn" onclick="answer('q3', this, true)">⛈️ Bloqué</button>
-            </div>
-            <div class="quiz-feedback" id="q3-fb"></div>
         </div>
     </div>
 </div>
-
 <script>
-function answer(id, btn, isOk) {
-    const fb = document.getElementById(id + '-fb');
-    fb.style.display = 'block';
-    fb.style.background = isOk ? '#ECFDF5' : '#FEF2F2';
-    fb.style.color = isOk ? '#065F46' : '#991B1B';
-    const text = {
-        'q1': isOk ? "✅ <b>Bravo !</b> Tout est nominal, c'est le moment de valoriser l'équipe." : "❌ <b>Faux.</b> Si le plan est respecté, restez au vert : ☀️ Tout va bien.",
-        'q2': isOk ? "✅ <b>Correct !</b> Jalon glissé mais Go-Live préservé = 🌧️ C'est compliqué." : "❌ <b>Erreur.</b> Un retard de jalon nécessite une alerte orange : 🌧️ C'est compliqué.",
-        'q3': isOk ? "✅ <b>Bravo !</b> La date de fin glisse, c'est impérativement Bloqué." : "❌ <b>Attention.</b> Si le Go-Live glisse, le statut est obligatoirement ⛈️ Bloqué."
-    };
-    fb.innerHTML = text[id];
-    btn.parentNode.querySelectorAll('button').forEach(b => b.disabled = true);
-    btn.style.borderColor = isOk ? '#059669' : '#DC2626';
+function answer(id, btn, isCorrect) {
+    const qEl = document.getElementById(id);
+    const buttons = qEl.querySelectorAll('.quiz-btn');
+    buttons.forEach(b => { b.disabled = true; });
+    if (isCorrect) {
+        btn.classList.add('correct');
+        document.getElementById(id + '-fb-ok').classList.add('show');
+    } else {
+        btn.classList.add('wrong');
+        document.getElementById(id + '-fb-ko').classList.add('show');
+    }
 }
 </script>
 </body>
