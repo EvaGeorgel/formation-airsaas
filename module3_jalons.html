@@ -2,7 +2,6 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap');
         :root { --brand: #3B5BDB; --brand-light: #EEF2FF; --bg: #F7F8FC; --text: #1C1C2E; }
@@ -10,14 +9,24 @@
         .container { max-width: 850px; margin: 0 auto; background: #fff; border-radius: 16px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
         h1 { font-family: 'Syne', sans-serif; font-size: 28px; color: var(--brand); margin-bottom: 25px; border-bottom: 3px solid var(--brand-light); padding-bottom: 10px;}
         h2 { font-family: 'Syne', sans-serif; font-size: 18px; margin-top: 30px; color: var(--brand); }
-        h3 { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; margin-top: 20px; }
+        
         .hero-concept { background: var(--brand-light); border-radius: 12px; padding: 25px; margin-bottom: 30px; border-left: 5px solid var(--brand); }
+        .hero-concept b { color: var(--brand); font-size: 18px; display: block; margin-bottom: 10px; }
+
         .grid-objectifs { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
         .obj-card { background: #fff; border: 1px solid #E5E7EB; padding: 20px; border-radius: 12px; transition: 0.3s; }
+        .obj-card:hover { border-color: var(--brand); transform: translateY(-3px); }
+        .obj-card h4 { margin: 0 0 10px 0; font-size: 15px; color: var(--brand); }
+
         .comparison { display: flex; gap: 20px; margin-top: 30px; background: #F8FAFC; padding: 20px; border-radius: 12px; border: 1px dashed var(--brand); }
         .comp-box { flex: 1; }
+        .comp-box h4 { text-transform: uppercase; font-size: 11px; letter-spacing: 1px; margin-bottom: 10px; }
+
         .methodo-tip { margin-top: 30px; padding: 20px; background: #FFF3BF; border-radius: 12px; font-size: 14px; border-left: 5px solid #E67700; color: #92400E; }
-        .next-module { margin-top: 40px; background: #1C1C2E; color: white; padding: 25px; border-radius: 12px; text-align: center; font-family: 'Syne'; font-weight: 700; }
+        
+        .practice-box { margin-top: 30px; padding: 20px; background: #E0F2FE; border-radius: 12px; border-left: 5px solid #0369A1; color: #075985; }
+        
+        .transition-next { margin-top: 40px; padding: 20px; border-top: 1px solid #E5E7EB; text-align: center; font-style: italic; color: var(--brand); font-weight: 600; }
     </style>
 </head>
 <body>
@@ -25,31 +34,20 @@
         <h1>📍 Piloter par les Jalons sur AirSaaS</h1>
 
         <div class="hero-concept">
-            <h3>Qu'est-ce qu'un jalon projet ?</h3>
-            <p>Le jalon (en anglais “milestone”) marque la fin d'une étape et un point d'arrêt dans le processus de gestion de projet. Il est souvent associé à un évènement important comme la signature d'un gros contrat ou la mise sur le marché d'un produit. C'est l'occasion pour une équipe de faire le bilan avant de passer à l'étape suivante.</p>
-            <p>Le jalon marque un passage définitif : une fois validé, il n'y a normalement pas de retour en arrière.</p>
+            <b>Qu'est-ce qu'un jalon projet ?</b>
+            Le jalon (<i>milestone</i>) marque la fin d'une étape et un point d'arrêt définitif. Comme une borne sur la route, il indique l'état d'avancement sans avoir de durée propre : c'est un marqueur temporel.
         </div>
 
-        <h2>🎯 Pourquoi faire des jalons projets ?</h2>
+        <h2>🎯 Pourquoi jalonner vos projets ?</h2>
         <div class="grid-objectifs">
             <div class="obj-card">
-                <h4>🔄 Revenir sur l'exécution</h4>
-                <p style="font-size:13px;">Tirer les leçons des erreurs et adapter la planification de la phase suivante.</p>
-            </div>
-            <div class="obj-card">
-                <h4>✅ Contrôler les livrables</h4>
-                <p style="font-size:13px;">Vérifier qu'ils sont tous en conformité avec ce qui avait été déterminé.</p>
-            </div>
-            <div class="obj-card">
                 <h4>🚫 Éviter l'effet tunnel</h4>
-                <p style="font-size:13px;">Créer des points qui servent de repère de navigation au chef de projet et à l'équipe.</p>
+                <p style="font-size:13px;">On crée des repères de navigation fixes pour que l'équipe sache toujours où elle en est.</p>
             </div>
             <div class="obj-card">
-                <h4>🔥 Motiver l'équipe</h4>
-                <p style="font-size:13px;">Décomposer les objectifs géants en étapes franchissables pour augmenter l'implication.</p>
+                <h4>📢 Communiquer</h4>
+                <p style="font-size:13px;">C'est l'indicateur parfait pour les parties prenantes qui ne travaillent pas sur le projet au quotidien.</p>
             </div>
-        </div>
-
-        <h2>🛠️ Comment faire les jalons de son projet ?</h2>
-        <h3>Trouver le bon nombre de jalons</h3>
-        <p>Ni trop, ni pas assez ! Si vous en avez trop, vous confondez tâche et jalon. Les jalons permettent de partager une vue macro. Si vous allez dans le micro (tâches),
+            <div class="obj-card">
+                <h4>✅ Valider les livrables</h4>
+                <p style="font-size:
