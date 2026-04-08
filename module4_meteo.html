@@ -35,17 +35,18 @@
         }
 
         .container { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
-
         .card { background: var(--surface); border-radius: 16px; padding: 32px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
-        
         h1, h2, .section-label { font-family: 'Space Grotesk', sans-serif; }
-        
         .page-header { background: var(--brand); border-radius: 20px; padding: 36px; color: white; }
         .page-header h1 { font-size: 26px; margin-bottom: 12px; }
-        
         .section-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--brand); margin-bottom: 8px; }
-        
-        /* METEO GRID */
+
+        /* WHY GRID */
+        .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
+        .why-card { background: var(--brand-light); border-radius: 12px; padding: 16px; font-size: 13px; border: 1px solid rgba(45,71,201,0.1); }
+        .why-card b { color: var(--brand); display: block; margin-bottom: 4px; }
+
+        /* METEO CARDS */
         .meteo-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
         .meteo-card { display: flex; align-items: center; gap: 18px; padding: 16px; border-radius: 12px; border: 1.5px solid var(--border); }
         .meteo-card.soleil { border-color: #6EE7B7; background: var(--soleil-bg); }
@@ -56,58 +57,54 @@
         .meteo-content h4 { font-size: 15px; font-weight: 700; }
         .meteo-content p { font-size: 13px; color: var(--text-muted); }
 
-        /* DISTINCTION SECTION OPTIMISÉE */
+        /* DISTINCTION SECTION */
         .distinction-block { background: #F9F7FF; border: 1.5px solid #DDD6FE; border-radius: 16px; padding: 24px; margin: 10px 0; }
-        .dist-title { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700; color: #5B21B6; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-        
+        .dist-title { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700; color: #5B21B6; margin-bottom: 16px; }
         .dist-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
         .dist-col { background: white; border-radius: 12px; padding: 16px; border: 1.5px solid var(--border); border-top-width: 5px; }
         .dist-col.nuage { border-top-color: var(--nuage); }
         .dist-col.pluie { border-top-color: var(--pluie); }
-        
         .dist-col-title { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
-        .dist-subtitle { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
-        
+        .dist-subtitle { font-size: 10px; font-weight: 800; text-transform: uppercase; margin-bottom: 12px; }
         .dist-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; margin-bottom: 8px; color: #4B5563; }
         .dist-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
-        
         .dist-cursor { background: #EDE9FE; border: 1.5px solid #C4B5FD; border-radius: 12px; padding: 16px; text-align: center; }
-        .dist-cursor-title { font-weight: 800; font-size: 12px; color: #7C3AED; margin-bottom: 10px; text-transform: uppercase; }
         .dist-question { font-style: italic; font-size: 14px; font-weight: 600; color: #1E1B4B; margin-bottom: 12px; }
         .dist-badges { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
         .dist-badge { background: white; padding: 4px 10px; border-radius: 6px; border: 1.5px solid #C4B5FD; font-size: 12px; font-weight: 700; }
 
-        /* OTHER SECTIONS */
-        .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .why-card { background: var(--brand-light); border-radius: 12px; padding: 16px; font-size: 13px; border: 1px solid rgba(45,71,201,0.1); }
+        /* GOVERNANCE */
         .gov-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .gov-card { background: #F0FDF8; border: 1.5px solid #A7F3D0; border-radius: 12px; padding: 16px; font-size: 13px; }
         .gov-badge { display: inline-block; background: var(--brand); color: white; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-bottom: 8px; }
-        
+
+        /* QUIZ */
         .quiz-case { background: #F9FAFB; border: 1.5px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 12px; }
         .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
-        .quiz-btn { background: white; border: 1.5px solid var(--border); border-radius: 8px; padding: 10px; font-size: 13px; cursor: pointer; text-align: left; }
-        .quiz-feedback { display: none; margin-top: 12px; padding: 12px; border-radius: 8px; font-size: 13px; }
-        .quiz-feedback.show { display: block; }
-        .quiz-feedback.ok { background: #ECFDF5; color: #065F46; }
-        .quiz-feedback.ko { background: #FEF2F2; color: #991B1B; }
+        .quiz-btn { background: white; border: 1.5px solid var(--border); border-radius: 8px; padding: 12px; font-size: 13px; cursor: pointer; text-align: left; font-family: inherit; font-weight: 500; transition: 0.2s; }
+        .quiz-btn:hover { border-color: var(--brand); background: var(--brand-light); }
+        .quiz-feedback { display: none; margin-top: 12px; padding: 12px; border-radius: 8px; font-size: 13px; line-height: 1.5; }
+
+        .note-expert { background: #EEF2FF; border: 1.5px dashed var(--brand); padding: 20px; border-radius: 12px; text-align: center; margin-top: 20px; }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="page-header">
         <h1>☀️ Comment faire une météo projet claire ?</h1>
-        <p style="font-size: 14px; opacity: 0.9;">Modèle visuel pour communiquer l'état de santé réel de vos projets sur AirSaaS.</p>
+        <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 10px; font-size: 14px;">
+            <b>C'est quoi la météo projet ?</b><br>
+            C'est un modèle visuel simple utilisant la métaphore du temps pour communiquer sur l'état de santé d'un projet. C'est le <b>premier indicateur</b> que l'on regarde sur AirSaaS.
+        </div>
     </div>
 
     <div class="card">
-        <div class="section-label">Objectifs</div>
-        <h2>Pourquoi l'utiliser sur vos projets ?</h2>
+        <div class="section-label">Pourquoi l'utiliser ?</div>
         <div class="why-grid">
-            <div class="why-card"><b>1. Gagner du temps</b> : Plus besoin de lire 10 diapositives. Les vues filtrées permettent de voir les points d'attention en quelques clics.</div>
-            <div class="why-card"><b>2. Faciliter le COPIL</b> : Le flash report intègre tout (jalons, risques, budgets) pour faciliter la prise de décision.</div>
-            <div class="why-card"><b>3. Aligner les parties prenantes</b> : La météo parle à tout le monde, même à ceux qui ne sont pas dans le détail opérationnel.</div>
-            <div class="why-card"><b>4. Détecter les signaux faibles</b> : Une cartographie pour déterminer où concentrer les ressources.</div>
+            <div class="why-card"><b>1. Gagner du temps</b>Plus de diaporamas interminables. On voit les points d'attention en un coup d'œil.</div>
+            <div class="why-card"><b>2. Faciliter le COPIL</b>Le flash report centralise tout pour décider vite et bien.</div>
+            <div class="why-card"><b>3. Aligner les parties</b>La météo est un langage universel pour les sponsors et les équipes.</div>
+            <div class="why-card"><b>4. Signaux faibles</b>Une cartographie pour savoir exactement où concentrer vos ressources.</div>
         </div>
     </div>
 
@@ -117,11 +114,11 @@
         <div class="meteo-grid">
             <div class="meteo-card soleil">
                 <div class="meteo-icon">☀️</div>
-                <div class="meteo-content"><h4>Tout va bien</h4><p>Tous les jalons projets sont sur la bonne voie, aucune action nécessaire. Bravo !</p></div>
+                <div class="meteo-content"><h4>Tout va bien</h4><p>Tous les jalons sont sur la bonne voie, aucune action nécessaire.</p></div>
             </div>
             <div class="meteo-card nuage">
                 <div class="meteo-icon">🌤️</div>
-                <div class="meteo-content"><h4>Quelques problèmes</h4><p>Des grains de sable apparaissent. On reste vigilant, mais la trajectoire est maintenue.</p></div>
+                <div class="meteo-content"><h4>Quelques problèmes</h4><p>Des grains de sable apparaissent, mais la trajectoire est maintenue.</p></div>
             </div>
         </div>
 
@@ -132,23 +129,20 @@
                     <div class="dist-col-title" style="color:var(--nuage);">🌤️ Quelques problèmes</div>
                     <div class="dist-subtitle" style="color:var(--nuage);">L'aléa du quotidien</div>
                     <div class="dist-row"><div class="dist-dot" style="background:var(--nuage);"></div><span><b>Planning :</b> Intact ✅</span></div>
-                    <div class="dist-row"><div class="dist-dot" style="background:var(--nuage);"></div><span><b>Action :</b> Géré en autonomie par le CP.</span></div>
-                    <div class="dist-row"><div class="dist-dot" style="background:var(--nuage);"></div><span>Irritants (ressource peu dispo, réunion annulée...)</span></div>
+                    <div class="dist-row"><div class="dist-dot" style="background:var(--nuage);"></div><span><b>Action :</b> Géré en autonomie.</span></div>
                 </div>
                 <div class="dist-col pluie">
                     <div class="dist-col-title" style="color:var(--pluie);">🌧️ C'est compliqué</div>
                     <div class="dist-subtitle" style="color:var(--pluie);">Le retard identifié</div>
                     <div class="dist-row"><div class="dist-dot" style="background:var(--pluie);"></div><span><b>Planning :</b> Glissement de jalon ⚠️</span></div>
-                    <div class="dist-row"><div class="dist-dot" style="background:var(--pluie);"></div><span><b>Action :</b> Le Sponsor doit être informé.</span></div>
-                    <div class="dist-row"><div class="dist-dot" style="background:var(--pluie);"></div><span>La date de fin tient encore, mais le plan a été revu.</span></div>
+                    <div class="dist-row"><div class="dist-dot" style="background:var(--pluie);"></div><span><b>Action :</b> Informer le Sponsor.</span></div>
                 </div>
             </div>
             <div class="dist-cursor">
-                <div class="dist-cursor-title">🎯 Le test ultime pour choisir :</div>
                 <div class="dist-question">"Si je ne fais rien, est-ce que ma date de fin de projet change ?"</div>
                 <div class="dist-badges">
                     <div class="dist-badge">Non → 🌤️</div>
-                    <div class="dist-badge">Oui, mais j'ai un plan → 🌧️</div>
+                    <div class="dist-badge">Oui, mais je gère → 🌧️</div>
                     <div class="dist-badge">Oui, et je suis bloqué → ⛈️</div>
                 </div>
             </div>
@@ -157,23 +151,12 @@
         <div class="meteo-grid">
             <div class="meteo-card pluie">
                 <div class="meteo-icon">🌧️</div>
-                <div class="meteo-content"><h4>C'est compliqué</h4><p>Un jalon majeur est en retard. La date de fin tient encore, mais le comité doit être notifié.</p></div>
+                <div class="meteo-content"><h4>C'est compliqué</h4><p>Jalon en retard. La date de fin tient encore, mais le comité doit savoir.</p></div>
             </div>
             <div class="meteo-card orage">
                 <div class="meteo-icon">⛈️</div>
-                <div class="meteo-content"><h4>Bloqué</h4><p>La livraison finale est impactée. Le sujet doit être remonté immédiatement au sponsor.</p></div>
+                <div class="meteo-content"><h4>Bloqué</h4><p>La livraison finale est impactée. Remontée immédiate au sponsor requise.</p></div>
             </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="section-label">Gouvernance</div>
-        <h2>🗂️ Qui met à jour la météo, et quand ?</h2>
-        <div class="gov-grid">
-            <div class="gov-card"><div class="gov-badge">Qui ?</div><div class="gov-text"><b>Le chef de projet</b> est responsable de la mise à jour sur AirSaaS. Pas le PMO ni le COPIL.</div></div>
-            <div class="gov-card"><div class="gov-badge">Fréquence</div><div class="gov-text"><b>Au minimum une fois par semaine</b>. Un retard de mise à jour est un signal visible dans l'outil.</div></div>
-            <div class="gov-card"><div class="gov-badge">Alerte</div><div class="gov-text"><b>N'attendez pas le COPIL</b> pour passer en "Bloqué". Informez le sponsor dès le changement de trajectoire.</div></div>
-            <div class="gov-card"><div class="gov-badge">Règle d'or</div><div class="gov-text">La météo ne doit jamais surprendre. Si le COPIL découvre le "Rouge" en séance, la météo a échoué.</div></div>
         </div>
     </div>
 
@@ -181,24 +164,30 @@
         <div class="section-label">Exercice</div>
         <h2>🎯 Quelle météo choisissez-vous ?</h2>
         <div class="quiz-case" id="q1">
-            <p style="font-size: 14px;"><b>Situation :</b> Un prestataire décale sa livraison de 6 semaines. Votre date de mise en production glisse de 2 mois. Le COPIL n'est pas informé.</p>
+            <p style="font-size: 14px; margin-bottom: 10px;"><b>Cas :</b> Un prestataire décale sa livraison de 6 semaines. Votre Go-Live glisse de 2 mois. Le COPIL n'est pas informé.</p>
             <div class="quiz-options">
+                <button class="quiz-btn" onclick="answer('q1', this, false)">🌤️ Quelques problèmes</button>
                 <button class="quiz-btn" onclick="answer('q1', this, false)">🌧️ C'est compliqué</button>
                 <button class="quiz-btn" onclick="answer('q1', this, true)">⛈️ Bloqué</button>
             </div>
-            <div class="quiz-feedback ok" id="q1-fb-ok">✅ <b>Correct !</b> Livraison finale impactée = Bloqué. Alerte immédiate requise.</div>
-            <div class="quiz-feedback ko" id="q1-fb-ko">❌ <b>Erreur.</b> Dès que la date de fin (Go-Live) est touchée, le statut est "Bloqué".</div>
+            <div class="quiz-feedback" id="q1-fb"></div>
+        </div>
+        <div class="note-expert">
+            <b>💡 Pourquoi 4 niveaux plutôt que 3 ?</b><br>
+            Pour éviter le biais du milieu et garantir une transparence réelle sur l'état du projet.
         </div>
     </div>
 </div>
 
 <script>
-function answer(qId, btn, isOk) {
-    const q = document.getElementById(qId);
-    q.querySelectorAll('.quiz-btn').forEach(b => b.disabled = true);
+function answer(id, btn, isOk) {
+    const fb = document.getElementById(id + '-fb');
+    fb.style.display = 'block';
+    fb.style.background = isOk ? '#ECFDF5' : '#FEF2F2';
+    fb.style.color = isOk ? '#065F46' : '#991B1B';
+    fb.innerHTML = isOk ? "✅ <b>Bravo !</b> La date de fin est touchée, c'est obligatoirement Bloqué." : "❌ <b>Attention.</b> Si le Go-Live glisse, le statut est impérativement Bloqué.";
+    btn.parentNode.querySelectorAll('button').forEach(b => b.disabled = true);
     btn.style.borderColor = isOk ? '#059669' : '#DC2626';
-    btn.style.background = isOk ? '#ECFDF5' : '#FEF2F2';
-    document.getElementById(qId + (isOk ? '-fb-ok' : '-fb-ko')).style.display = 'block';
 }
 </script>
 </body>
