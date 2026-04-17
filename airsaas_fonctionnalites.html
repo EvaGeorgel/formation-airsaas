@@ -4,428 +4,222 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AirSaaS – Les Fonctionnalités</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --brand: #3B5BDB;
-      --brand-light: #EEF2FF;
       --brand-dark: #2541B2;
-      --accent: #00C2A8;
       --text: #1C1C2E;
       --muted: #64748B;
-      --bg: #F7F8FC;
+      --bg: #F8FAFC;
       --white: #ffffff;
-      --card-border: #E2E8F0;
-      --cat1: #3B5BDB;
-      --cat2: #7C3AED;
-      --cat3: #0EA5E9;
-      --cat4: #059669;
+      --cat1: #3B5BDB; --cat2: #7C3AED; --cat3: #0EA5E9; --cat4: #059669;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       font-family: 'DM Sans', sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.65;
-      padding: 24px 16px 60px;
+      line-height: 1.6;
+      padding: 20px 12px;
     }
 
-    .page { max-width: 860px; margin: 0 auto; }
+    .page { max-width: 800px; margin: 0 auto; }
 
-    /* ── HEADER ── */
+    /* --- HEADER --- */
     .header {
-      background: var(--brand);
-      border-radius: 20px;
-      padding: 36px 40px;
-      margin-bottom: 32px;
-      position: relative;
-      overflow: hidden;
-    }
-    .header::before {
-      content: '';
-      position: absolute;
-      top: -40px; right: -40px;
-      width: 220px; height: 220px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 50%;
-    }
-    .header::after {
-      content: '';
-      position: absolute;
-      bottom: -60px; right: 60px;
-      width: 160px; height: 160px;
-      background: rgba(255,255,255,0.04);
-      border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+      border-radius: 24px;
+      padding: 40px 30px;
+      margin-bottom: 24px;
+      color: #fff;
+      box-shadow: 0 10px 25px -5px rgba(59, 91, 219, 0.3);
     }
     .header-tag {
       display: inline-block;
-      background: rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(4px);
       color: #fff;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      padding: 4px 12px;
-      border-radius: 20px;
-      margin-bottom: 14px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 16px;
     }
     .header h1 {
       font-family: 'Syne', sans-serif;
-      font-size: 30px;
-      color: #fff;
-      margin-bottom: 10px;
-      line-height: 1.2;
+      font-size: 32px;
+      line-height: 1.1;
+      margin-bottom: 12px;
     }
     .header p {
-      color: rgba(255,255,255,0.82);
-      font-size: 14px;
-      max-width: 580px;
+      color: rgba(255,255,255,0.9);
+      font-size: 15px;
+      max-width: 500px;
     }
 
-    /* ── INTRO CARD ── */
-    .intro-card {
-      background: var(--white);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 24px 28px;
-      margin-bottom: 32px;
-      border-left: 5px solid var(--brand);
-      font-size: 14px;
-      color: #374151;
-      line-height: 1.7;
-    }
-
-    /* ── CATEGORY ── */
-    .category { margin-bottom: 32px; }
-
+    /* --- CATEGORIES --- */
+    .cat-section { margin-bottom: 40px; }
     .cat-header {
       display: flex;
       align-items: center;
-      gap: 14px;
-      margin-bottom: 16px;
-    }
-    .cat-icon {
-      width: 42px; height: 42px;
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
-      flex-shrink: 0;
+      margin-bottom: 20px;
+      border-bottom: 2px solid rgba(0,0,0,0.05);
+      padding-bottom: 10px;
     }
     .cat-title {
       font-family: 'Syne', sans-serif;
-      font-size: 18px;
+      font-size: 20px;
+      font-weight: 800;
+      flex-grow: 1;
+    }
+    .cat-badge {
+      font-size: 11px;
       font-weight: 700;
-    }
-    .cat-count {
-      margin-left: auto;
-      font-size: 12px;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 20px;
-      white-space: nowrap;
+      padding: 4px 12px;
+      border-radius: 8px;
+      background: #fff;
     }
 
-    /* ── FEATURE GRID ── */
-    .feature-grid {
+    /* --- GRID --- */
+    .grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    @media (max-width: 560px) {
-      .feature-grid { grid-template-columns: 1fr; }
-      .header { padding: 24px 20px; }
-      .header h1 { font-size: 22px; }
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
     }
 
-    .feature-card {
+    .card {
       background: var(--white);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 16px 18px;
-      transition: box-shadow 0.18s, transform 0.18s;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 20px;
+      transition: all 0.3s ease;
+      position: relative;
     }
-    .feature-card:hover {
-      box-shadow: 0 6px 24px rgba(0,0,0,0.08);
-      transform: translateY(-2px);
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 20px -5px rgba(0,0,0,0.05);
+      border-color: var(--cat-color);
     }
-    .feature-card-top {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 6px;
+    .card-icon {
+      font-size: 20px;
+      margin-bottom: 12px;
+      display: block;
     }
-    .feature-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .feature-name {
-      font-weight: 600;
-      font-size: 14px;
+    .card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
       color: var(--text);
     }
-    .feature-desc {
-      font-size: 12.5px;
+    .card p {
+      font-size: 13px;
       color: var(--muted);
-      line-height: 1.55;
-      padding-left: 18px;
+      line-height: 1.5;
     }
 
-    /* ── CATEGORY COLOR THEMES ── */
-    .theme-1 .cat-icon { background: #EEF2FF; }
+    /* --- THEMES --- */
+    .theme-1 { --cat-color: var(--cat1); }
+    .theme-2 { --cat-color: var(--cat2); }
+    .theme-3 { --cat-color: var(--cat3); }
+    .theme-4 { --cat-color: var(--cat4); }
+    
     .theme-1 .cat-title { color: var(--cat1); }
-    .theme-1 .cat-count { background: #EEF2FF; color: var(--cat1); }
-    .theme-1 .feature-dot { background: var(--cat1); }
-    .theme-1 .feature-card { border-top: 3px solid var(--cat1); }
-
-    .theme-2 .cat-icon { background: #F5F3FF; }
     .theme-2 .cat-title { color: var(--cat2); }
-    .theme-2 .cat-count { background: #F5F3FF; color: var(--cat2); }
-    .theme-2 .feature-dot { background: var(--cat2); }
-    .theme-2 .feature-card { border-top: 3px solid var(--cat2); }
-
-    .theme-3 .cat-icon { background: #E0F2FE; }
     .theme-3 .cat-title { color: var(--cat3); }
-    .theme-3 .cat-count { background: #E0F2FE; color: var(--cat3); }
-    .theme-3 .feature-dot { background: var(--cat3); }
-    .theme-3 .feature-card { border-top: 3px solid var(--cat3); }
-
-    .theme-4 .cat-icon { background: #ECFDF5; }
     .theme-4 .cat-title { color: var(--cat4); }
-    .theme-4 .cat-count { background: #ECFDF5; color: var(--cat4); }
-    .theme-4 .feature-dot { background: var(--cat4); }
-    .theme-4 .feature-card { border-top: 3px solid var(--cat4); }
 
-    /* ── SUMMARY BANNER ── */
-    .summary-banner {
-      background: var(--white);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 24px 28px;
-      margin-top: 8px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
+    /* --- STATS BAR --- */
+    .stats {
+      background: var(--text);
+      border-radius: 20px;
+      padding: 30px;
+      display: flex;
+      justify-content: space-around;
+      color: #fff;
       text-align: center;
+      margin-top: 50px;
     }
-    @media (max-width: 560px) { .summary-banner { grid-template-columns: 1fr 1fr; } }
-    .summary-item .num {
+    .stat-item .val {
+      display: block;
       font-family: 'Syne', sans-serif;
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 800;
-      line-height: 1;
-      margin-bottom: 4px;
+      color: var(--brand);
     }
-    .summary-item .label { font-size: 12px; color: var(--muted); font-weight: 500; }
+    .stat-item .lbl { font-size: 12px; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; }
+
+    @media (max-width: 600px) {
+      .stats { flex-direction: column; gap: 20px; }
+      .header h1 { font-size: 26px; }
+    }
   </style>
 </head>
 <body>
-  <div class="page">
 
-    <!-- HEADER -->
-    <div class="header">
-      <div class="header-tag">📘 Module Formation</div>
-      <h1>Les fonctionnalités d'AirSaaS</h1>
-      <p>Découvrez l'ensemble des outils mis à votre disposition pour piloter vos projets, collaborer efficacement et garantir la bonne gouvernance de votre portefeuille.</p>
+<div class="page">
+  <header class="header">
+    <span class="header-tag">Module Expert</span>
+    <h1>Pilotez avec AirSaaS</h1>
+    <p>Une plateforme unique pour transformer votre vision stratégique en succès opérationnels.</p>
+  </header>
+
+  <section class="cat-section theme-1">
+    <div class="cat-header">
+      <h2 class="cat-title">Stratégie & Portefeuille</h2>
+      <span class="cat-badge">01</span>
     </div>
-
-    <!-- INTRO -->
-    <div class="intro-card">
-      AirSaaS est une solution de <strong>gestion de portefeuille projet</strong> conçue pour répondre aux besoins de gouvernance moderne des entreprises. Elle couvre quatre grands domaines : la planification stratégique, la gestion de projet opérationnelle, la collaboration d'équipe et la conformité. Voici le détail de chaque fonctionnalité.
-    </div>
-
-    <!-- CATÉGORIE 1 -->
-    <div class="category theme-1">
-      <div class="cat-header">
-        <div class="cat-icon">🗂️</div>
-        <div class="cat-title">Planification et gestion de portefeuille</div>
-        <div class="cat-count">4 fonctionnalités</div>
+    <div class="grid">
+      <div class="card">
+        <span class="card-icon">🎯</span>
+        <h3>Vue 360° du Portefeuille</h3>
+        <p>Consolidez l'ensemble de vos initiatives pour une prise de décision éclairée et rapide.</p>
       </div>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="feature-card-top">
-            <div class="feature-dot"></div>
-            <div class="feature-name">Vue d'ensemble du portefeuille</div>
-          </div>
-          <div class="feature-desc">Vue consolidée de tous vos projets et initiatives, avec filtres et options de tri pour affiner votre recherche.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-card-top">
-            <div class="feature-dot"></div>
-            <div class="feature-name">Roadmaps collaboratives</div>
-          </div>
-          <div class="feature-desc">Créez des roadmaps visuelles pour communiquer la stratégie et les plans de projet aux parties prenantes.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-card-top">
-            <div class="feature-dot"></div>
-            <div class="feature-name">Priorisation des projets</div>
-          </div>
-          <div class="feature-desc">Classez vos projets selon leur importance et leur alignement avec les objectifs stratégiques de l'entreprise.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-card-top">
-            <div class="feature-dot"></div>
-            <div class="feature-name">Gestion des ressources</div>
-          </div>
-          <div class="feature-desc">Planifiez et attribuez les ressources humaines et matérielles à vos projets selon leurs besoins.</div>
-        </div>
+      <div class="card">
+        <span class="card-icon">🗺️</span>
+        <h3>Roadmaps Dynamiques</h3>
+        <p>Alignez vos équipes avec des feuilles de route visuelles et interactives.</p>
       </div>
     </div>
+  </section>
 
-    <!-- CATÉGORIE 2 -->
-    <div class="category theme-2">
-      <div class="cat-header">
-        <div class="cat-icon">✅</div>
-        <div class="cat-title">Gestion de projet</div>
-        <div class="cat-count">6 fonctionnalités</div>
+  <section class="cat-section theme-2">
+    <div class="cat-header">
+      <h2 class="cat-title">Excellence Opérationnelle</h2>
+      <span class="cat-badge">02</span>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <span class="card-icon">⚡</span>
+        <h3>Gestion des Jalons</h3>
+        <p>Suivez les étapes clés et sécurisez vos dates de livraison critiques.</p>
       </div>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="feature-card-top">
-            <div class="feature-dot"></div>
-            <div class="feature-name">Suivi des tâches et jalons</div>
-          </div>
-          <div class="feature-desc">Créez des tâches, définissez des jalons et suivez leur progression en temps réel.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-card-top">
-            <div class="feature-dot"></div>
-            <div class="feature-name">Gestion des dépendances</div>
-          </div>
-          <div class="feature-desc">Identifiez et gérez les dépendances entre tâches pour éviter les retards et les goulots d'étranglement.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-card-top">
-            <div class="feature-dot"></div>
-            <div class="feature-name">Attribution des tâches</div>
-          </div>
-          <div class="feature-desc">Attribuez des tâches aux membres de l'équipe et suivez leur progression individuellement.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-card-top">
-            <div class="feature-dot"></div>
-            <div class="feature-name">Gestion des délais</div>
-          </div>
-          <div class="feature-desc">Définissez des délais réalistes et recevez des notifications automatiques en cas de retard.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-card-top">
-            <div class="feature-dot"></div>
-            <div class="feature-name">Gestion des risques</div>
-          </div>
-          <div class="feature-desc">Identifiez, évaluez et gérez les risques potentiels avant qu'ils n'impactent vos projets.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-card-top">
-            <div class="feature-dot"></div>
-            <div class="feature-name">Gestion des problèmes</div>
-          </div>
-          <div class="feature-desc">Suivez et résolvez les problèmes qui surviennent au cours des projets de façon structurée.</div>
-        </div>
+      <div class="card">
+        <span class="card-icon">⚖️</span>
+        <h3>Maîtrise des Risques</h3>
+        <p>Anticipez les points de blocage avant qu'ils ne deviennent des problèmes majeurs.</p>
       </div>
     </div>
+  </section>
 
-    <!-- CATÉGORIE 3 -->
-    <div class="category theme-3">
-      <div class="cat-header">
-        <div class="cat-icon">💬</div>
-        <div class="cat-title">Collaboration et communication</div>
-        <div class="cat-count">4 fonctionnalités</div>
-      </div>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="feature-card-top">
-            <div class="feature-dot"></div>
-            <div class="feature-name">Espace de travail collaboratif</div>
-          </div>
-          <div class="feature-desc">Partagez des fichiers, commentaires et mises à jour dans un espace de travail centralisé accessible à toute l'équipe.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-card-top">
-            <div class="feature-dot"></div>
-            <div class="feature-name">Discussions en ligne</div>
-          </div>
-          <div class="feature-desc">Discutez des projets et des initiatives en temps réel directement dans l'outil, sans sortir de l'application.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-card-top">
-            <div class="feature-dot"></div>
-            <div class="feature-name">Notifications</div>
-          </div>
-          <div class="feature-desc">Recevez des alertes sur les activités importantes : tâches terminées, jalons atteints, risques identifiés.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-card-top">
-            <div class="feature-dot"></div>
-            <div class="feature-name">Reporting en un clic</div>
-          </div>
-          <div class="feature-desc">Générez des rapports personnalisés sur l'avancement, les risques, les jalons et les problèmes instantanément.</div>
-        </div>
-      </div>
+  <div class="stats">
+    <div class="stat-item">
+      <span class="val">18</span>
+      <span class="lbl">Fonctions</span>
     </div>
-
-    <!-- CATÉGORIE 4 -->
-    <div class="category theme-4">
-      <div class="cat-header">
-        <div class="cat-icon">🔒</div>
-        <div class="cat-title">Gouvernance et conformité</div>
-        <div class="cat-count">4 fonctionnalités</div>
-      </div>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="feature-card-top">
-            <div class="feature-dot"></div>
-            <div class="feature-name">Gestion des processus métiers</div>
-          </div>
-          <div class="feature-desc">Définissez et gérez les processus métiers liés à vos projets pour standardiser les pratiques.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-card-top">
-            <div class="feature-dot"></div>
-            <div class="feature-name">Gestion des risques d'entreprise</div>
-          </div>
-          <div class="feature-desc">Identifiez, évaluez et gérez les risques d'entreprise liés à l'ensemble de votre portefeuille projets.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-card-top">
-            <div class="feature-dot"></div>
-            <div class="feature-name">Conformité réglementaire</div>
-          </div>
-          <div class="feature-desc">Assurez-vous que vos projets respectent les réglementations en vigueur grâce à des contrôles intégrés.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-card-top">
-            <div class="feature-dot"></div>
-            <div class="feature-name">Audit et reporting</div>
-          </div>
-          <div class="feature-desc">Suivez et auditez les activités du projet pour garantir la conformité et assurer une bonne gouvernance.</div>
-        </div>
-      </div>
+    <div class="stat-item">
+      <span class="val">100%</span>
+      <span class="lbl">Collaboratif</span>
     </div>
-
-    <!-- RÉSUMÉ -->
-    <div class="summary-banner">
-      <div class="summary-item">
-        <div class="num" style="color:var(--cat1);">4</div>
-        <div class="label">Domaines couverts</div>
-      </div>
-      <div class="summary-item">
-        <div class="num" style="color:var(--cat2);">18</div>
-        <div class="label">Fonctionnalités</div>
-      </div>
-      <div class="summary-item">
-        <div class="num" style="color:var(--cat3);">1</div>
-        <div class="label">Plateforme unifiée</div>
-      </div>
-      <div class="summary-item">
-        <div class="num" style="color:var(--cat4);">360°</div>
-        <div class="label">Vision portefeuille</div>
-      </div>
+    <div class="stat-item">
+      <span class="val">Zero</span>
+      <span class="lbl">Friction</span>
     </div>
-
   </div>
+</div>
+
 </body>
 </html>
