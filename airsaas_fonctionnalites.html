@@ -35,18 +35,6 @@
       text-align: center;
       box-shadow: 0 20px 40px rgba(0,0,0,0.1);
     }
-    .badge-top {
-      background: rgba(255,255,255,0.1);
-      padding: 8px 20px;
-      border-radius: 100px;
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 25px;
-      display: inline-block;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
     .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(28px, 5vw, 42px); margin-bottom: 20px; }
     .hero p { font-size: 18px; opacity: 0.9; max-width: 700px; margin: 0 auto; }
 
@@ -66,7 +54,7 @@
 
     .feature-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 20px;
     }
 
@@ -75,9 +63,11 @@
       border-radius: 20px;
       padding: 30px;
       border: 1px solid rgba(0,0,0,0.05);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: all 0.4s ease;
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
     .card:hover {
       transform: translateY(-8px);
@@ -88,81 +78,128 @@
       content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 100%;
       background: var(--accent); opacity: 0.7;
     }
-    .card h3 { font-size: 17px; margin-bottom: 12px; color: var(--brand-dark); }
-    .card p { font-size: 14px; color: var(--muted); line-height: 1.5; }
+    .card h3 { font-size: 17px; margin-bottom: 12px; color: var(--brand-dark); border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; }
+    .card p { font-size: 14px; color: var(--text); font-weight: 500; margin-bottom: 10px; }
+    
+    .card ul { list-style: none; }
+    .card li { font-size: 13px; color: var(--muted); margin-bottom: 5px; padding-left: 15px; position: relative; }
+    .card li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
 
     .t1 { --accent: var(--cat1); } .t1 span { background: var(--cat1); }
     .t2 { --accent: var(--cat2); } .t2 span { background: var(--cat2); }
     .t3 { --accent: var(--cat3); } .t3 span { background: var(--cat3); }
     .t4 { --accent: var(--cat4); } .t4 span { background: var(--cat4); }
-
-    .footer-grade {
-      background: #fff;
-      border-radius: 24px;
-      padding: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border: 2px dashed var(--brand);
-      margin-top: 60px;
-    }
-    .score-box { text-align: center; }
-    .score-circle {
-      width: 80px; height: 80px;
-      border-radius: 50%;
-      background: var(--brand);
-      color: white;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Syne', sans-serif;
-      font-size: 24px; font-weight: 800;
-      margin: 0 auto 10px;
-    }
   </style>
 </head>
 <body>
 
 <div class="container">
   <div class="hero">
-    <div class="badge-top">Certification AirSaaS 2026</div>
-    <h1>Guide Complet des Fonctionnalités</h1>
-    <p>Maîtrisez les outils de demain pour une gouvernance projet agile et performante.</p>
+    <h1>Guide Complet AirSaaS</h1>
+    <p>Une exploration détaillée des piliers de notre plateforme pour transformer votre gestion de projet.</p>
   </div>
 
   <h2 class="section-title t1"><span>01</span> Stratégie & Portefeuille</h2>
   <div class="feature-grid t1">
-    <div class="card"><h3>Vue d'ensemble</h3><p>Vue consolidée de tous vos projets et initiatives, avec filtres et options de tri pour affiner votre recherche.</p></div>
-    <div class="card"><h3>Roadmaps Collaboratives</h3><p>Créez des roadmaps visuelles pour communiquer la stratégie et les plans de projet aux parties prenantes.</p></div>
-    <div class="card"><h3>Priorisation des projets</h3><p>Classez vos projets selon leur importance et leur alignement avec les objectifs stratégiques de l'entreprise.</p></div>
-    <div class="card"><h3>Gestion des ressources</h3><p>Planifiez et attribuez les ressources humaines et matérielles à vos projets selon leurs besoins.</p></div>
+    <div class="card">
+      <h3>Vue d'ensemble</h3>
+      <p>Consolidation multi-projets.</p>
+      <ul>
+        <li>Filtres avancés par état ou priorité</li>
+        <li>Tri dynamique des initiatives</li>
+        <li>Lecture rapide de la santé globale</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Roadmaps Collaboratives</h3>
+      <p>Communication de la vision.</p>
+      <ul>
+        <li>Timeline visuelle interactive</li>
+        <li>Partage simplifié aux parties prenantes</li>
+        <li>Alignement stratégie / exécution</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Priorisation</h3>
+      <p>Arbitrage de valeur.</p>
+      <ul>
+        <li>Score d'alignement stratégique</li>
+        <li>Classement par importance business</li>
+        <li>Optimisation du backlog projet</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Gestion des ressources</h3>
+      <p>Pilotage capacitaire.</p>
+      <ul>
+        <li>Affectation des talents</li>
+        <li>Suivi de la charge de travail</li>
+        <li>Anticipation des besoins matériels</li>
+      </ul>
+    </div>
   </div>
 
   <h2 class="section-title t2"><span>02</span> Gestion Opérationnelle</h2>
   <div class="feature-grid t2">
-    <div class="card"><h3>Suivi des tâches et jalons</h3><p>Créez des tâches, définissez des jalons et suivez leur progression en temps réel.</p></div>
-    <div class="card"><h3>Gestion des dépendances</h3><p>Identifiez et gérez les dépendances entre tâches pour éviter les retards.</p></div>
-    <div class="card"><h3>Attribution des tâches</h3><p>Attribuez des tâches aux membres de l'équipe et suivez leur progression individuellement.</p></div>
-    <div class="card"><h3>Gestion des délais</h3><p>Définissez des délais réalistes et recevez des notifications automatiques.</p></div>
-    <div class="card"><h3>Gestion des risques</h3><p>Identifiez, évaluez et gérez les risques potentiels avant qu'ils n'impactent vos projets.</p></div>
-    <div class="card"><h3>Gestion des problèmes</h3><p>Suivez et résolvez les problèmes qui surviennent de façon structurée.</p></div>
+    <div class="card">
+      <h3>Tâches & Jalons</h3>
+      <p>Suivi de l'avancement.</p>
+      <ul>
+        <li>Création de structures WBS</li>
+        <li>Suivi de progression en temps réel</li>
+        <li>Validation des étapes clés</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Dépendances</h3>
+      <p>Maîtrise du flux.</p>
+      <ul>
+        <li>Liaisons entre tâches critiques</li>
+        <li>Calcul automatique des retards</li>
+        <li>Visualisation des goulots d'étranglement</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Gestion des risques</h3>
+      <p>Anticipation proactive.</p>
+      <ul>
+        <li>Identification et évaluation d'impact</li>
+        <li>Plans de remédiation intégrés</li>
+        <li>Matrice de criticité</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Gestion des délais</h3>
+      <p>Respect des engagements.</p>
+      <ul>
+        <li>Définition de deadlines réalistes</li>
+        <li>Notifications automatiques de retard</li>
+        <li>Ajustement agile des calendriers</li>
+      </ul>
+    </div>
   </div>
 
-  <h2 class="section-title t3"><span>03</span> Collaboration & Communication</h2>
+  <h2 class="section-title t3"><span>03</span> Collaboration</h2>
   <div class="feature-grid t3">
-    <div class="card"><h3>Espace Collaboratif</h3><p>Partagez des fichiers, commentaires et mises à jour dans un espace centralisé.</p></div>
-    <div class="card"><h3>Discussions en ligne</h3><p>Discutez des projets et des initiatives en temps réel directement dans l'outil.</p></div>
-    <div class="card"><h3>Notifications</h3><p>Recevez des alertes sur les activités importantes (tâches, jalons, risques).</p></div>
-    <div class="card"><h3>Reporting en un clic</h3><p>Générez des rapports personnalisés sur l'avancement et les risques instantanément.</p></div>
+    <div class="card">
+      <h3>Espace Collaboratif</h3>
+      <p>Centralisation des savoirs.</p>
+      <ul>
+        <li>Partage de fichiers sécurisé</li>
+        <li>Historique des commentaires</li>
+        <li>Mise à jour unique pour tous</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Reporting en un clic</h3>
+      <p>Aide à la décision.</p>
+      <ul>
+        <li>Génération de rapports flash</li>
+        <li>Export de données personnalisées</li>
+        <li>Synthèse automatique des risques</li>
+      </ul>
+    </div>
   </div>
-
-  <h2 class="section-title t4"><span>04</span> Gouvernance & Conformité</h2>
-  <div class="feature-grid t4">
-    <div class="card"><h3>Processus métiers</h3><p>Définissez et gérez les processus métiers pour standardiser les pratiques.</p></div>
-    <div class="card"><h3>Risques d'entreprise</h3><p>Identifiez les risques liés à l'ensemble de votre portefeuille projets.</p></div>
-    <div class="card"><h3>Conformité réglementaire</h3><p>Assurez-vous que vos projets respectent les réglementations en vigueur.</p></div>
-    <div class="card"><h3>Audit et reporting</h3><p>Suivez et auditez les activités du projet pour garantir une bonne gouvernance.</p></div>
-  </div>
-
-  
 </div>
 
 </body>
