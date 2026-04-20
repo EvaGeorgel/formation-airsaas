@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation AirSaaS : Devenir un Expert du Pilotage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --primary: #3B5BDB;
+            --secondary: #7C3AED;
+            --success: #10B981;
+            --danger: #EF4444;
+            --warning: #F59E0B;
+            --bg: #F7F8FC;
+            --text: #1F2937;
+            --white: #FFFFFF;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
+
+        /* Header & Progress */
+        header { background: var(--white); padding: 1rem 2rem; border-bottom: 1px solid #E5E7EB; position: sticky; top: 0; z-index: 100; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .brand { font-weight: 700; font-size: 1.25rem; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+        .progress-wrapper { width: 200px; height: 8px; background: #E5E7EB; border-radius: 4px; overflow: hidden; }
+        #progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); transition: width 0.3s ease; }
+
+        /* Layout */
+        .container { max-width: 1100px; margin: 2rem auto; display: grid; grid-template-columns: 280px 1fr; gap: 2rem; padding: 0 1rem; }
+        @media (max-width: 900px) { .container { grid-template-columns: 1fr; } .sidebar { display: none; } }
+
+        /* Sidebar */
+        .sidebar { background: var(--white); padding: 1.5rem; border-radius: 16px; box-shadow: var(--shadow); height: fit-content; position: sticky; top: 100px; }
+        .nav-item { padding: 0.75rem 1rem; border-radius: 8px; cursor: pointer; transition: 0.2s; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 10px; }
+        .nav-item:hover { background: #F3F4F6; }
+        .nav-item.active { background: var(--primary); color: white; }
+        .nav-item.locked { opacity: 0.5; cursor: not-allowed; }
+
+        /* Content Area */
+        .content-card { background: var(--white); padding: 2.5rem; border-radius: 16px; box-shadow: var(--shadow); min-height: 600px; }
+        .module { display: none; animation: fadeIn 0.4s ease; }
+        .module.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        h1 { font-size: 2rem; margin-bottom: 1.5rem; color: var(--text); }
+        h2 { font-size: 1.5rem; margin: 2rem 0 1rem; color: var(--primary); border-left: 4px solid var(--secondary); padding-left: 1rem; }
+        p { margin-bottom: 1rem; }
+
+        /* Components */
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 12px; overflow: hidden; margin: 2rem 0; box-shadow: var(--shadow); }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0; }
+        .info-card { background: #f9fafb; padding: 1.5rem; border-radius: 12px; border: 1px solid #E5E7EB; transition: 0.3s; cursor: pointer; }
+        .info-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: var(--shadow); }
+        .info-card h4 { color: var(--secondary); margin-bottom: 0.5rem; }
+
+        .quote-box { background: linear-gradient(135deg, #EEF2FF 0%, #F5F3FF 100%); padding: 1.5rem; border-radius: 12px; border-left: 5px solid var(--primary); margin: 2rem 0; font-style: italic; }
+
+        .quiz-container { background: #F9FAFB; padding: 2rem; border-radius: 12px; margin-top: 2rem; border: 2px dashed #D1D5DB; }
+        .option { display: block; padding: 1rem; background: var(--white); border: 1px solid #E5E7EB; border-radius: 8px; margin-bottom: 0.5rem; cursor: pointer; transition: 0.2s; }
+        .option:hover { border-color: var(--primary); background: #F5F7FF; }
+        .option.correct { background: #D1FAE5; border-color: var(--success); color: #065F46; }
+        .option.wrong { background: #FEE2E2; border-color: var(--danger); color: #991B1B; }
+
+        .accordion { margin-top: 1rem; }
+        .accordion-item { border: 1px solid #E5E7EB; border-radius: 8px; margin-bottom: 0.5rem; overflow: hidden; }
+        .accordion-header { padding: 1rem; background: #F9FAFB; cursor: pointer; font-weight: 600; display: flex; justify-content: space-between; }
+        .accordion-content { padding: 1rem; display: none; background: white; border-top: 1px solid #E5E7EB; }
+
+        .btn { padding: 0.8rem 1.5rem; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: #324fc0; }
+        .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+        .navigation-btns { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #E5E7EB; }
+
+        .badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1rem; }
+        .badge-module { background: #E0E7FF; color: var(--primary); }
+
+        /* Specific interface helpers */
+        .interface-grid { display: grid; grid-template-columns: 250px 1fr 250px; gap: 10px; background: #EEE; padding: 10px; border-radius: 8px; margin: 1rem 0; font-size: 0.8rem; text-align: center; }
+        .ui-part { background: white; padding: 20px; border-radius: 4px; border: 2px solid transparent; cursor: help; transition: 0.2s; }
+        .ui-part:hover { border-color: var(--secondary); background: #F5F3FF; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav-container">
+        <div class="brand">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            AirSaaS Academy
+        </div>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <span id="progress-text" style="font-size: 0.8rem; font-weight: 600;">0%</span>
+            <div class="progress-wrapper">
+                <div id="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <aside class="sidebar">
+        <div class="nav-item active" onclick="showModule(0)">0. Introduction</div>
+        <div class="nav-item" onclick="showModule(1)">1. La Fiche Projet</div>
+        <div class="nav-item" onclick="showModule(2)">2. La Météo Projet</div>
+        <div class="nav-item" onclick="showModule(3)">3. Les Jalons</div>
+        <div class="nav-item" onclick="showModule(4)">4. Les Décisions</div>
+        <div class="nav-item" onclick="showModule(5)">5. Gestion des Risques</div>
+        <div class="nav-item" onclick="showModule(6)">🏁 Quiz Final</div>
+    </aside>
+
+    <main class="content-card">
+        <section id="module-0" class="module active">
+            <span class="badge badge-module">Bienvenue</span>
+            <h1>Introduction à AirSaaS</h1>
+            <p>AirSaaS est une plateforme de <strong>Gestion de Portefeuille de Projets (PPM)</strong> conçue pour aligner la stratégie de l'entreprise avec l'exécution opérationnelle.</p>
+            
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/5yDtBERBxxk" allowfullscreen></iframe>
+            </div>
+
+            <h2>Les 4 Piliers de la plateforme</h2>
+            <div class="grid-cards">
+                <div class="info-card">
+                    <h4>🎯 Stratégie</h4>
+                    <p>Vues multi-projets, roadmaps et priorisation.</p>
+                </div>
+                <div class="info-card">
+                    <h4>⚙️ Opérationnel</h4>
+                    <p>Tâches, jalons, dépendances et risques.</p>
+                </div>
+                <div class="info-card">
+                    <h4>🤝 Collaboration</h4>
+                    <p>Espaces d'échanges, notifications et reporting.</p>
+                </div>
+                <div class="info-card">
+                    <h4>⚖️ Gouvernance</h4>
+                    <p>Processus métiers, audits et arbitrages.</p>
+                </div>
+            </div>
+
+            <div class="quote-box">
+                "AirSaaS remplace vos tableurs fragiles et vos PowerPoints de suivi périmés par une source de vérité unique et dynamique."
+            </div>
+
+            <div class="quiz-container" id="quiz-0">
+                <h3>Vérification rapide</h3>
+                <p>AirSaaS s'adresse-t-il uniquement aux chefs de projets ?</p>
+                <div class="option" onclick="checkAnswer(this, false, 'AirSaaS implique aussi les contributeurs (jalons) et les sponsors (décisions/stratégie).')">Oui, c'est un outil technique réservé aux experts.</div>
+                <div class="option" onclick="checkAnswer(this, true, 'Exactement ! L\'outil connecte les équipes opérationnelles à la direction.')">Non, il connecte les contributeurs, les chefs de projets et les sponsors.</div>
+            </div>
+        </section>
+
+        <section id="module-1" class="module">
+            <span class="badge badge-module">Cœur du métier</span>
+            <h1>La Fiche Projet : Cadrer pour réussir</h1>
+            <p>La fiche projet est l'acte de naissance de votre initiative. Un mauvais cadrage conduit inévitablement à un échec opérationnel.</p>
+
+            <h2>Anatomie d'une fiche AirSaaS</h2>
+            <p>Cliquez sur les zones pour comprendre leur rôle :</p>
+            
+            <div class="interface-grid">
+                <div class="ui-part" onclick="alert('PANNEAU GAUCHE : Ici on définit QUI (Sponsor, CP, Équipes) et COMBIEN (Budget, Effort, Dates).')">👥 Acteurs & Caractéristiques</div>
+                <div class="ui-part" style="border: 2px solid var(--primary)" onclick="alert('CENTRE : Le POURQUOI. Les gains attendus et la description stratégique.')">🎯 Gains Attendus (Le Pourquoi)</div>
+                <div class="ui-part" onclick="alert('PANNEAU DROIT : Le QUAND. Statut du cycle de vie et liste des jalons clés.')">📅 Statut & Jalons</div>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">Le "Pourquoi" : Les Gains attendus <span>+</span></div>
+                    <div class="accordion-content">
+                        <p>C'est l'élément le plus important pour vos sponsors. Il justifie l'investissement.</p>
+                        <p><strong>Exemple :</strong> "Réduction de 40% des tickets support d'ici Q4" ou "Expansion du marché vers l'Allemagne".</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">Le "Qui" : Équipes & Personnes <span>+</span></div>
+                    <div class="accordion-content">
+                        <p><strong>Équipe en demande :</strong> Celle qui a besoin du projet.</p>
+                        <p><strong>Équipes impliquées :</strong> Celles qui vont travailler sur les jalons.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quote-box" style="border-color: var(--success);">
+                <strong>Règle d'or :</strong> Un projet bien cadré = un "Pourquoi" clair + une équipe identifiée + des jalons définis.
+            </div>
+
+            <div class="quiz-container">
+                <h3>Vérification</h3>
+                <p>Où définit-on la raison d'être stratégique du projet ?</p>
+                <div class="option" onclick="checkAnswer(this, false, 'Non, ce champ est technique.')">Dans le champ Budget.</div>
+                <div class="option" onclick="checkAnswer(this, true, 'Bravo ! C\'est ce qui donne du sens au travail de l\'équipe.')">Dans le champ Gains attendus.</div>
+            </div>
+        </section>
+
+        <section id="module-2" class="module">
+            <span class="badge badge-module">Communication</span>
+            <h1>La Météo Projet</h1>
+            <p>La météo projet est le thermomètre de votre projet. Elle permet de communiquer l'état de santé réel sans fioritures.</p>
+
+            <div class="grid-cards" style="grid-template-columns: repeat(4, 1fr);">
+                <div class="info-card" style="border-bottom: 5px solid var(--success); text-align: center;">☀️<br>Beau fixe</div>
+                <div class="info-card" style="border-bottom: 5px solid var(--warning); text-align: center;">⛅<br>Nuageux</div>
+                <div class="info-card" style="border-bottom: 5px solid #F97316; text-align: center;">🌦️<br>Orageux</div>
+                <div class="info-card" style="border-bottom: 5px solid var(--danger); text-align: center;">⛈️<br>Bloqué</div>
+            </div>
+
+            <h3>La Checklist avant de poster</h3>
+            <p>AirSaaS vous impose (avec bienveillance) de vérifier 4 points :</p>
+            <ul>
+                <li>📅 Jalons à jour ?</li>
+                <li>📈 Progression cohérente ?</li>
+                <li>💰 Budget/Effort consommés ?</li>
+                <li>🚨 Points d'attention identifiés ?</li>
+            </ul>
+
+            <div class="quote-box">
+                <strong>La règle d'incontestabilité :</strong> Une météo documentée avec des faits protège le Chef de Projet en cas de crise.
+            </div>
+        </section>
+
+        <section id="module-3" class="module">
+            <span class="badge badge-module">Opérations</span>
+            <h1>Les Jalons : Piloter par les livrables</h1>
+            <p>Un jalon n'est pas une tâche. C'est un <strong>événement</strong>, un point de passage obligé.</p>
+
+            <div style="display: flex; gap: 20px; margin: 2rem 0;">
+                <div style="flex: 1; background: #fee2e2; padding: 1rem; border-radius: 8px;">
+                    <strong>❌ Tâche (Gantt)</strong><br>
+                    "Faire le design" (Durée 10 jours). Trop complexe à suivre.
+                </div>
+                <div style="flex: 1; background: #d1fae5; padding: 1rem; border-radius: 8px;">
+                    <strong>✅ Jalon (AirSaaS)</strong><br>
+                    "Maquettes validées" (Date fixe). Résultat tangible.
+                </div>
+            </div>
+
+            <h3>Comment créer un bon jalon ?</h3>
+            <p>Utilisez le <strong>Passé Composé</strong> pour nommer vos jalons :</p>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">Le poids des jalons (XS à XL) <span>+</span></div>
+                    <div class="accordion-content">Plus un jalon est "lourd" (XL), plus il impacte le pourcentage de progression globale du projet s'il est terminé.</div>
+                </div>
+            </div>
+
+            <div class="quiz-container">
+                <h3>Quiz express</h3>
+                <p>Combien de jalons sont recommandés pour un projet de 3 mois ?</p>
+                <div class="option" onclick="checkAnswer(this, true, 'Exact. Au-delà, vous faites de la gestion de tâches et non du pilotage.')">Entre 5 et 10.</div>
+                <div class="option" onclick="checkAnswer(this, false, 'C\'est beaucoup trop, vous allez vous noyer dans le micro-détail.')">Environ 50.</div>
+            </div>
+        </section>
+
+        <section id="module-4" class="module">
+            <span class="badge badge-module">Gouvernance</span>
+            <h1>Les Décisions</h1>
+            <p>C'est l'outil qui tue les réunions inutiles et les emails "perdus".</p>
+            
+            <div class="grid-cards">
+                <div class="info-card">
+                    <h4>Traçabilité</h4>
+                    <p>On sait qui a décidé quoi, et quand.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Réactivité</h4>
+                    <p>Le sponsor reçoit une notification pour arbitrer.</p>
+                </div>
+            </div>
+
+            <p>Une décision dans AirSaaS a 3 états :</p>
+            <ul style="list-style-position: inside; margin-bottom: 2rem;">
+                <li>🟡 <strong>À prendre</strong> : En attente d'arbitrage.</li>
+                <li>🟢 <strong>Prise</strong> : Validée, le projet avance.</li>
+                <li>🔴 <strong>Rejetée</strong> : On change de direction.</li>
+            </ul>
+        </section>
+
+        <section id="module-5" class="module">
+            <span class="badge badge-module">Anticipation</span>
+            <h1>La Gestion des Risques</h1>
+            <p>Un risque est un événement futur possible. L'identifier, c'est déjà le réduire.</p>
+
+            <div class="grid-cards">
+                <div class="info-card"><strong>Stratégique</strong><br>Roadmap & Priorités</div>
+                <div class="info-card"><strong>Métier</strong><br>Implication client</div>
+                <div class="info-card"><strong>Technique</strong><br>Complexité IT</div>
+                <div class="info-card"><strong>Humain</strong><br>Disponibilité équipe</div>
+            </div>
+
+            <div class="quote-box">
+                <strong>Règle d'or (NFX50-117) :</strong> L'analyse des risques permet de décider si on lance le projet ou si on l'arrête avant de perdre de l'argent.
+            </div>
+        </section>
+
+        <section id="module-6" class="module">
+            <h1>Examen Final 🎓</h1>
+            <p>Validez vos acquis pour devenir "Expert AirSaaS".</p>
+            <div id="final-quiz-area">
+                </div>
+            <div id="final-result" style="display:none; text-align:center; padding: 2rem; background: var(--bg); border-radius: 16px; margin-top: 2rem;">
+                <h2 id="score-text">Score : 0/5</h2>
+                <p id="rank-text"></p>
+                <button class="btn btn-primary" onclick="location.reload()">Recommencer la formation</button>
+            </div>
+        </section>
+
+        <div class="navigation-btns">
+            <button id="prevBtn" class="btn btn-outline" onclick="changeModule(-1)">Précédent</button>
+            <button id="nextBtn" class="btn btn-primary" onclick="changeModule(1)">Suivant</button>
+        </div>
+    </main>
+</div>
+
+<script>
+    let currentModule = 0;
+    const totalModules = 6;
+    
+    const finalQuestions = [
+        { q: "AirSaaS est une plateforme de...", a: ["PPM (Gestion de Portefeuille)", "CRM (Ventes)", "ERP (Compta)"], c: 0 },
+        { q: "Quel champ justifie l'intérêt stratégique du projet ?", a: ["Budget", "Gains attendus", "Description technique"], c: 1 },
+        { q: "La météo 'Rouge' signifie que le projet est :", a: ["Terminé", "En avance", "Bloqué"], c: 2 },
+        { q: "Quelle est la règle de nommage d'un bon jalon ?", a: ["Infinitif (Faire x)", "Passé composé (X validé)", "Peu importe"], c: 1 },
+        { q: "Où gère-t-on les arbitrages importants ?", a: ["Par email", "Dans la section Décisions", "Dans le budget"], c: 1 }
+    ];
+
+    function showModule(index) {
+        if (index < 0 || index > totalModules) return;
+        
+        document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+        document.getElementById(`module-${index}`).classList.add('active');
+        
+        document.querySelectorAll('.nav-item').forEach((item, i) => {
+            item.classList.toggle('active', i === index);
+        });
+
+        currentModule = index;
+        updateProgress();
+        
+        // Final Quiz setup
+        if (index === 6) {
+            renderFinalQuiz();
+            document.getElementById('nextBtn').style.display = 'none';
+        } else {
+            document.getElementById('nextBtn').style.display = 'inline-flex';
+        }
+        
+        document.getElementById('prevBtn').style.visibility = index === 0 ? 'hidden' : 'visible';
+        window.scrollTo(0, 0);
+    }
+
+    function changeModule(step) {
+        showModule(currentModule + step);
+    }
+
+    function updateProgress() {
+        const percent = Math.round((currentModule / totalModules) * 100);
+        document.getElementById('progress-bar').style.width = percent + '%';
+        document.getElementById('progress-text').innerText = percent + '%';
+    }
+
+    function toggleAccordion(header) {
+        const content = header.nextElementSibling;
+        const isOpen = content.style.display === 'block';
+        content.style.display = isOpen ? 'none' : 'block';
+        header.querySelector('span').innerText = isOpen ? '+' : '-';
+    }
+
+    function checkAnswer(el, isCorrect, feedback) {
+        if (el.parentNode.classList.contains('answered')) return;
+        
+        el.classList.add(isCorrect ? 'correct' : 'wrong');
+        el.parentNode.classList.add('answered');
+        
+        const fdbkDiv = document.createElement('div');
+        fdbkDiv.style.marginTop = '1rem';
+        fdbkDiv.style.fontWeight = '600';
+        fdbkDiv.style.color = isCorrect ? 'var(--success)' : 'var(--danger)';
+        fdbkDiv.innerText = feedback;
+        el.parentNode.appendChild(fdbkDiv);
+    }
+
+    function renderFinalQuiz() {
+        const area = document.getElementById('final-quiz-area');
+        area.innerHTML = '';
+        finalQuestions.forEach((q, i) => {
+            const qDiv = document.createElement('div');
+            qDiv.className = 'quiz-container';
+            qDiv.style.marginBottom = '1.5rem';
+            qDiv.innerHTML = `<h4>${i+1}. ${q.q}</h4>`;
+            q.a.forEach((opt, oi) => {
+                const optDiv = document.createElement('div');
+                optDiv.className = 'option';
+                optDiv.innerText = opt;
+                optDiv.onclick = () => selectFinalOption(optDiv, i, oi);
+                qDiv.appendChild(optDiv);
+            });
+            area.appendChild(qDiv);
+        });
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-primary';
+        btn.style.width = '100%';
+        btn.innerText = 'Valider mes réponses';
+        btn.onclick = calculateFinalScore;
+        area.appendChild(btn);
+    }
+
+    const userAnswers = [];
+    function selectFinalOption(el, qIdx, oIdx) {
+        el.parentNode.querySelectorAll('.option').forEach(o => o.style.borderColor = '#E5E7EB');
+        el.style.borderColor = 'var(--primary)';
+        userAnswers[qIdx] = oIdx;
+    }
+
+    function calculateFinalScore() {
+        let score = 0;
+        finalQuestions.forEach((q, i) => {
+            if (userAnswers[i] === q.c) score++;
+        });
+        
+        document.getElementById('final-quiz-area').style.display = 'none';
+        const res = document.getElementById('final-result');
+        res.style.display = 'block';
+        document.getElementById('score-text').innerText = `Score : ${score} / ${finalQuestions.length}`;
+        
+        let rank = "";
+        if (score === 5) { rank = "🌟 Expert AirSaaS - Maîtrise Totale !"; confetti(); }
+        else if (score >= 3) rank = "👍 Confirmé - Vous êtes prêt à piloter.";
+        else rank = "📚 Débutant - Une petite relecture s'impose.";
+        
+        document.getElementById('rank-text').innerText = rank;
+    }
+</script>
+
+</body>
+</html>
