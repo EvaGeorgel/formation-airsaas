@@ -115,4 +115,89 @@ h1,h2,h3,h4 { font-family: 'Bricolage Grotesque', sans-serif; line-height: 1.2; 
       <div class="card">
         <p><strong>Cadrage :</strong> <span class="st-pill st-cadrage">À l'étude</span> <span class="st-pill st-cadrage">A valider</span> <span class="st-pill st-cadrage">Validé</span></p>
         <p><strong>Exécution :</strong> <span class="st-pill st-exec">Préparation lancement</span> <span class="st-pill st-exec">En cours</span> <span class="st-pill st-exec">Différé</span></p>
-        <p><strong>Fin :</strong>
+        <p><strong>Fin :</strong> <span class="st-pill">Terminé</span> <span class="st-pill">Abandonné</span></p>
+      </div>
+      <div class="section-title">Décisions</div>
+      <div class="ss-wrap">
+        <img src="https://i.ibb.co/VpMTdKj/Capture-d-cran-2026-04-27-142823.png" alt="Interface Décisions">
+      </div>
+    </div>
+    <div class="content-wrap"><div class="page-nav"><button class="btn btn-primary" onclick="goPage(2)">Suivant →</button></div></div>
+  </div>
+
+  <div class="page" id="p2">
+    <div class="hero"><h1>Instances de Pilotage</h1></div>
+    <div class="content-wrap">
+      <div class="card">
+        <div class="card-head">Flux de reporting</div>
+        <p>1. L'<strong>Équipe</strong> reporte au <strong>Chef de Projet</strong> (Quotidien).</p>
+        <p>2. Le <strong>Chef de Projet</strong> reporte au <strong>Sponsor</strong> (Copil).</p>
+        <p>3. Le <strong>Sponsor</strong> reporte à la <strong>Direction</strong> (Comop/Portefeuille).</p>
+      </div>
+    </div>
+    <div class="content-wrap"><div class="page-nav"><button class="btn btn-primary" onclick="goPage(3)">Suivant →</button></div></div>
+  </div>
+
+  <div class="page" id="p3">
+    <div class="hero"><h1>La Météo Projet</h1></div>
+    <div class="content-wrap">
+      <div class="card">
+        <p>La météo exprime le <strong>sentiment</strong> du CP sur la santé du projet (Délai, Budget, Scope, Moral).</p>
+        <div class="callout co-blue">💡 Une météo factuelle sert à alerter le sponsor sur des besoins d'arbitrage.</div>
+      </div>
+    </div>
+    <div class="content-wrap"><div class="page-nav"><button class="btn btn-primary" onclick="goPage(4)">Suivant →</button></div></div>
+  </div>
+
+  <div class="page" id="p4">
+    <div class="hero"><h1>Les Jalons</h1></div>
+    <div class="content-wrap">
+      <div class="grid-2">
+        <div class="card">
+          <h3>👚 Tailles T-Shirt (Charge)</h3>
+          <p>XS (5j), S (10j), M (20j), L (40j), XL (60j+).</p>
+        </div>
+        <div class="card">
+          <h3>⚖️ Poids (Valeur)</h3>
+          <p>Définit l'importance stratégique dans la progression globale (0-100%).</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Zones clés</h3>
+        <p>Chaque jalon comporte : Nom, Date, Responsable, Équipe, Taille T-shirt, Poids et sa propre Météo.</p>
+      </div>
+    </div>
+    <div class="content-wrap"><div class="page-nav"><button class="btn btn-primary" onclick="goPage(5)">Suivant →</button></div></div>
+  </div>
+
+  <div class="page" id="p5">
+    <div class="hero"><h1>Gestion des Risques</h1></div>
+    <div class="content-wrap">
+      <div class="risk-grid">
+        <div class="risk-card" style="border-top:4px solid var(--blue)">Financier</div>
+        <div class="risk-card" style="border-top:4px solid var(--violet)">Juridique</div>
+        <div class="risk-card" style="border-top:4px solid var(--emerald)">Opérationnel</div>
+        <div class="risk-card" style="border-top:4px solid var(--rose)">Image</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let cur = 0;
+const total = 6;
+
+function goPage(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('p' + n).classList.add('active');
+  document.querySelectorAll('.tb-mod').forEach((m, i) => {
+    m.classList.toggle('active', i === n);
+  });
+  cur = n;
+  document.getElementById('prog-fill').style.width = ((n+1)/total*100) + '%';
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
