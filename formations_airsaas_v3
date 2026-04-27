@@ -15,7 +15,7 @@
 body { font-family: 'Instrument Sans', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
 h1,h2,h3,h4 { font-family: 'Bricolage Grotesque', sans-serif; line-height: 1.2; }
 
-/* NAVIGATION */
+/* NAVIGATION ORIGINALE */
 #topbar {
   position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.92);
   backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
@@ -27,19 +27,17 @@ h1,h2,h3,h4 { font-family: 'Bricolage Grotesque', sans-serif; line-height: 1.2; 
 .tb-mod { padding: 6px 14px; border-radius: 8px; cursor: pointer; white-space: nowrap; font-size: 13px; color: var(--muted); transition: 0.2s; }
 .tb-mod.active { color: var(--blue); background: #EEF2FF; font-weight: 600; }
 
-/* LAYOUT */
+/* LAYOUT & CARDS */
 .page { display: none; }
 .page.active { display: block; animation: pageIn 0.3s ease; }
 @keyframes pageIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 .hero { padding: 64px 24px; max-width: 1100px; margin: 0 auto; text-align: center; }
 .content-wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; }
-
-/* CARDS */
 .card { background: var(--surface); border-radius: var(--r); border: 1px solid var(--border); padding: 32px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
 .card-head { font-size: 17px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
 .ch-icon { width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; }
 
-/* ELEMENTS */
+/* ELEMENTS SPECIFIQUES */
 .st-pill { padding: 4px 12px; border-radius: 99px; font-size: 12px; font-weight: 600; display: inline-block; margin: 2px; border: 1px solid transparent; }
 .st-study { background: #FFFBEB; color: #92400E; border-color: #FCD34D; }
 .st-exec { background: #ECFDF5; color: #065F46; border-color: #6EE7B7; }
@@ -47,7 +45,6 @@ h1,h2,h3,h4 { font-family: 'Bricolage Grotesque', sans-serif; line-height: 1.2; 
 .risk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
 .risk-card { background: white; border: 1px solid var(--border); padding: 20px; border-radius: var(--r); text-align: center; font-weight: 600; border-top: 4px solid var(--blue); }
 .wpill { padding: 6px 16px; border-radius: 99px; font-size: 13px; font-weight: 600; border: 1.5px solid var(--border); display: inline-block; margin: 4px; }
-
 .img-box { margin: 24px 0; border-radius: var(--r); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--sh-lg); }
 .img-box img { width: 100%; display: block; }
 </style>
@@ -134,7 +131,7 @@ h1,h2,h3,h4 { font-family: 'Bricolage Grotesque', sans-serif; line-height: 1.2; 
       </div>
       <div class="card">
         <h3>Décisions</h3>
-        <p style="margin-bottom:15px;">Utilisez cet onglet pour tracer les arbitrages structurants.</p>
+        <p>Utilisez cet onglet pour tracer les arbitrages structurants.</p>
         <div class="img-box">
           <img src="https://i.ibb.co/VpMTdKj/Capture-d-cran-2026-04-27-142823.png" alt="Vue Décisions AirSaaS">
         </div>
@@ -148,7 +145,7 @@ h1,h2,h3,h4 { font-family: 'Bricolage Grotesque', sans-serif; line-height: 1.2; 
       <div class="card">
         <p><strong>1. Équipe Projet (Ressources) :</strong> Travaille sur les jalons au quotidien.</p>
         <p><strong>2. CoPil (Comité de Pilotage) :</strong> Le Chef de Projet reporte au Sponsor (Arbitrages & Météo).</p>
-        <p><strong>3. Comop / Codir :</strong> Vision Portefeuille. Priorisation des ressources et des budgets entre les projets.</p>
+        <p><strong>3. Comop / Codir :</strong> Vision Portefeuille. Priorisation des ressources et des budgets.</p>
       </div>
     </div>
   </div>
